@@ -253,7 +253,7 @@ if MySys() == 'linux'
     au FileType c,cpp set tags+=/home/scr/lang/0ctope/libc/libc/tags
     au FileType c,cpp set tags+=/home/scr/lang/0ctope/cpp/cpp_src/tags
     au FileType c,cpp set tags+=/home/scr/lang/0ctope/win32/winapi/tags
-    au FileType   cpp set tags+=/home/scr/lang/0ctope/win32/mfc/tags
+    "au FileType   cpp set tags+=/home/scr/lang/0ctope/win32/mfc/tags
     au FileType  java set tags+=/home/scr/lang/0ctope/java_api/src/tags
 elseif MySys() == 'windows'
     au FileType c,cpp set tags+=E:\lang\cpp\cpp\cpp_src\tags "cpp_src.tar.bz2
@@ -1023,6 +1023,7 @@ onoremap <C-F4> <C-C><C-W>c
 "	 qa
 "	 yyp<C-a>q
 "	 98@a
+"-----------------------------------------------------------------------------
 "-----------------------------------------------------------------------------
 "-----------------------------------------------------------------------------
 "-----------------------------------------------------------------------------
