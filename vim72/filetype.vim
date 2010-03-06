@@ -2375,7 +2375,10 @@ au BufNewFile,BufRead *termcap*
 	\|endif
 
 " Vim script
-au BufNewFile,BufRead *vimrc*			call s:StarSetf('vim')
+"(2010年 03月 06日 星期六 11:15:40 CST)
+"#=============================================================================
+"au BufNewFile,BufRead *vimrc*			call s:StarSetf('vim')
+au BufNewFile,BufRead *vimrc*,*vimperator*			call s:StarSetf('vim')
 
 " Subversion commit file
 au BufNewFile,BufRead svn-commit*.tmp		setf svn
