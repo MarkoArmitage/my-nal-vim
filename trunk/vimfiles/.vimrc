@@ -180,7 +180,7 @@ hi Normal guibg=#cfe8cc
 "set confirm                    "用确认对话框弹出警告信息
 "set display=lastline           "长行不能完全显示时显示当前屏幕能显示的部分
 "set encoding=utf-8             "设置字符编码 @@@@@
-set expandtab                  "使用space代替tab.
+"set expandtab                  "使用space代替tab.
 "set fileformats=unix,dos       "设置保存文件格式
 "set filetype=php               "设置默认文件类型
 "set guifont=SimSun\ 10         "设置用于GUI图形用户界面的字体列表。
@@ -780,6 +780,7 @@ endif
 "#############################################################################
 "快速编辑
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <silent> <leader>p2v :r!cat /tmp/pwd2vim.tmp<cr>
 map <F3> :tabclose<CR>
 map <F4> :tabnew<CR>
 map <F5> :tabprevious<CR>
