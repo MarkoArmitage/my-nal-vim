@@ -79,13 +79,13 @@ syn match   txtReference '^[|>:]\(\s*[|>:]\)*'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "类html文本
-"syn match   txtBold       '\*[^*[:blank:]].\{-}\*'hs=s+1,he=e-1
-"syn match txtItalic "^\s\+.\+$" "斜体文本
+syn match   txtBold       '\*[^*[:blank:]].\{-}\*'hs=s+1,he=e-1
+syn match txtItalic "^\s\+.\+$" "斜体文本
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " color definitions (specific)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"hi txtUrl        term=bold        cterm=bold  ctermfg=blue    gui=underline     guifg=blue
+hi txtUrl        term=bold        cterm=bold  ctermfg=blue    gui=underline     guifg=blue
 "hi txtTitle     term=bold       cterm=bold      ctermfg=black   gui=bold        guifg=black
 hi link txtUrl      Underlined"ModeMsg"Tabline"PmenuSbar
 hi link txtTitle      Title"ModeMsg"Tabline"PmenuSbar

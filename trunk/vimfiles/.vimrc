@@ -23,8 +23,8 @@ if has("gui_running")
     "设定 windows 下 gvim 启动时最大化
     "autocmd GUIEnter * simalt ~x
     set lines=43
-    set columns=103
-    winpos  240  20
+    set columns=123
+    winpos  170  20
     if exists("&cursorline")
         set cursorline  "Highlight current
     endif
@@ -160,8 +160,7 @@ set tabstop=4                   "tab宽度为四个字符
 set title                       "在标题中显示文件是否可以或已经被修改
 set whichwrap=b,s,<,>,[,]       "左右前头跨行移动
 syntax enable
-syntax on
-syntax on                       "设置语法高亮度
+syntax on                       "设置语法高亮
 
 "colorscheme  candycode
 "colorscheme  darkblue
@@ -250,9 +249,9 @@ set complete=.,w,b,u,t,i
 set tags+=tags "最好写成+=
 set tags+=./tags,./../tags,./../../tags,./../../../tags,./**/tags,tags
 if MySys() == 'linux'
-    au FileType c,cpp set tags+=/home/scr/lang/0ctope/libc/libc/tags
-    au FileType c,cpp set tags+=/home/scr/lang/0ctope/cpp/cpp_src/tags
-    au FileType c,cpp set tags+=/home/scr/lang/0ctope/win32/winapi/tags
+    "au FileType c,cpp set tags+=/home/scr/lang/0ctope/libc/libc/tags
+    "au FileType c,cpp set tags+=/home/scr/lang/0ctope/cpp/cpp_src/tags
+    "au FileType c,cpp set tags+=/home/scr/lang/0ctope/win32/winapi/tags
     "au FileType   cpp set tags+=/home/scr/lang/0ctope/win32/mfc/tags
     au FileType  java set tags+=/home/scr/lang/0ctope/java_api/src/tags
 elseif MySys() == 'windows'
@@ -653,8 +652,16 @@ let NERDTreeQuitOnOpen=0    " 1: 打开文件后, 关闭NERDTrre窗口
 " NERD_commenter.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <silent> <leader>ccc ,cc<cr>k
+imap <silent> <leader>ccc /*<esc>a
 map <silent> <leader>cca ,ca<cr>k
-" let NERD_java_alt_style=1
+map <silent> <leader>ccs :.,.s/ //g<cr>
+vmap <silent> <leader>ct :s/\( .*$\)/ (\^\1\^)<cr>
+"map <silent> <leader>ct $F!,c$<cr>k$F!x
+map <silent> <leader>ct $F<space>l,c$<cr>k$2F<space>l
+map <silent> <leader>cis :source $VIM/vimfiles/syntax/txt.vim<cr>
+"map <silent> <leader>cqt qa,ctjq10@a
+"map <F2> $F<space>l,c$<cr>k
+"let NERD_java_alt_style=1
 " Default mapping: [count],cc   " 以行为单位进行注释.
 " ,c<space>     " comment <--> uncomment.
 " ,cm           " 以段作为单位进行注释.
@@ -722,7 +729,8 @@ let tlist_txt_settings = 'txt;c:content;f:figures;t:tables'
 let TxtBrowser_Dict_Url='http://dict.cn/text'	"英文词典
 let Txtbrowser_Search_Engine='http://www.baidu.com/s?wd=text&oq=text&f=3&rsp=2'
 au BufRead,BufNewFile *.txt setlocal ft=txt "syntax highlight txt for txt.vim
-au BufRead,BufNewFile *.log setlocal ft=txt "syntax highlight log for txt.vim
+"au BufRead,BufNewFile *.log setlocal ft=txt "syntax highlight log for txt.vim
+au BufRead,BufNewFile *log* setlocal ft=txt "syntax highlight log for txt.vim
 
 "=============================================================================
 " ZoomWin.vim
@@ -778,8 +786,9 @@ endif
 
 
 "#############################################################################
-"快速编辑
+"maps
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <silent> <leader>pwd :pwd<cr>
 map <silent> <leader>p2v :r!cat /tmp/pwd2vim.tmp<cr>
 map <F3> :tabclose<CR>
 map <F4> :tabnew<CR>
@@ -1025,7 +1034,11 @@ onoremap <C-F4> <C-C><C-W>c
 "	 yyp<C-a>q
 "	 98@a
 "-----------------------------------------------------------------------------
+"双击m键可以删除Win下生成的多余换行符CR（在Vim中可以看到蓝色的^M）
+"nmap mm :%s/\r//g<cr>
 "-----------------------------------------------------------------------------
+"双击t键实现对在起点下载的TXT文本进行排版并删除里面多余的广告等
+"nmap tt :%s/^\([\s　]\+\)/    /g<cr>:%s/^更新时间.*\d$//g<cr>:%s/<a href.*<\/a>$//g<cr>:%s/\([\s　]*\n\)\+/\r\r/<cr>
 "-----------------------------------------------------------------------------
 "-----------------------------------------------------------------------------
 "-----------------------------------------------------------------------------
