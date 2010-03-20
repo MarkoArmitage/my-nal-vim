@@ -140,7 +140,10 @@ function s:SetUpForNewFiletype(filetype, forceReset)
     elseif a:filetype ==? "asm68k"
         call s:MapDelimiters('; ', '')
     elseif a:filetype ==? "asm"
-        call s:MapDelimitersWithAlternative('; ', '', '# ', '')
+"(2010年 03月 20日 星期六 21:53:13 CST)
+"#=============================================================================
+        "call s:MapDelimitersWithAlternative('; ', '', '# ', '')
+        call s:MapDelimitersWithAlternative('! ', '', '; ', '')
     elseif a:filetype ==? "asn"
         call s:MapDelimiters('-- ', '')
     elseif a:filetype ==? "aspvbs"
