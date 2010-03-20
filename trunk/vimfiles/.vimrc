@@ -21,7 +21,7 @@ endif
 
 if has("gui_running")
     "设定 windows 下 gvim 启动时最大化
-    "autocmd GUIEnter * simalt ~x
+    "autocmd GUIEnter * simalt ~
     set lines=43
     set columns=123
     winpos  170  20
@@ -788,6 +788,7 @@ endif
 "#############################################################################
 "maps
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"map <silent> <leader>mov <M-Space>
 map <silent> <leader>pwd :pwd<cr>
 map <silent> <leader>p2v :r!cat /tmp/pwd2vim.tmp<cr>
 map <F3> :tabclose<CR>

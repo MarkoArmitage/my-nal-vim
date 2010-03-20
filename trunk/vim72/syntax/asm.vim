@@ -46,7 +46,10 @@ syn match binNumber		"0[bB][0-1]*"
 
 
 syn match asmSpecialComment	";\*\*\*.*"
-syn match asmComment		";.*"hs=s+1
+"(2010年 03月 20日 星期六 21:50:01 CST)
+"#=============================================================================
+"syn match asmComment		";.*"hs=s+1
+syn match asmComment		"[;!].*"hs=s+1
 
 syn match asmInclude		"\.include"
 syn match asmCond		"\.if"
