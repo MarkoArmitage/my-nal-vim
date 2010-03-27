@@ -75,7 +75,7 @@ if MySys() == 'linux'
     map <silent> <leader>vib :call SwitchToBuf("/media/F/notes/blog/book/01.txt")<cr>
     map <silent> <leader>vik :call SwitchToBuf("/media/F/notes/blog/vim/script/vim_script_settings_of_me.txt")<cr>
     map <silent> <leader>vie :call SwitchToBuf("/media/F/notes/blog/english/e-new-words.txt")<cr>
-    map <silent> <leader>vif :call SwitchToBuf("/media/C/Vim/Vim/_vimperatorrc")<cr>
+    map <silent> <leader>vif :call SwitchToBuf("~/.vimperatorrc")<cr>
     map <silent> <leader>vig :call SwitchToBuf("/media/F/notes/blog/vim/regular-expression/regular_expressions_test.txt")<cr>
     map <silent> <leader>viw :call SwitchToBuf("/media/F/notes/blog/z_other/01OneThousandWrods.txt")<cr>
     map <silent> <leader>vll :call SwitchToBuf("~/.vim/log.txt")<cr>
@@ -249,6 +249,7 @@ set complete=.,w,b,u,t,i
 set tags+=tags "最好写成+=
 set tags+=./tags,./../tags,./../../tags,./../../../tags,./**/tags,tags
 if MySys() == 'linux'
+    au FileType c     set tags+=/home/scr/lang/cpp/minix_svn/tags
     "au FileType c,cpp set tags+=/home/scr/lang/0ctope/libc/libc/tags
     "au FileType c,cpp set tags+=/home/scr/lang/0ctope/cpp/cpp_src/tags
     "au FileType c,cpp set tags+=/home/scr/lang/0ctope/win32/winapi/tags
@@ -333,7 +334,7 @@ let Tlist_File_Fold_Auto_Close=1
 let Tlist_GainFocus_On_ToggleOpen=1
 let Tlist_Process_File_Always=1
 let Tlist_WinHeight=10
-let Tlist_WinWidth=33
+let Tlist_WinWidth=28
 let Tlist_Use_Horiz_Window=0
 let Tlist_Inc_Winwidth=0  "如果启动的是vim而不是gvim, 则项必须设置为0.
 let TlistShowPrototype = 50
@@ -448,7 +449,7 @@ let OmniCpp_ShowScopeInAbbr = 0 " 1: 作用域 类名/函数名;  0: 相反
 let OmniCpp_SelectFirstItem = 2
 "0 = use standard vim search function
 "1 = use local search function
-let OmniCpp_LocalSearchDecl = 0
+let OmniCpp_LocalSearchDecl = 1
 
 "=============================================================================
 " DoxygenToolkit.vim 文档工具
@@ -789,6 +790,7 @@ endif
 "maps
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "map <silent> <leader>mov <M-Space>
+map <silent> <leader>s2t :%s/	/    /g<cr>
 map <silent> <leader>pwd :pwd<cr>
 map <silent> <leader>p2v :r!cat /tmp/pwd2vim.tmp<cr>
 map <F3> :tabclose<CR>
@@ -962,8 +964,6 @@ onoremap <C-F4> <C-C><C-W>c
 "-----------------------------------------------------------------------------
 "|:r!|	   :r! {command}   insert the standard output of {command} below the cursor
 "-----------------------------------------------------------------------------
-"|gJ|	N  gJ		like "J", but without inserting spaces
-"-----------------------------------------------------------------------------
 "|quote|	  "{char}	use register {char} for the next delete, yank, or put
 "-----------------------------------------------------------------------------
 "   "ay     "ap
@@ -1051,3 +1051,8 @@ onoremap <C-F4> <C-C><C-W>c
 "-----------------------------------------------------------------------------
 "-----------------------------------------------------------------------------
 "######################## end of notes #######################################
+ "%s/，/, /g
+ "%s/。/. /g
+ "%s/；/; /g
+ "%s/：/: /g
+"
