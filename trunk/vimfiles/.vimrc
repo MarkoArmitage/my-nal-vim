@@ -68,6 +68,22 @@ function! SwitchToBuf(filename)
     endif
 endfunction
 
+"用sdcv对vim进行屏幕取词
+function! Mydict()
+	let expl=system('sdcv -n ' .
+	\ expand("<cword>"))
+	windo if
+	\ expand("%")=="diCt-tmp" |
+	\ q!|endif
+	"25vsp diCt-tmp
+	botright vertical 20split diCt-tmp
+	"botright aboveleft 20split diCt-tmp
+	setlocal buftype=nofile bufhidden=hide noswapfile
+	1s/^/\=expl/
+	1
+endfunction
+
+
 "Fast edit vimrc
 if MySys() == 'linux'
     map <silent> <leader>wvim :call SwitchToBuf("/media/C/Vim/Vim/_vimrc")<cr>
@@ -789,7 +805,9 @@ endif
 "#############################################################################
 "maps
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"map <silent> <leader>mov <M-Space>
+nmap ,F :call Mydict()<CR><C-W>h
+map <silent> <leader>s2d :%s/，/, /ge<cr>:%s/。/. /ge<cr>:%s/；/; /ge<cr>:%s/：/: /ge<cr>:%s/　/  /ge<cr>:%s/“/"/ge<cr>:%s/”/"/ge<cr>:%s/？/?/ge<cr>:%s/！/!/ge<cr>:%s/、/. /ge<cr>:%s/）/)/ge<cr>:%s/（/(/ge<cr>:%s/…/.../ge<cr>:%s/＝/=/ge<cr>:%s/／/\//ge<cr>:%s/＊/\*/ge<cr>
+":%s/＊/\*/ge<cr>
 map <silent> <leader>s2t :%s/	/    /g<cr>
 map <silent> <leader>pwd :pwd<cr>
 map <silent> <leader>p2v :r!cat /tmp/pwd2vim.tmp<cr>
@@ -869,6 +887,7 @@ map <silent> <leader>lhd o<Esc>I#ifdef  _NAL_HDEBUG_<Esc>o#else<Esc>o#endif
 vnoremap p <Esc>:let current_reg = @"<CR>gvs<C-R>=current_reg<CR><Esc>
 "中文也可以达78个字符时自动换行
 map <silent> <leader>sfo :set fo+=Mm<cr>
+map <silent> <leader>q :set noai<cr>:set fo+=Mm<cr>Vgq:set ai<cr>
 inoremap <C-U> <C-G>u<C-U>
 "########################end of map##########################################
 
@@ -1051,8 +1070,6 @@ onoremap <C-F4> <C-C><C-W>c
 "-----------------------------------------------------------------------------
 "-----------------------------------------------------------------------------
 "######################## end of notes #######################################
- "%s/，/, /g
- "%s/。/. /g
- "%s/；/; /g
- "%s/：/: /g
 "
+
+
