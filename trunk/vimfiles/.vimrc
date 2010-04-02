@@ -73,11 +73,11 @@ function! Mydict()
 	let expl=system('sdcv -n ' .
 	\ expand("<cword>"))
 	windo if
-	\ expand("%")=="diCt-tmp" |
+	\ expand("%")=="diCtTmp" |
 	\ q!|endif
-	"25vsp diCt-tmp
-	botright vertical 20split diCt-tmp
-	"botright aboveleft 20split diCt-tmp
+	"25vsp diCtTmp
+	botright vertical 20split diCtTmp
+	"botright aboveleft 20split diCtTmp
 	setlocal buftype=nofile bufhidden=hide noswapfile
 	1s/^/\=expl/
 	1
@@ -119,7 +119,7 @@ elseif MySys() == 'windows'
 endif
 
 "#############################################################################
-" settings
+" settings ses
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 au FileType c,cpp set nomodeline " @@@@@
 au FileType text, txt, TXT set tw=78 fo+=Mm "选中，然后按gq就可以
@@ -260,6 +260,8 @@ abbreviate teh the
 "=============================================================================
 " ctags settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"nmap g] g]:pwd<cr>
+nmap <C-T> <C-T>:pwd<cr>
 set complete=.,w,b,u,t,i
 "set tags=/home/liaocaiyuan/book/unpv22e/tags
 set tags+=tags "最好写成+=
@@ -334,7 +336,23 @@ map <silent> <leader>cre :cs reset<cr>
 "=============================================================================
 "TagList settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <silent> <leader>tl :TlistToggle<CR>
+function! TlistToggle_close_diCtTmp(filename, flag)
+	let bufwinnr = bufwinnr(a:filename)
+	if bufwinnr != -1
+		"把光标焦点移到号为bufwinnr的窗口
+		exec bufwinnr . "wincmd w"
+		close
+	endif
+	if a:flag == 0
+		TlistToggle
+	elseif a:flag == 1
+		call Mydict()
+	endif
+endfunction "tll
+map <silent> <leader>tl :call TlistToggle_close_diCtTmp("diCtTmp", 0)<cr>
+map <silent> <leader>tf  :call TlistToggle_close_diCtTmp("__Tag_List__", 1)<cr><C-W>h
+"map <silent> <leader>tl :TlistToggle<CR>
+
 let Tlist_Show_One_File=4
 let Tlist_OnlyWindow=0
 let Tlist_Use_Right_Window=1
@@ -477,13 +495,17 @@ let OmniCpp_LocalSearchDecl = 1
 " DoxBlock                  Group
 " DoxUndoc(DEBUG) !         Ignore code fragment
 let g:DoxygenToolkit_commentType = "C"
-let g:DoxygenToolkit_briefTag_pre="@Description  "
+let g:DoxygenToolkit_briefTag_pre="@Description:  "
 let g:DoxygenToolkit_paramTag_pre="@Param "
-let g:DoxygenToolkit_returnTag="@Returns   "
+let g:DoxygenToolkit_returnTag="@Returns:   "
 let g:DoxygenToolkit_blockHeader="************************************************************************"
 let g:DoxygenToolkit_blockFooter="************************************************************************"
 let g:DoxygenToolkit_authorName="nuoerll (nuoliu), lcy3636@126.com"
 let g:DoxygenToolkit_licenseTag="Reserve"
+"nmap <silent> <leader>dox :Dox<cr><esc>mzkddk3lvf/r*f<space>D0%ddr*wh.f<space>D`za
+"nmap <silent> <leader>dox :Dox<cr><esc>mzkddk2lvf/r=xxf<space>D0%ddr*llvf/hhr=f<space>D`za
+nmap <silent> <leader>dox :Dox<cr><esc>mzkddk2lvf/r=xf<space>Dr*0%hmxl
+\<C-E>%lr*hj<C-E>`xjr<space>`xjllvf/hr=f<space>Dhr*`za
 
 "=============================================================================
 " winmove.vim	settings
@@ -494,6 +516,9 @@ let g:wm_move_y = 20
 "=============================================================================
 " a.vim	settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <silent> <leader>ihh :IH<cr>
+nmap <silent> <leader>ihs :IHS<cr>
+nmap <silent> <leader>ihv :IHV<cr>
 "	a.vim主要命令如下:
 "		:A switches to the header file corresponding to the current file being edited (or vise versa)
 "		:AS splits and switches
@@ -591,7 +616,7 @@ nmap <silent> <C-C> :exe "C c"<CR>
 nmap <silent> <leader>ezo :exe "Cfoldvar " . line(".")<CR>
 
 "=============================================================================
-" Project.vim   project.vim
+" project.vim   project.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <silent> <leader>pr :Project Project<CR> zR
 " 切换打开和关闭project窗口
@@ -805,8 +830,7 @@ endif
 "#############################################################################
 "maps
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap ,F :call Mydict()<CR><C-W>h
-map <silent> <leader>s2d :%s/，/, /ge<cr>:%s/。/. /ge<cr>:%s/；/; /ge<cr>:%s/：/: /ge<cr>:%s/　/  /ge<cr>:%s/“/"/ge<cr>:%s/”/"/ge<cr>:%s/？/?/ge<cr>:%s/！/!/ge<cr>:%s/、/. /ge<cr>:%s/）/)/ge<cr>:%s/（/(/ge<cr>:%s/…/.../ge<cr>:%s/＝/=/ge<cr>:%s/／/\//ge<cr>:%s/＊/\*/ge<cr>
+map <silent> <leader>d2s :%s/，/, /ge<cr>:%s/。/. /ge<cr>:%s/；/; /ge<cr>:%s/：/: /ge<cr>:%s/　/  /ge<cr>:%s/“/"/ge<cr>:%s/”/"/ge<cr>:%s/？/?/ge<cr>:%s/！/!/ge<cr>:%s/、/. /ge<cr>:%s/）/)/ge<cr>:%s/（/(/ge<cr>:%s/…/.../ge<cr>:%s/＝/=/ge<cr>:%s/／/\//ge<cr>:%s/＊/\*/ge<cr>
 ":%s/＊/\*/ge<cr>
 map <silent> <leader>s2t :%s/	/    /g<cr>
 map <silent> <leader>pwd :pwd<cr>
@@ -1071,5 +1095,3 @@ onoremap <C-F4> <C-C><C-W>c
 "-----------------------------------------------------------------------------
 "######################## end of notes #######################################
 "
-
-
