@@ -69,20 +69,34 @@ function! SwitchToBuf(filename)
 endfunction
 
 "用sdcv对vim进行屏幕取词
+"echo "$Definition" |
+"sed -n '1,/^[A-Z]/p' |
+"#  从输出的第一行打印到下一部分的第一行.
+"sed '$d' | sed '$d'
+
 function! Mydict()
-	let expl=system('sdcv -n ' .
+	"let expl0=system('sdcv -n ' .
+	let expl=system('sdcv.sh ' .
 	\ expand("<cword>"))
 	windo if
-	\ expand("%")=="diCtTmp" |
-	\ q!|endif
+	\ expand("%:p")=="/tmp/diCtTmp" |
+	\ wq!|endif
+	botright vertical 20split /tmp/diCtTmp
 	"25vsp diCtTmp
-	botright vertical 20split diCtTmp
-	"botright aboveleft 20split diCtTmp
-	setlocal buftype=nofile bufhidden=hide noswapfile
+	"botright aboveleft 20split /tmp/diCtTmp
+	setlocal buftype= bufhidden=hide noswapfile
+	"setlocal buftype=nofile bufhidden=hide noswapfile
 	1s/^/\=expl/
 	1
 endfunction
 
+function! Testfun()
+	let ttmp=expand("%:p")
+	echo ttmp
+	if ttmp == "/home/scr/.vimrc"
+		echo "ok"
+	endif
+endfunction
 
 "Fast edit vimrc
 if MySys() == 'linux'
@@ -350,7 +364,7 @@ function! TlistToggle_close_diCtTmp(filename, flag)
 	endif
 endfunction "tll
 map <silent> <leader>tl :call TlistToggle_close_diCtTmp("diCtTmp", 0)<cr>
-map <silent> <leader>tf  :call TlistToggle_close_diCtTmp("__Tag_List__", 1)<cr><C-W>h
+map <silent> <leader>tf  :call TlistToggle_close_diCtTmp("__Tag_List__", 1)<cr>j<C-W>h
 "map <silent> <leader>tl :TlistToggle<CR>
 
 let Tlist_Show_One_File=4
@@ -505,7 +519,7 @@ let g:DoxygenToolkit_licenseTag="Reserve"
 "nmap <silent> <leader>dox :Dox<cr><esc>mzkddk3lvf/r*f<space>D0%ddr*wh.f<space>D`za
 "nmap <silent> <leader>dox :Dox<cr><esc>mzkddk2lvf/r=xxf<space>D0%ddr*llvf/hhr=f<space>D`za
 nmap <silent> <leader>dox :Dox<cr><esc>mzkddk2lvf/r=xf<space>Dr*0%hmxl
-\<C-E>%lr*hj<C-E>`xjr<space>`xjllvf/hr=f<space>Dhr*`za
+\<C-E>%lr*hj<C-E>`xjr<space>`xjllvf/hr=f<space>Dhr*`za<C-W>:<Tab>
 
 "=============================================================================
 " winmove.vim	settings
@@ -772,7 +786,7 @@ let TxtBrowser_Dict_Url='http://dict.cn/text'	"英文词典
 let Txtbrowser_Search_Engine='http://www.baidu.com/s?wd=text&oq=text&f=3&rsp=2'
 au BufRead,BufNewFile *.txt setlocal ft=txt "syntax highlight txt for txt.vim
 "au BufRead,BufNewFile *.log setlocal ft=txt "syntax highlight log for txt.vim
-au BufRead,BufNewFile *log* setlocal ft=txt "syntax highlight log for txt.vim
+au BufRead,BufNewFile *log setlocal ft=txt "syntax highlight log for txt.vim
 
 "=============================================================================
 " ZoomWin.vim
@@ -830,8 +844,12 @@ endif
 "#############################################################################
 "maps
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <silent> <leader>d2s :%s/，/, /ge<cr>:%s/。/. /ge<cr>:%s/；/; /ge<cr>:%s/：/: /ge<cr>:%s/　/  /ge<cr>:%s/“/"/ge<cr>:%s/”/"/ge<cr>:%s/？/?/ge<cr>:%s/！/!/ge<cr>:%s/、/. /ge<cr>:%s/）/)/ge<cr>:%s/（/(/ge<cr>:%s/…/.../ge<cr>:%s/＝/=/ge<cr>:%s/／/\//ge<cr>:%s/＊/\*/ge<cr>
-":%s/＊/\*/ge<cr>
+map <silent> <leader>sq qz"apjjf"mzggjlv$hy`zpjqi
+map <silent> <leader>d2s :%s/，/, /ge<cr>:%s/。/. /ge<cr>:%s/；/; /ge<cr>
+\:%s/：/: /ge<cr>:%s/　/  /ge<cr>:%s/“/"/ge<cr>:%s/”/"/ge<cr>:%s/？/?/ge<cr>
+\:%s/！/!/ge<cr>:%s/、/. /ge<cr>:%s/）/)/ge<cr>:%s/（/(/ge<cr>:%s/…/.../ge<cr>
+\:%s/＝/=/ge<cr>:%s/／/\//ge<cr>:%s/＊/\*/ge<cr>:%s/—/-/ge<cr>:%s/＃/#/ge<cr>
+":%s/＃/#/ge<cr>
 map <silent> <leader>s2t :%s/	/    /g<cr>
 map <silent> <leader>pwd :pwd<cr>
 map <silent> <leader>p2v :r!cat /tmp/pwd2vim.tmp<cr>
@@ -893,7 +911,7 @@ map <silent> <leader>cos :%s/<C-R><C-W>/&/gn<cr>
 " \ ==> /
 map <silent> <leader>tof V:s/\\/\//g<cr>
 " source $VIMRUNTIME/syntax/2html.vim
-map <silent> <leader>vth :source $VIMRUNTIME/syntax/2html.vim<cr>
+map <silent> <leader>v2h :source $VIMRUNTIME/syntax/2html.vim<cr>
 " write date under cursor
 map <silent> <leader>date :r ! date<cr>I(<Esc>A)<Esc>o<Esc>i#<esc>77a=<Esc>0
 "给某个单词加上()
@@ -970,7 +988,7 @@ noremap <M-C-X> <C-X>
 " CTRL-A is Select all
 noremap <C-A> gggH<C-O>G
 inoremap <C-A> <C-O>gg<C-O>gH<C-O>G
-cnoremap <C-A> <C-C>gggH<C-O>G
+"cnoremap <C-A> <C-C>gggH<C-O>G
 onoremap <C-A> <C-C>gggH<C-O>G
 snoremap <C-A> <C-C>gggH<C-O>G
 xnoremap <C-A> <C-C>ggVG
