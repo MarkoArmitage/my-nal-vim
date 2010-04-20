@@ -381,7 +381,7 @@ function s:SetUpForNewFiletype(filetype, forceReset)
     elseif a:filetype ==? "jproperties"
         call s:MapDelimiters('# ','')
     elseif a:filetype ==? "jsp"
-        call s:MapDelimiters('<%--', '--%>')
+        call s:MapDelimiters('<%-- ', ' --%>')
     elseif a:filetype ==? "kix"
         call s:MapDelimiters('; ', '')
     elseif a:filetype ==? "kscript"
