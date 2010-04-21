@@ -1,6 +1,5 @@
 let mapleader=","
 "kkkkkk" ……
-"
 " :echo $VIMRUNTIME/../vimfiles/plugin/
 ":bdelete 3     "把一个缓冲区从列表中去除
 ":bwipe         "把一个缓冲区从列表中彻底去除
