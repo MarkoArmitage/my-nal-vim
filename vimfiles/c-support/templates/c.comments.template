@@ -43,7 +43,7 @@ $%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  *        Version:  1.0
  *        Created:  |DATE| |TIME|
  *       Revision:  none
- *       Compiler:  cl.exe
+ *       Compiler:  gcc
  *
  *         Author:  |AUTHOR| (|AUTHORREF|), |EMAIL|
  *        Company:  |COMPANY|
@@ -66,7 +66,7 @@ $%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  *        Created:  |DATE| |TIME|
  *        Created:  
  *       Revision:  none
- *       Compiler:  cl.exe
+ *       Compiler:  gcc
  *
  *         Author:  |AUTHOR| (|AUTHORREF|), |EMAIL|
  *        Company:  |COMPANY|
