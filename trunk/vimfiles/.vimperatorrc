@@ -1,0 +1,233 @@
+"2.2 (created: 2009/10/28 19:04:27)
+
+set runtimepath=/home/scr/.vimperator
+source! /home/scr/.vimperatorrc.local
+
+" vim: set ft=vimperator:
+
+let mapleader = ","
+
+" :mkv 生成本文件
+" <C-J> 打开下载对话框
+" 保存并退出
+" xall
+" saves 保存页面;
+" set 设置选项;
+" !cmd 可以执行系统命令.
+" emenu {menu} 从命令行打开菜单
+
+";{mode}{hint}
+"进入扩展提示模式。扩展提示模式用于对被提示元素进行一些鼠标左键之外的操作。例如，用户可以复制链接地址，在新窗口打开链接或者保存图片。如果你希望复制
+"24 号提示的地址，按 ;y 进入该模式，然后按 24 来复制这个提示对象的地址。
+      " ;     使指定的链接获得焦点
+      " ?     显示元素信息（不完全）
+      " s     保存到默认下载地址
+      " a     保存（提示选择保存位置）
+      " f     聚焦到某个帧
+      " o     在当前标签页中打开链接
+      " t     在新标签页中打开链接
+      " b     在新的背景标签页中打开链接
+      " w     在新窗口中打开链接
+      " F     在背景标签页中打开多个提示对象
+      " O     用提示对象的 URL 生成一条 :open 命令（类似于映射 O ）
+      " T     用提示对象的 URL 生成一条 :tabopen 命令（类似于映射 T ）
+      " W     用提示对象的 URL 生成一条 :winopen 命令
+      " v     查看目的页面的源代码
+      " V     使用外部编辑器查看目的页面的源代码
+      " y     复制目的页面地址
+      " Y     复制提示对象的文字标题
+
+" F:\Program Files\Mozilla Firefox\defaults\profile\chrome\vimperator.jar
+" 为了支持拼音打开链接, 把下载到的vimperator.jar放到文件夹 F:\Program Files\Mozilla Firefox\defaults\profile\chrome 中.
+
+" ============================================================================
+" set runtimepath = C:/Vim/vim/vimperator
+" source! C:\\Vim\\Vim\\_vimperatorrc.local
+
+set complete=l
+set nextpattern=\s*下一页|下一张|下一节|下一章|下一篇|下一頁|下页|后页\s*,^\bnext\b,\bnext\b,\bsuivant\b,^>$,^(>>|??|?)$,^(>|?),(>|?)$,\bmore\b
+set previouspattern=\s*上一页|上一张|上一节|上一章|上一篇|上一頁|上页|前页\s*,^\bprev|previous\b,\bprev|previous\b,\bprecedent\b,^<$,^(<<|??|?)$,^(<|?),(<|?)$
+set editor="gvim.exe -f"
+set guioptions=rbn
+set history=1000
+set hlsearch
+set popups=2
+set showstatuslinks=2
+set showtabline=1
+set titlestring=LiaoCaiYuan-nuoaila
+"set visualbell
+set wildoptions=auto
+style -name notab * .tabs-newtab-button {display:none !important;}
+command! noimg set! permissions.default.image=2
+command! nojs set! javascript.enabled=false
+command! ysimg set! permissions.default.image=1
+command! ysjs set! javascript.enabled=true
+autocmd LocationChange .* :js modes.passAllKeys = /wave\.google\.com|mail\.google\.com|www\.google\.com\/reader\/view/.test(buffer.URL)
+
+"(2010年 03月 06日 星期六 11:27:23 CST)
+"#=============================================================================
+cnoremap <C-n> :<cr>
+noremap <C-J> :dialog downloads<cr>
+"noremap <C-K> :t http://www.google.cn<cr>
+noremap <C-G> :t http://www.google.com.hk/firefox<cr>
+noremap <C-H> :t http://www.hao123.com<cr>
+noremap <C-L> :t http://211.64.120.6/eol/homepage/common/opencourse<cr>
+noremap <C-;> :t http://www.sdjtu.edu.cn/sdjtunet/wzdh.htm<cr>
+
+noremap <C-q> <C-v>
+noremap <C-Q> <C-z>
+noremap <C-s> <C-c>
+
+inoremap <C-q> <C-v>
+inoremap <C-Q> <C-z>
+inoremap <C-s> <C-c>
+
+noremap <C-c> <C-v><C-c>
+noremap <C-v> <C-v><C-v>
+noremap <C-x> <C-v><C-x>
+noremap <C-z> <C-v><C-z>
+noremap <C-y> <C-v><C-y>
+
+cnoremap <C-c> <C-v><C-c>
+cnoremap <C-v> <C-v><C-v>
+" 粘贴
+cnoremap <S-Insert> <C-v><C-v>
+cnoremap <C-x> <C-v><C-x>
+cnoremap <C-z> <C-v><C-z>
+cnoremap <C-y> <C-v><C-y>
+
+inoremap <C-c> <C-v><C-c>
+inoremap <C-v> <C-v><C-v>
+inoremap <S-Insert> <C-v><C-v>
+inoremap <C-x> <C-v><C-x>
+inoremap <C-z> <C-v><C-z>
+inoremap <C-y> <C-v><C-y>
+" ============================================================================
+
+" ============================================================================
+map x :bmarks<cr>
+map e :delbmarks<space>  
+"map xo :bmarks<cr>;o
+"map xt :bmarks<cr>;t
+"map xw :bmarks<cr>;w
+map <etc> <etc><etc><etc>
+" pref!    调出firefox的about:config
+" pref    调出firefox的preference对话框
+map <Leader>prf :pref<cr>
+" addon    调出firefox的插件管理；
+map <Leader>add :addon<cr>
+" restart重启ff
+map <Leader>res :restart<cr>
+" 打开收藏夹 1
+map <F2> <Esc><Esc><Esc>:tabopen C:\Users\liaocaiyuan\AppData\Roaming\Mozilla\Firefox\Profiles\og93ywkh.default\bookmarks.html<cr>
+" 打开收藏夹 2
+map <F3> :dialog places<cr>
+" 打开firefox设置各种配置的对话框
+map <Leader>cof :dialog preferences<cr>
+" 打开message, 查看有什么消息
+map <Leader>mes :mes<cr>
+" 打开/头闭工具栏.  T为菜单
+" ATTENTION: between <C-v> and <C-d>, there should not be any space.
+map <Leader>ato <Esc><Esc><Esc> :set go+=mT <CR> <C-v><C-d>
+map <Leader>dto <Esc><Esc><Esc> :set go=<CR>
+" 查看源码
+map <Leader>vco :vie<cr>
+" open/close bookmarks
+map <Leader>obm i<C-I>
+map <Leader>cbm :sbclose<cr>
+"
+
+
+map <Leader>vif :! gvim ~/.vimperatorrc<cr><cr>
+map <Leader>vim :! gvim ~/.vimrc<cr><cr>
+
+
+
+
+map <Leader>tgma t https://mail.google.com/mail/#inbox<cr>
+
+map <Leader>tjyd t https://www.amazon.cn/ap/signin?_encoding=UTF8&openid.assoc_handle=cnamazon&openid.return%5Fto=https%3A%2F%2Fwww.amazon.cn%2Fgp%2Fcss%2Fhistory%2Fview.html%3Fie%3DUTF8%26ref%5F%3Dya%255F%255F6%26orderFilter%3Dwheres-my-stuff&openid.mode=checkid%5Fsetup&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&openid.claimed%5Fid=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier%5Fselect&openid.pape.max%5Fauth%5Fage=900&openid.ns.pape=http%3A%2F%2Fspecs.openid.net%2Fextensions%2Fpape%2F1.0&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier%5Fselect<cr>
+map <Leader>tjys t http://www.amazon.cn/mn/advancedSearchInputApp?type=book<cr>
+
+map <Leader>t126 t http://www.126.com/<cr>
+
+
+map <Leader>tbbd t http://www.baidu.com<cr>
+map <Leader>tbyk t http://www.youku.com<cr>
+map <Leader>tbmp t http://mp3.baidu.com<cr>
+map <Leader>tbbk t http://baike.baidu.com<cr>
+map <Leader>tbpt t http://image.baidu.com<cr>
+map <Leader>tbns t http://news.baidu.com<cr>
+map <Leader>tbh1 t http://www.hao123.com<cr>
+map <Leader>tfdr t http://start.fedoraproject.org<cr>
+map <Leader>tffj t https://addons.mozilla.org/zh-CN/firefox<cr> "Firefox附件
+
+map <Leader>txjx t http://211.64.120.6/eol/stu_main.jsp<cr>
+map <Leader>ffsvn t file://~/notes/note/svn/svn-book-html/svn-book.html
+"unixblog
+map <Leader>blbl t http://blog.chinaunix.net/u3/112454/index.html<cr>
+
+
+
+
+noremap J <esc>12j
+noremap K <esc>12k
+imap j <esc>j
+imap k <esc>k
+noremap j <esc>j
+noremap k <esc>k
+
+
+
+" 日期
+"map <F3> :echo new Date().toDateString()<CR>
+map <Leader>h :echo "Hello"<CR>
+imap <Leader>h :echo "Hello"<CR>
+cmap <Leader>h :echo "Hello"<CR>
+
+" color setting
+"colorscheme myzenburn
+"colorscheme desert
+
+" 光标宽度
+set! ui.caretWidth=24
+" 光标闪动时间间隔
+set! ui.caretBlinkTime=550
+
+"对 Google 的所有站点启用 passthrough 模式：
+autocmd LocationChange .* js modes.passAllKeys = /google\.com/.test(buffer.URL)
+"对 Google 的 某些 站点启用 passthrough 模式：
+autocmd LocationChange .* js modes.passAllKeys = /(www|mail)\.google\.com/.test(buffer.URL)
+"在使用 Gmail 撰写邮件时将 filetype （文件类型）设置为 mail （邮件）:
+autocmd LocationChange .* :set editor=gvim\ -f
+autocmd LocationChange mail\.google\.com :set editor="gvim -f -c 'set ft=mail'"
+
+
+
+
+
+
+" gu          /* 到URL的上一层目录 */
+" gU          /* 到URL的根目录    */
+" <C-a>/<C-x>   /* 把URL最后一个数字增加/减少1，然后打开 */
+" 
+" 例如：
+" 2gu 是指从http://www.example.com/dir1/dir2/file.htm到 http://www.example.com/dir1/
+" <C-a>是指从 http://www.example.com/2008.htm 到 http://www.example.com/2009.htm
+" 
+" y/p          /* 把当前URL拷贝到粘贴板或把粘贴板上的URL在当然页打开 */
+" P           /* 大写的P是在新标签页打开粘贴板里的URL   */
+
+" g<C-g>/:pageinfo          /* 查看当前页面信息 */
+" gf/:viewsource             /* 查看当前页源代码 */
+" zi <--> zo                 /* 放大/缩小当前页，zoom in/out */
+" r/:reload <==> <C-c>/:stop    /* 重新载入当前页或停止载入当前页 */
+
+" ;y23             /* 拷贝编号为23的链接地址到粘贴板 */
+" ;t35             /* 后台在新标签中打开编号为35的链接 */
+
+" o{a-zA-Z0-9}
+" gn{a-zA-Z0-9}
+" M{a-zA-Z0-9}
+"
+" nuoailz liaocaiyuan

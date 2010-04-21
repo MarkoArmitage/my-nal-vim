@@ -1,6 +1,6 @@
 let mapleader=","
 "kkkkkk" ……
-" :echo $VIMRUNTIME
+" :echo $VIMRUNTIME/../vimfiles/plugin/
 ":bdelete 3     "把一个缓冲区从列表中去除
 ":bwipe         "把一个缓冲区从列表中彻底去除
 
@@ -22,7 +22,7 @@ endif
 if has("gui_running")
     "设定 windows 下 gvim 启动时最大化
     "autocmd GUIEnter * simalt ~
-    set lines=43
+    set lines=48
     set columns=123
     winpos  170  20
     if exists("&cursorline")
@@ -90,12 +90,22 @@ function! Mydict()
 	1
 endfunction
 
+function! Firefox_jsp()
+	let ttmp=expand("<cWORD>")
+	let jsp_path="http://10.3.10.19:8080/sy/"
+	" jsp_fullpath="http://10.3.10.19:8080/sy/$ttmp"
+	let jsp_fullpath= jsp_path . ttmp			
+	let t3=system('firefox -height 50 -width 40 ' . jsp_fullpath)
+endfunction
+
 function! Testfun()
-	let ttmp=expand("%:p")
+	let ttmp=expand("<cWORD>")
+	let jsp_path="http://10.3.10.19:8080/sy/"
 	echo ttmp
-	if ttmp == "/home/scr/.vimrc"
-		echo "ok"
-	endif
+	let t2= jsp_path . ttmp
+	echo t2
+	let t3=system('firefox ' . t2)
+	echo t3
 endfunction
 
 "Fast edit vimrc
@@ -133,7 +143,7 @@ elseif MySys() == 'windows'
 endif
 
 "#############################################################################
-" settings ses
+" settings sets
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 au FileType c,cpp set nomodeline " @@@@@
 au FileType text, txt, TXT set tw=78 fo+=Mm "选中，然后按gq就可以
@@ -143,7 +153,8 @@ autocmd BufReadPost *       " @@@@@
 \ endif
 
 filetype on
-filetype plugin  on "自动识别文件类型，自动匹配对应的文件类型Plugin.vim文件
+filetype plugin on "自动识别文件类型，自动匹配对应的文件类型Plugin.vim文件
+filetype plugin indent  on "自动识别文件类型，自动匹配对应的文件类型Plugin.vim文件
 set statusline=%f%m%r,%Y,%{&fileformat}\ \ \ ASCII=\%b,HEX=\%B\ \ \ %l,%c%V\
 \ %p%%\ \ \ [%L\ lines]         "设置在状态行显示的信息
 
@@ -180,12 +191,12 @@ set nowarn
 set number                      "显示行号
 set ruler                       "show the cursor position all the time
 set scrolloff=2                 "设定光标离窗口上下边界2行时窗口自动滚动
-set shiftwidth=4                "设定 << 和 >> 命令移动时的宽度
 set showcmd                     "在状态栏显示目前所执行的指令 @@@@@
 set showmatch
 set smartindent
+set shiftwidth=4                "设定 << 和 >> 命令移动时的宽度
 set softtabstop=4               "使得按退格键时可以一次删掉 4 个空格
-set tabstop=4                   "tab宽度为四个字符
+set tabstop=8                   "tab宽度为四个字符
 "set textwidth=78 fo+=Mm         "对当前文件文字自动换行
 set title                       "在标题中显示文件是否可以或已经被修改
 set whichwrap=b,s,<,>,[,]       "左右前头跨行移动
@@ -221,6 +232,7 @@ hi Normal guibg=#cfe8cc
 "set vb t_vb=                   "关闭响铃
 "set vb                         "出错时闪屏
 "set viminfo @@@@@
+"set viminfo='20,<50,s10,h
 "########################## end of settings ##################################
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -402,7 +414,8 @@ map <silent> <leader>hb :HSBufExplorer<cr>
 "=============================================================================
 "MiniBufExplorer
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <silent> <leader>mb :MiniBufExplorer<cr>
+" mbt mbe mbc mbu
+"map <silent> <leader>mbc ,mbe:q!<cr>
 
 "=============================================================================
 "WinManager 功能:控制各插件的窗口布局
@@ -710,7 +723,8 @@ let NERDTreeQuitOnOpen=0    " 1: 打开文件后, 关闭NERDTrre窗口
 map <silent> <leader>ccc ,cc<cr>k
 imap <silent> <leader>ccc /*<esc>a
 map <silent> <leader>cca ,ca<cr>k
-map <silent> <leader>ccs :.,.s/ //g<cr>
+map <silent> <leader>ccs mz:.,.s/ //g<cr>/<Up><Up><cr>`z
+vnoremap <silent> <leader>scs :s/ //g<cr>
 vmap <silent> <leader>ct :s/\( .*$\)/ (\^\1\^)<cr>
 "map <silent> <leader>ct $F!,c$<cr>k$F!x
 map <silent> <leader>ct $F<space>l,c$<cr>k$2F<space>l
@@ -833,8 +847,31 @@ nmap <leader>cw :cw 10<cr> :cn<cr>
 
 
 "#############################################################################
-" 项目相关设置
+" 项目相关设置 pj
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set path+=./**
+
+":cd src                            "切换到/home/easwy/src/vim70/src目录
+":set sessionoptions-=curdir        "在session option中去掉curdir
+":set sessionoptions+=sesdir        "在session option中加入sesdir
+":mksession vim70.vim               "创建一个会话文件
+":wviminfo vim70.viminfo            "创建一个viminfo文件
+":qa                                "退出vim
+
+"在vim载入会话文件的最后一步, 它会查找一个额外的文件(*x.vim)并执行其中的ex命令.
+"然后再编辑一个名为~/src/vim70/vim70x.vim (*x.vim) 的文件，文件的内容为:
+""set project path
+"set path+=~/src/vim70/** 
+
+"退出vim后，在命令行下执行gvim &，再次进入vim，这时看到的是一个空白窗口。然后执行下面的命令：
+":source ~/src/vim70/src/vim70.vim  '载入会话文件
+":rviminfo vim70.viminfo            '读入viminfo文件
+
+
+" execute project related configuration in current directory
+if filereadable("workspace.vim")
+    source workspace.vim
+endif 
 if filereadable("vim72_wp.vim")
    source vim72_wsp.vim
 endif
@@ -844,15 +881,26 @@ endif
 "#############################################################################
 "maps
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <silent> <leader>sq qz"apjjf"mzggjlv$hy`zpjqi
+" for jsp jsps
+map <silent> <leader>utf mz:%s/GB2312/UTF-8/gi<cr>`z
+map <silent> <leader>b23 mz:%s/utf-8/GB2312/gi<cr>`z
+map <silent> <leader>sps gg0:w <C-R><C-W>.jsp<cr>,cccjfGcwutf-8<esc>
+map <silent> <leader>sfj mzgg0W :call Firefox_jsp()<cr>`z
+
+" for shell-script
+map <silent> <leader>ssa gg/^$<cr>qz"apjjf"mzggjlv$hy*`zpjqi
+map <silent> <leader>ssb gg/^$<cr>qz"bpjjf"mzggjlv$hy*`zpjqi
+map <silent> <leader>sss gg/#!<cr>h<C-E>G0dkddkddpi#<esc>
+
 map <silent> <leader>d2s :%s/，/, /ge<cr>:%s/。/. /ge<cr>:%s/；/; /ge<cr>
 \:%s/：/: /ge<cr>:%s/　/  /ge<cr>:%s/“/"/ge<cr>:%s/”/"/ge<cr>:%s/？/?/ge<cr>
 \:%s/！/!/ge<cr>:%s/、/. /ge<cr>:%s/）/)/ge<cr>:%s/（/(/ge<cr>:%s/…/.../ge<cr>
 \:%s/＝/=/ge<cr>:%s/／/\//ge<cr>:%s/＊/\*/ge<cr>:%s/—/-/ge<cr>:%s/＃/#/ge<cr>
-":%s/＃/#/ge<cr>
+\:%s/１/1/ge<cr>:%s/２/2/ge<cr>
+":%s/１/1/ge<cr>
 map <silent> <leader>s2t :%s/	/    /g<cr>
 map <silent> <leader>pwd :pwd<cr>
-map <silent> <leader>p2v :r!cat /tmp/pwd2vim.tmp<cr>
+map <silent> <leader>y mz:r!cat /tmp/pwd2vim.tmp<cr>0vEd`zi <esc>Pjdd`zf<Space>x
 map <F3> :tabclose<CR>
 map <F4> :tabnew<CR>
 map <F5> :tabprevious<CR>
@@ -913,7 +961,7 @@ map <silent> <leader>tof V:s/\\/\//g<cr>
 " source $VIMRUNTIME/syntax/2html.vim
 map <silent> <leader>v2h :source $VIMRUNTIME/syntax/2html.vim<cr>
 " write date under cursor
-map <silent> <leader>date :r ! date<cr>I(<Esc>A)<Esc>o<Esc>i#<esc>77a=<Esc>0
+map <silent> <leader>dte :r ! date<cr>I(<Esc>A)<Esc>o<Esc>i#<esc>77a=<Esc>0
 "给某个单词加上()
 map <silent> <leader>eas i(<Esc>ea)<Esc>
 map <silent> <leader>eam i[<Esc>ea]<Esc>
@@ -1102,7 +1150,12 @@ onoremap <C-F4> <C-C><C-W>c
 "双击t键实现对在起点下载的TXT文本进行排版并删除里面多余的广告等
 "nmap tt :%s/^\([\s　]\+\)/    /g<cr>:%s/^更新时间.*\d$//g<cr>:%s/<a href.*<\/a>$//g<cr>:%s/\([\s　]*\n\)\+/\r\r/<cr>
 "-----------------------------------------------------------------------------
+"vimgrep 的使用
+":cd ~/src/vim70
+":vimgrep /\<main\>/ src/*.c
+":cw 
 "-----------------------------------------------------------------------------
+":Explore"等Ex命令来打开文件浏览器
 "-----------------------------------------------------------------------------
 "-----------------------------------------------------------------------------
 "-----------------------------------------------------------------------------
@@ -1113,3 +1166,4 @@ onoremap <C-F4> <C-C><C-W>c
 "-----------------------------------------------------------------------------
 "######################## end of notes #######################################
 "
+"set sessionoptions+=slash
