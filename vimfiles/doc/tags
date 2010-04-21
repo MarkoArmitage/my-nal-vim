@@ -150,6 +150,16 @@ EnhComm-Options	EnhancedCommentify.txt	/*EnhComm-Options*
 EnhComm-Support	EnhancedCommentify.txt	/*EnhComm-Support*
 EnhancedCommentify	EnhancedCommentify.txt	/*EnhancedCommentify*
 EnhancedCommentify()	EnhancedCommentify.txt	/*EnhancedCommentify()*
+FindMate	FindMate.txt	/*FindMate*
+FindMate-about	FindMate.txt	/*FindMate-about*
+FindMate-author	FindMate.txt	/*FindMate-author*
+FindMate-changelog	FindMate.txt	/*FindMate-changelog*
+FindMate-contact	FindMate.txt	/*FindMate-contact*
+FindMate-installation	FindMate.txt	/*FindMate-installation*
+FindMate-introduction	FindMate.txt	/*FindMate-introduction*
+FindMate-options	FindMate.txt	/*FindMate-options*
+FindMate-usage	FindMate.txt	/*FindMate-usage*
+FindMate.txt	FindMate.txt	/*FindMate.txt*
 IDMY	visincr.txt	/*IDMY*
 IH	alternate.txt	/*IH*
 IHN	alternate.txt	/*IHN*
@@ -158,6 +168,8 @@ IHT	alternate.txt	/*IHT*
 IHV	alternate.txt	/*IHV*
 IMDY	visincr.txt	/*IMDY*
 IYMD	visincr.txt	/*IYMD*
+LargeFile-copyright	LargeFile.txt	/*LargeFile-copyright*
+LargeFile.txt	LargeFile.txt	/*LargeFile.txt*
 NERDComAbout	NERD_commenter.txt	/*NERDComAbout*
 NERDComAlignedComment	NERD_commenter.txt	/*NERDComAlignedComment*
 NERDComAltDelim	NERD_commenter.txt	/*NERDComAltDelim*
@@ -269,6 +281,7 @@ WinManagerFileEdit	winmanager.txt	/*WinManagerFileEdit*
 WinManagerForceReSize	winmanager.txt	/*WinManagerForceReSize*
 WinManagerResumeAUs	winmanager.txt	/*WinManagerResumeAUs*
 WinManagerSuspendAUs	winmanager.txt	/*WinManagerSuspendAUs*
+ZoomWin.txt	ZoomWin.txt	/*ZoomWin.txt*
 acp	acp.txt	/*acp*
 acp-about	acp.txt	/*acp-about*
 acp-author	acp.txt	/*acp-author*
@@ -1591,6 +1604,10 @@ ex-visincr-II	visincr.txt	/*ex-visincr-II*
 ex-visincr-IM	visincr.txt	/*ex-visincr-IM*
 ex-visincr-IMDY	visincr.txt	/*ex-visincr-IMDY*
 ex-visincr-IYMD	visincr.txt	/*ex-visincr-IYMD*
+findmate	FindMate.txt	/*findmate*
+g:FindMate_firstSearch	FindMate.txt	/*g:FindMate_firstSearch*
+g:FindMate_totalResults	FindMate.txt	/*g:FindMate_totalResults*
+g:FindMate_verbose	FindMate.txt	/*g:FindMate_verbose*
 g:acp_behavior	acp.txt	/*g:acp_behavior*
 g:acp_behavior-command	acp.txt	/*g:acp_behavior-command*
 g:acp_behavior-completefunc	acp.txt	/*g:acp_behavior-completefunc*
@@ -1617,6 +1634,7 @@ g:acp_completeoptPreview	acp.txt	/*g:acp_completeoptPreview*
 g:acp_enableAtStartup	acp.txt	/*g:acp_enableAtStartup*
 g:acp_ignorecaseOption	acp.txt	/*g:acp_ignorecaseOption*
 g:acp_mappingDriven	acp.txt	/*g:acp_mappingDriven*
+g:loaded_findMate	FindMate.txt	/*g:loaded_findMate*
 g:vimwiki_auto_checkbox	vimwiki.txt	/*g:vimwiki_auto_checkbox*
 g:vimwiki_list	vimwiki.txt	/*g:vimwiki_list*
 g:vimwiki_lower	vimwiki.txt	/*g:vimwiki_lower*
@@ -1666,6 +1684,8 @@ javacomplete-thanks	javacomplete.txt	/*javacomplete-thanks*
 javacomplete-todo	javacomplete.txt	/*javacomplete-todo*
 javacomplete-usage	javacomplete.txt	/*javacomplete-usage*
 javacomplete.txt	javacomplete.txt	/*javacomplete.txt*
+largefile	LargeFile.txt	/*largefile*
+largefile-history	LargeFile.txt	/*largefile-history*
 omnicpp-download	omnicppcomplete.txt	/*omnicpp-download*
 omnicpp-faq	omnicppcomplete.txt	/*omnicpp-faq*
 omnicpp-features	omnicppcomplete.txt	/*omnicpp-features*
@@ -1890,3 +1910,8 @@ yS	surround.txt	/*yS*
 ySS	surround.txt	/*ySS*
 ys	surround.txt	/*ys*
 yss	surround.txt	/*yss*
+zoomwin	ZoomWin.txt	/*zoomwin*
+zoomwin-copyright	ZoomWin.txt	/*zoomwin-copyright*
+zoomwin-history	ZoomWin.txt	/*zoomwin-history*
+zoomwin-setup	ZoomWin.txt	/*zoomwin-setup*
+zoomwin-usage	ZoomWin.txt	/*zoomwin-usage*
