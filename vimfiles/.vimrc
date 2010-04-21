@@ -36,7 +36,10 @@ endif
 
 " Platform
 function! MySys()
-  return "linux"
+    if has("win32")
+	return "windows"
+    else 
+	return "linux"
 endfunction
 
 " Switch to buffer according to file name
@@ -130,7 +133,7 @@ elseif MySys() == 'windows'
     "Fast reloading of the _vimrc
     map <silent> <leader>vis :source ~\_vimrc<cr>
     "Fast editing of _vimrc
-    map <silent> <leader>vim :call SwitchToBuf("/media/C/Vim/Vim/_vimrc")<cr>
+    map <silent> <leader>vim :call SwitchToBuf("C:/Vim/Vim/_vimrc")<cr>
     map <silent> <leader>vio :call SwitchToBuf("F:/notes/blog/vim/13vim_skill.txt")<cr>
     map <silent> <leader>vib :call SwitchToBuf("F:/notes/blog/book/01.txt")<cr>
     map <silent> <leader>vik :call SwitchToBuf("F:/notes/blog/vim/script/vim_script_settings_of_me.txt")<cr>
