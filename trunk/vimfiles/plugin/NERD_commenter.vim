@@ -140,10 +140,7 @@ function s:SetUpForNewFiletype(filetype, forceReset)
     elseif a:filetype ==? "asm68k"
         call s:MapDelimiters('; ', '')
     elseif a:filetype ==? "asm"
-"(2010年 03月 20日 星期六 21:53:13 CST)
-"#=============================================================================
-        "call s:MapDelimitersWithAlternative('; ', '', '# ', '')
-        call s:MapDelimitersWithAlternative('! ', '', '; ', '')
+        call s:MapDelimitersWithAlternative('; ', '', '! ', '')
     elseif a:filetype ==? "asn"
         call s:MapDelimiters('-- ', '')
     elseif a:filetype ==? "aspvbs"
@@ -381,7 +378,7 @@ function s:SetUpForNewFiletype(filetype, forceReset)
     elseif a:filetype ==? "jproperties"
         call s:MapDelimiters('# ','')
     elseif a:filetype ==? "jsp"
-        call s:MapDelimiters('<%-- ', ' --%>')
+        call s:MapDelimiters('<%--', '--%>')
     elseif a:filetype ==? "kix"
         call s:MapDelimiters('; ', '')
     elseif a:filetype ==? "kscript"
@@ -672,11 +669,6 @@ function s:SetUpForNewFiletype(filetype, forceReset)
         call s:MapDelimiters("comment = '","'")
     elseif a:filetype ==? "txt2tags"
         call s:MapDelimiters('%','')
-"(2010年 03月 05日 星期五 10:42:59 CST)
-"==============================================================================
-"增加*.txt的
-    elseif a:filetype ==? "txt"
-        call s:MapDelimitersWithAlternative('(^ ',' ^)','// ','')
     elseif a:filetype ==? "uc"
         call s:MapDelimitersWithAlternative('// ','', '/* ',' */')
     elseif a:filetype ==? "uil"

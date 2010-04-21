@@ -1,11 +1,11 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" CSCOPE settings for vim
+" CSCOPE settings for vim           
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
 " This file contains some boilerplate settings for vim's cscope interface,
 " plus some keyboard mappings that I've found useful.
 "
-" USAGE:
+" USAGE: 
 " -- vim 6:     Stick this file in your ~/.vim/plugin directory (or in a
 "               'plugin' directory in some other directory that is in your
 "               'runtimepath'.
@@ -13,7 +13,7 @@
 " -- vim 5:     Stick this file somewhere and 'source cscope.vim' it from
 "               your ~/.vimrc file (or cut and paste it into your .vimrc).
 "
-" NOTE:
+" NOTE: 
 " These key maps use multiple keystrokes (2 or 3 keys).  If you find that vim
 " keeps timing you out before you can complete them, try changing your timeout
 " settings, as explained below.
@@ -25,10 +25,10 @@
 
 
 " This tests to see if vim was configured with the '--enable-cscope' option
-" when it was compiled.  If it wasn't, time to recompile vim...
+" when it was compiled.  If it wasn't, time to recompile vim... 
 if has("cscope")
 
-   """"""""""" Standard cscope/vim boilerplate
+    """"""""""""" Standard cscope/vim boilerplate
 
     " use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
     set cscopetag
@@ -39,17 +39,17 @@ if has("cscope")
 
     " add any cscope database in current directory
     if filereadable("cscope.out")
-        cs add cscope.out
-    " else add the database pointed to by environment variable
-    elseif $CSCOPE_DB !=""
+        cs add cscope.out  
+    " else add the database pointed to by environment variable 
+    elseif $CSCOPE_DB != ""
         cs add $CSCOPE_DB
     endif
 
     " show msg when any other cscope db added
-    set cscopeverbose
+    set cscopeverbose  
 
 
-   """"""""""" My cscope/vim key mappings
+    """"""""""""" My cscope/vim key mappings
     "
     " The following maps all invoke one of the following cscope search types:
     "
@@ -85,7 +85,7 @@ if has("cscope")
     " To do the first type of search, hit 'CTRL-\', followed by one of the
     " cscope search types above (s,g,c,t,e,f,i,d).  The result of your cscope
     " search will be displayed in the current window.  You can use CTRL-T to
-    " go back to where you were before the search.
+    " go back to where you were before the search.  
 
     "   's'   symbol: find all references to the token under cursor
     "   'g'   global: find global definition(s) of the token under cursor
@@ -95,14 +95,14 @@ if has("cscope")
     "   'f'   file:   open the filename under cursor
     "   'i'   includes: find files that include the filename under cursor
     "   'd'   called: find functions that function under cursor calls
-    " s: 查找C语言符号，即查找函数名、宏、枚举值等出现的地方
-    " g: 查找函数、宏、枚举等定义的位置，类似ctags所提供的功能
-    " c: 查找调用本函数的函数
-    " t: 查找指定的字符串
-    " e: 查找egrep模式，相当于egrep功能，但查找速度快多了
-    " f: 查找并打开文件，类似vim的find功能
+    " s: 查找C语言符号，即查找函数名、宏、枚举值等出现的地方 
+    " g: 查找函数、宏、枚举等定义的位置，类似ctags所提供的功能 
+    " c: 查找调用本函数的函数 
+    " t: 查找指定的字符串 
+    " e: 查找egrep模式，相当于egrep功能，但查找速度快多了 
+    " f: 查找并打开文件，类似vim的find功能 
     " i: 查找包含本文件的文件
-    " d: 查找本函数调用的函数
+    " d: 查找本函数调用的函数 
     nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
     nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
     nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
@@ -131,7 +131,7 @@ if has("cscope")
     nmap <C-@>d :scs find d <C-R>=expand("<cword>")<CR><CR>	
 
 
-    " Hitting CTRL-space *twice* before the search type does a vertical
+    " Hitting CTRL-space *twice* before the search type does a vertical 
     " split instead of a horizontal one (vim 6 and up only)
     "
     " (Note: you may wish to put a 'set splitright' in your .vimrc
@@ -147,13 +147,13 @@ if has("cscope")
     nmap <C-@><C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
 
 
-   """"""""""" key map timeouts
+    """"""""""""" key map timeouts
     "
     " By default Vim will only wait 1 second for each keystroke in a mapping.
     " You may find that too short with the above typemaps.  If so, you should
     " either turn off mapping timeouts via 'notimeout'.
     "
-    "set notimeout
+    "set notimeout 
     "
     " Or, you can keep timeouts, by uncommenting the timeoutlen line below,
     " with your own personal favorite value (in milliseconds):
@@ -166,7 +166,7 @@ if has("cscope")
     " delays as vim waits for a keystroke after you hit ESC (it will be
     " waiting to see if the ESC is actually part of a key code like <F1>).
     "
-    "set ttimeout
+    "set ttimeout 
     "
     " personally, I find a tenth of a second to work well for key code
     " timeouts. If you experience problems and have a slow terminal or network
@@ -176,3 +176,4 @@ if has("cscope")
     "set ttimeoutlen=100
 
 endif
+

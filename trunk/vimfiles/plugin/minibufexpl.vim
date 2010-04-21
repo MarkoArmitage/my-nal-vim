@@ -288,7 +288,7 @@ if !hasmapto('<Plug>MiniBufExplorer')
   map <unique> <Leader>mbe <Plug>MiniBufExplorer
 endif
 if !hasmapto('<Plug>CMiniBufExplorer')
-  map  <Leader>mbc <Plug>CMiniBufExplorer
+  map <unique> <Leader>mbc <Plug>CMiniBufExplorer
 endif
 if !hasmapto('<Plug>UMiniBufExplorer')
   map <unique> <Leader>mbu <Plug>UMiniBufExplorer
@@ -1803,7 +1803,7 @@ endfunc " }}}
 "                       opened again unless you do a \mbe (or restart VIM).
 "                     o Removed spaces between "tabs" (even more mini :)
 "                     o Simplified MBE tab processing 
-"               6.0.6 o Fixed register overwrite bug found by S?bastien Pierre
+"               6.0.6 o Fixed register overwrite bug found by Sébastien Pierre
 "               6.0.5 o Fixed an issue with window sizing when we run out of 
 "                       buffers.  
 "                     o Fixed some weird commenting bugs.  

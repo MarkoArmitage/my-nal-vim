@@ -5,7 +5,6 @@
 "
 " $Id: pyclewn.vim 29 2009-04-18 18:20:41Z xdegaye $
 
-"if exists("b:did_pyclewn")
 if exists("b:did_pyclewn")
     finish
 endif
