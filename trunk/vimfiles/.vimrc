@@ -23,7 +23,7 @@ if has("gui_running")
     "设定 windows 下 gvim 启动时最大化
     "autocmd GUIEnter * simalt ~
     set lines=48
-    set columns=123
+    set columns=84
     winpos  10  0
     if exists("&cursorline")
         set cursorline  "Highlight current
@@ -278,6 +278,7 @@ iabbrev fil C:\Program Files\Vim\vimfiles
 " use abbreviate
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 abbreviate teh the
+abbreviate mian main
 "######################## end of abbreviate ##################################
 
 
@@ -899,8 +900,8 @@ map <silent> <leader>d2s :%s/，/, /ge<cr>:%s/。/. /ge<cr>:%s/；/; /ge<cr>
 \:%s/：/: /ge<cr>:%s/　/  /ge<cr>:%s/“/"/ge<cr>:%s/”/"/ge<cr>:%s/？/?/ge<cr>
 \:%s/！/!/ge<cr>:%s/、/,/ge<cr>:%s/）/)/ge<cr>:%s/（/(/ge<cr>:%s/…/.../ge<cr>
 \:%s/＝/=/ge<cr>:%s/／/\//ge<cr>:%s/＊/\*/ge<cr>:%s/—/-/ge<cr>:%s/＃/#/ge<cr>
-\:%s/１/1/ge<cr>:%s/２/2/ge<cr>
-":%s/１/1/ge<cr>
+\:%s/１/1/ge<cr>:%s/２/2/ge<cr>:%s/－/-/ge<cr>
+":%s/－/1/ge<cr>
 map <silent> <leader>s2t :%s/	/    /g<cr>
 map <silent> <leader>pwd :pwd<cr>
 map <silent> <leader>y mz:r!cat /tmp/pwd2vim.tmp<cr>0vEd`zi <esc>Pjdd`zf<Space>x
