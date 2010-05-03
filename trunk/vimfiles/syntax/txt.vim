@@ -20,13 +20,13 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syn clear
 syn case ignore
-"(2010Äê 04ÔÂ 28ÈÕ ĞÇÆÚÈı 16:40:42 CST)
+"(2010å¹´ 04æœˆ 28æ—¥ æ˜ŸæœŸä¸‰ 16:40:42 CST)
 "#=============================================================================
 "hi clear Normal
 "#=============================================================================
 "colo default "desert
 "set bg&
-"set guifont=Monospace\ 11"set the gui font. ĞÂËÎÌå:h8:cGB2312"
+"set guifont=Monospace\ 11"set the gui font. æ–°å®‹ä½“:h8:cGB2312"
 "set linespace=5"row space.
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -36,49 +36,56 @@ syn case ignore
 syn keyword txtTodo todo fixme note debug comment notice
 syn keyword txtError error bug caution dropped
 
+"(2010å¹´ 05æœˆ 01æ—¥ æ˜ŸæœŸå…­ 11:28:29 CST)
+"#=============================================================================
+"ä»¥$å·æ‰“å¤´çš„è¡Œä¸ºæ³¨é‡Šæ–‡æœ¬
+syn match   cmdLine '^\$.*$'
+syn match   cmdOut '^&.*$'
+"#=============================================================================
+
 "txtComment: Lines that start with '#'
-"ÒÔ#ºÅ´òÍ·µÄĞĞÎª×¢ÊÍÎÄ±¾
+"ä»¥#å·æ‰“å¤´çš„è¡Œä¸ºæ³¨é‡Šæ–‡æœ¬
 syn match   txtComment '^#.*$' contains=txtTodo
 
 "txtTitle: Lines start with digit and '.'
-"±êÌâÎÄ±¾: Ç°ÃæÓĞÈÎÒâ¸ö¿Õ¸ñ,Êı×Ö.[Êı×Ö.]´òÍ·, ²¢ÇÒ¸ÃĞĞÀï²»º¬ÓĞ,.¡££¬µÈ±êµã·ûºÅ
-syn match txtTitle "^\(\d\+\.\)\+\s*[^,¡££¬]\+$"
+"æ ‡é¢˜æ–‡æœ¬: å‰é¢æœ‰ä»»æ„ä¸ªç©ºæ ¼,æ•°å­—.[æ•°å­—.]æ‰“å¤´, å¹¶ä¸”è¯¥è¡Œé‡Œä¸å«æœ‰,.ã€‚ï¼Œç­‰æ ‡ç‚¹ç¬¦å·
+syn match txtTitle "^\(\d\+\.\)\+\s*[^,ã€‚ï¼Œ]\+$"
 
 "txtTitle: Lines start with Chinese digit and '.'
-"±êÌâÎÄ±¾: ºº×ÖÊı×Ö¼Ó'.¡¢'´òÍ·£¬ÇÒ¸ÃĞĞ²»º¬,.¡££¬±êµã·ûºÅ
-syn match txtTitle "^\([Ò»¶şÈıËÄÎåÁùÆß°Ë¾ÅÊ®][¡¢.]\)\+\s*[^,¡££¬]\+$"
+"æ ‡é¢˜æ–‡æœ¬: æ±‰å­—æ•°å­—åŠ '.ã€'æ‰“å¤´ï¼Œä¸”è¯¥è¡Œä¸å«,.ã€‚ï¼Œæ ‡ç‚¹ç¬¦å·
+syn match txtTitle "^\([ä¸€äºŒä¸‰å››äº”å…­ä¸ƒå…«ä¹å][ã€.]\)\+\s*[^,ã€‚ï¼Œ]\+$"
 
 "txtTitle: Lines start with digit
-"±êÌâÎÄ±¾: ÒÔÊı×Ö´òÍ·, ÖĞ¼äÓĞ¿Õ¸ñ, ºó¸úÈÎÒâÎÄ×Ö. ÇÒ¸ÃĞĞ²»º¬ÓĞ,.¡££¬±êµã·ûºÅ
-syn match txtTitle "^\d\s\+.\+\s*[^,¡££¬]$"
+"æ ‡é¢˜æ–‡æœ¬: ä»¥æ•°å­—æ‰“å¤´, ä¸­é—´æœ‰ç©ºæ ¼, åè·Ÿä»»æ„æ–‡å­—. ä¸”è¯¥è¡Œä¸å«æœ‰,.ã€‚ï¼Œæ ‡ç‚¹ç¬¦å·
+syn match txtTitle "^\d\s\+.\+\s*[^,ã€‚ï¼Œ]$"
 
 "txtList: Lines start with space and then '-+*.'
-"ÁĞ±íÎÄ±¾: ÈÎÒâ¿Õ¸ñ´òÍ·, ºó¸úÒ»¸ö[-+*.]
+"åˆ—è¡¨æ–‡æœ¬: ä»»æ„ç©ºæ ¼æ‰“å¤´, åè·Ÿä¸€ä¸ª[-+*.]
 syn match txtList    '^\s*[-+*.] [^ ]'me=e-1
 
 "txtList: Lines start with space and then digit
-"ÁĞ±íÎÄ±¾: ÈÎÒâ¿Õ¸ñ´òÍ·, ºó¸úÒ»¸ö(Êı×Ö) »ò (×ÖÄ¸) ´òÍ·µÄÎÄ±¾ĞĞ
+"åˆ—è¡¨æ–‡æœ¬: ä»»æ„ç©ºæ ¼æ‰“å¤´, åè·Ÿä¸€ä¸ª(æ•°å­—) æˆ– (å­—æ¯) æ‰“å¤´çš„æ–‡æœ¬è¡Œ
 syn match txtList    '^\s*(\=\([0-9]\+\|[a-zA-Z]\))'
 
 "txtList: Lines start with space and then digit and '.'
-"ÁĞ±íÎÄ±¾: ÖÁÉÙÒ»¸ö¿Õ¸ñ´òÍ·, [Êı×Ö.]´òÍ·, µ«Ëæºó²»ÄÜ¸úÊı×Ö(ÅÅ³ı°Ñ5.5ÕâÑùµÄÎÄ
-"±¾µ±³ÉÁĞ±í) 
+"åˆ—è¡¨æ–‡æœ¬: è‡³å°‘ä¸€ä¸ªç©ºæ ¼æ‰“å¤´, [æ•°å­—.]æ‰“å¤´, ä½†éšåä¸èƒ½è·Ÿæ•°å­—(æ’é™¤æŠŠ5.5è¿™æ ·çš„æ–‡
+"æœ¬å½“æˆåˆ—è¡¨) 
 syn match txtList "^\s\+\d\+\.\d\@!"
 
 "txtApostrophe: text in the apostrophe
-"µ¥ÒıºÅÄÚÎÄ×Ö
+"å•å¼•å·å†…æ–‡å­—
 syn match   txtApostrophe  '\'[^\']\+\''hs=s+1,he=e-1
 
 "txtQuotes: text in the quotoes
-"Ë«ÒıºÅÄÚÎÄ×Ö, °üÀ¨È«½Ç°ë½Ç, ×÷ÓÃ·¶Î§×î¶àÁ½ĞĞ
-syn match   txtQuotes     '["¡°][^"¡±]\+\(\n\)\=[^"¡±]*["¡±]'hs=s+1,he=e-1
+"åŒå¼•å·å†…æ–‡å­—, åŒ…æ‹¬å…¨è§’åŠè§’, ä½œç”¨èŒƒå›´æœ€å¤šä¸¤è¡Œ
+syn match   txtQuotes     '["â€œ][^"â€]\+\(\n\)\=[^"â€]*["â€]'hs=s+1,he=e-1
 
 "txtParentesis: text in the parentesis
-"À¨ºÅÄÚÎÄ×Ö, ²»ÔÚĞĞÊ×(ÎªÁËºÍtxtListÇø±ğ), ×÷ÓÃ·¶Î§×î¶àÁ½ĞĞ
-syn match   txtParentesis "[(£¨][^)£©]\+\(\n\)\=[^)£©]*[)£©]" contains=txtUrl
+"æ‹¬å·å†…æ–‡å­—, ä¸åœ¨è¡Œé¦–(ä¸ºäº†å’ŒtxtListåŒºåˆ«), ä½œç”¨èŒƒå›´æœ€å¤šä¸¤è¡Œ
+syn match   txtParentesis "[(ï¼ˆ][^)ï¼‰]\+\(\n\)\=[^)ï¼‰]*[)ï¼‰]" contains=txtUrl
 
 "txtBrackets: text in the brackets
-"ÆäËüÀ¨ºÅÄÚÎÄ×Ö, ×÷ÓÃ·¶Î§×î¶àÁ½ĞĞ, ´óÀ¨ºÅÎŞĞĞÊıÏŞÖÆ
+"å…¶å®ƒæ‹¬å·å†…æ–‡å­—, ä½œç”¨èŒƒå›´æœ€å¤šä¸¤è¡Œ, å¤§æ‹¬å·æ— è¡Œæ•°é™åˆ¶
 syn match txtBrackets     '<[^<]\+\(\n\)\=[^<]*>'hs=s+1,he=e-1 contains=txtUrl
 syn match txtBrackets     '\[[^\[]\+\(\n\)\=[^\[]*\]'hs=s+1,he=e-1 contains=txtUrl
 syn region txtBrackets    matchgroup=txtOperator start="{"        end="}" contains=txtUrl
@@ -92,26 +99,32 @@ syn match txtEmailMsg '^\s*\(From\|De\|Sent\|To\|Para\|Date\|Data\|Assunto\|Subj
 syn match txtEmailQuote '^\(>\($\| \)\)\+'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"ÀàhtmlÎÄ±¾
+"ç±»htmlæ–‡æœ¬
 "syn match   txtBold       '\*[^*[:blank:]].\{-}\*'hs=s+1,he=e-1
-"syn match txtItalic "^\s\+.\+$" "Ğ±ÌåÎÄ±¾
+"syn match txtItalic "^\s\+.\+$" "æ–œä½“æ–‡æœ¬
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " color definitions (specific)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"hi txtUrl        term=bold        cterm=bold  ctermfg=blue    gui=underline     guifg=blue
+"hi txtUrl        term=bold        cterm=bold  ctermfg=blue    gui=underline     guifg=red
 hi link txtUrl      Underlined"ModeMsg"Tabline"PmenuSbar
 hi link txtTitle      Title"ModeMsg"Tabline"PmenuSbar
 hi link txtList         SignColumn"Pmenu"DiffText"Statement
 hi link txtComment      Special "Comment
 hi link txtQuotes       MoreMsg"String
-hi link txtApostrophe    MoreMsg"Special
+hi link txtApostrophe    WarningMsg"Special
 hi link txtParentesis   Special "Comment
 hi link txtBrackets  Special
 hi link txtError  ErrorMsg
 hi link txtTodo  Todo
-hi link txtEmailMsg     Structure
+hi link txtEmailMsg     PmenuSbar
 hi link txtEmailQuote   Structure
+"(2010å¹´ 05æœˆ 01æ—¥ æ˜ŸæœŸå…­ 12:09:56 CST)
+"#=============================================================================
+"hi link cmdLine  Structure
+hi link cmdLine  keyword
+hi link cmdOut  LineNr
+"#=============================================================================
 
 "set background=dark
 let b:current_syntax = 'txt'
