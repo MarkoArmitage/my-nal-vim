@@ -50,7 +50,7 @@ endif
 function! MySys()
     if has("win32")
 	return "windows"
-    else 
+    else
 	return "linux"
 endfunction
 
@@ -131,6 +131,7 @@ if MySys() == 'linux'
     map <silent> <leader>vik :call SwitchToBuf("/media/F/notes/blog/vim/script/vim_script_settings_of_me.txt")<cr>
     map <silent> <leader>vie :call SwitchToBuf("/media/F/notes/blog/english/e-new-words.txt")<cr>
     map <silent> <leader>vif :call SwitchToBuf("~/.vimperatorrc")<cr>
+    map <silent> <leader>vir :call SwitchToBuf("/media/F/notes/blog/vim/regular-expression/regular_expressions.txt")<cr>
     map <silent> <leader>vig :call SwitchToBuf("/media/F/notes/blog/vim/regular-expression/regular_expressions_test.txt")<cr>
     map <silent> <leader>viw :call SwitchToBuf("/media/F/notes/blog/z_other/01OneThousandWrods.txt")<cr>
     map <silent> <leader>vll :call SwitchToBuf("~/.vim/log.txt")<cr>
@@ -184,7 +185,7 @@ set bsdir=buffer                "设定文件浏览器目录为当前目录
 set cindent                     "设置为 C 语言风格的缩进模式
 set cmdheight=1                 "设定命令行的行数为 1
 set fileencodings=utf-8,chinese "@@@@@
-"set foldmethod=indent			"按缩进进行折叠
+set foldmethod=marker		"按缩进进行折叠
 set formatoptions+=tcqroMm      "使得注释换行时自动加上前导的空格和星号
 set guioptions-=L
 set guioptions-=m               "去除菜单栏
@@ -846,11 +847,11 @@ au BufRead,BufNewFile *log setlocal ft=txt "syntax highlight log for txt.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " :help DrawIt
     " ,di	  to start DrawIt and
-    " ,ds	  to stop  DrawIt. 
+    " ,ds	  to stop  DrawIt.
     "<left>       move and draw left
     "<right>      move and draw right, inserting lines/space as needed
     "<up>         move and draw up, inserting lines/space as needed
-    "<down>       move and draw down, inserting lines/space as needed 
+    "<down>       move and draw down, inserting lines/space as needed
 
 "=============================================================================
 " vimdiff
@@ -889,7 +890,7 @@ set path+=./**
 "在vim载入会话文件的最后一步, 它会查找一个额外的文件(*x.vim)并执行其中的ex命令.
 "然后再编辑一个名为~/src/vim70/vim70x.vim (*x.vim) 的文件，文件的内容为:
 ""set project path
-"set path+=~/src/vim70/** 
+"set path+=~/src/vim70/**
 
 "退出vim后，在命令行下执行gvim &，再次进入vim，这时看到的是一个空白窗口。然后执行下面的命令：
 ":source ~/src/vim70/src/vim70.vim  '载入会话文件
@@ -899,7 +900,7 @@ set path+=./**
 " execute project related configuration in current directory
 if filereadable("workspace.vim")
     source workspace.vim
-endif 
+endif
 if filereadable("vim72_wp.vim")
    source vim72_wsp.vim
 endif
@@ -924,9 +925,9 @@ map <silent> <leader>d2s mz:%s/，/, /ge<cr>:%s/。/. /ge<cr>:%s/；/; /ge<cr>
 \:%s/：/: /ge<cr>:%s/　/  /ge<cr>:%s/“/"/ge<cr>:%s/”/"/ge<cr>:%s/？/?/ge<cr>
 \:%s/！/!/ge<cr>:%s/、/,/ge<cr>:%s/）/)/ge<cr>:%s/（/(/ge<cr>:%s/…/.../ge<cr>
 \:%s/＝/=/ge<cr>:%s/／/\//ge<cr>:%s/＊/\*/ge<cr>:%s/—/-/ge<cr>:%s/＃/#/ge<cr>
-\:%s/１/1/ge<cr>:%s/２/2/ge<cr>:%s/－/-/ge<cr>
+\:%s/１/1/ge<cr>:%s/２/2/ge<cr>:%s/－/-/ge<cr>:%s/―/-/ge<cr>
 \`z
-":%s/－/1/ge<cr>
+":%s/―/--/ge<cr>
 map <silent> <leader>s2t :%s/	/    /g<cr>
 map <silent> <leader>pwd :pwd<cr>
 map <silent> <leader>y mz:r!cat /tmp/pwd2vim.tmp<cr>0vEd`zi <esc>Pjdd`zf<Space>x
@@ -1182,7 +1183,7 @@ onoremap <C-F4> <C-C><C-W>c
 "vimgrep 的使用
 ":cd ~/src/vim70
 ":vimgrep /\<main\>/ src/*.c
-":cw 
+":cw
 "-----------------------------------------------------------------------------
 ":Explore"等Ex命令来打开文件浏览器
 "-----------------------------------------------------------------------------
