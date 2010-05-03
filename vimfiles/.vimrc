@@ -35,7 +35,7 @@ else
     if has("gui_running")
 	set lines=48
 	set columns=134
-	winpos  10  0
+	winpos  140  0
 	if exists("&cursorline")
 	    set cursorline
 	endif
@@ -809,8 +809,8 @@ map <silent> <leader>bft :set ft=txt<cr>
 "<Leader>f / TxtBrowserWord		"查单词
 "<Leader>s / TxtBrowserSearch	"search word under cursor
 map <silent> <leader>bgu :TxtBrowserUrl<cr>
-map <silent> <leader>bfw :TxtBrowserWord<cr>
-map <silent> <leader>bsw :TxtBrowserSearch<cr>
+map <silent> <leader>bgw :TxtBrowserWord<cr>
+map <silent> <leader>bgs :TxtBrowserSearch<cr>
 let tlist_txt_settings = 'txt;c:content;f:figures;t:tables'
 let TxtBrowser_Dict_Url='http://dict.cn/text'	"英文词典
 let Txtbrowser_Search_Engine='http://www.baidu.com/s?wd=text&oq=text&f=3&rsp=2'
@@ -839,6 +839,18 @@ au BufRead,BufNewFile *log setlocal ft=txt "syntax highlight log for txt.vim
 "=============================================================================
 " grep.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+"=============================================================================
+" DrawIt.vba.gz
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " :help DrawIt
+    " ,di	  to start DrawIt and
+    " ,ds	  to stop  DrawIt. 
+    "<left>       move and draw left
+    "<right>      move and draw right, inserting lines/space as needed
+    "<up>         move and draw up, inserting lines/space as needed
+    "<down>       move and draw down, inserting lines/space as needed 
 
 "=============================================================================
 " vimdiff
@@ -908,11 +920,12 @@ map <silent> <leader>ssa gg/^$<cr>qz"apjjf"mzggjlv$hy*`zpjqi
 map <silent> <leader>ssb gg/^$<cr>qz"bpjjf"mzggjlv$hy*`zpjqi
 map <silent> <leader>sss gg/#!<cr>h<C-E>G0dkddkddpi#<esc>
 
-map <silent> <leader>d2s :%s/，/, /ge<cr>:%s/。/. /ge<cr>:%s/；/; /ge<cr>
+map <silent> <leader>d2s mz:%s/，/, /ge<cr>:%s/。/. /ge<cr>:%s/；/; /ge<cr>
 \:%s/：/: /ge<cr>:%s/　/  /ge<cr>:%s/“/"/ge<cr>:%s/”/"/ge<cr>:%s/？/?/ge<cr>
 \:%s/！/!/ge<cr>:%s/、/,/ge<cr>:%s/）/)/ge<cr>:%s/（/(/ge<cr>:%s/…/.../ge<cr>
 \:%s/＝/=/ge<cr>:%s/／/\//ge<cr>:%s/＊/\*/ge<cr>:%s/—/-/ge<cr>:%s/＃/#/ge<cr>
 \:%s/１/1/ge<cr>:%s/２/2/ge<cr>:%s/－/-/ge<cr>
+\`z
 ":%s/－/1/ge<cr>
 map <silent> <leader>s2t :%s/	/    /g<cr>
 map <silent> <leader>pwd :pwd<cr>
@@ -958,9 +971,9 @@ map <silent> <leader>dfg $bhde<esc>
 map <silent> <leader>sfl :.,/^$/-1!sort<cr>
 map <silent> <leader>sor :!sort<cr>
 " 把选中区域中的空行删除掉
-map <silent> <leader>dsp :g/^$/d<cr>
+map <silent> <leader>dsp mz:g/^$/d<cr>`z
 " 删除选中区域中行末空格
-map <silent> <leader>dep :%s/  *$//g<cr>
+map <silent> <leader>dep mz:%s/  *$//g<cr>`z
 " 加上行号
 map <silent> <leader>anu :%s/^/\=line(".")." "/g<cr>
 " 字符数
@@ -970,8 +983,8 @@ map <silent> <leader>cow :%s/\i\+/&/gn<cr>
 " 行数
 map <silent> <leader>col :%s/^//n<cr>
 " 统计光标下单词在文中出现的次数
-map <silent> <leader>cos :%s/\<<C-R><C-W>\>/&/gn<cr>
-map <silent> <leader>cos :%s/<C-R><C-W>/&/gn<cr>
+map <silent> <leader>cos mz:%s/\<<C-R><C-W>\>/&/gn<cr>`z
+map <silent> <leader>cos mz:%s/<C-R><C-W>/&/gn<cr>`z
 " \ ==> /
 map <silent> <leader>tof V:s/\\/\//g<cr>
 " source $VIMRUNTIME/syntax/2html.vim
