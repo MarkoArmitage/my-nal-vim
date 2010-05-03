@@ -33,19 +33,8 @@ syn case ignore
 " key words definition.
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Keywords
-syn keyword txtTodo todo fixme note debug comment notice
+syn keyword txtTodo todo fixme note debug comment notice analysis solution
 syn keyword txtError error bug caution dropped
-
-"(2010年 05月 01日 星期六 11:28:29 CST)
-"#=============================================================================
-"以$号打头的行为注释文本
-syn match   cmdLine '^\$.*$'
-syn match   cmdOut '^&.*$'
-"#=============================================================================
-
-"txtComment: Lines that start with '#'
-"以#号打头的行为注释文本
-syn match   txtComment '^#.*$' contains=txtTodo
 
 "txtTitle: Lines start with digit and '.'
 "标题文本: 前面有任意个空格,数字.[数字.]打头, 并且该行里不含有,.。，等标点符号
@@ -103,6 +92,20 @@ syn match txtEmailQuote '^\(>\($\| \)\)\+'
 "syn match   txtBold       '\*[^*[:blank:]].\{-}\*'hs=s+1,he=e-1
 "syn match txtItalic "^\s\+.\+$" "斜体文本
 
+"(2010年 05月 01日 星期六 11:28:29 CST) "(2010年 05月 03日 星期一 19:34:15 CST)
+"#=============================================================================
+"在(^ ^)内的为注释文本
+syn match txtComment   "(\^.*\^)"
+syn match txtComment2  '^#.*$' contains=txtTodo
+
+"命令行
+syn match   cmdLine '^[	 ]*\[.*\][#\$].*$'
+
+"命令输出
+syn match cmdOut	"\\\@<!|[^"*|]\+|" contains=cmdOutBar
+syn match cmdOutBar		contained "|"
+"#=============================================================================
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " color definitions (specific)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -110,7 +113,8 @@ syn match txtEmailQuote '^\(>\($\| \)\)\+'
 hi link txtUrl      Underlined"ModeMsg"Tabline"PmenuSbar
 hi link txtTitle      Title"ModeMsg"Tabline"PmenuSbar
 hi link txtList         SignColumn"Pmenu"DiffText"Statement
-hi link txtComment      Special "Comment
+hi link txtComment      comment
+hi link txtComment2    Comment
 hi link txtQuotes       MoreMsg"String
 hi link txtApostrophe    WarningMsg"Special
 hi link txtParentesis   Special "Comment
@@ -121,9 +125,9 @@ hi link txtEmailMsg     PmenuSbar
 hi link txtEmailQuote   Structure
 "(2010年 05月 01日 星期六 12:09:56 CST)
 "#=============================================================================
-"hi link cmdLine  Structure
 hi link cmdLine  keyword
-hi link cmdOut  LineNr
+hi def link cmdOut LineNr
+hi def link cmdOutBar Ignore
 "#=============================================================================
 
 "set background=dark

@@ -676,7 +676,7 @@ function s:SetUpForNewFiletype(filetype, forceReset)
 "==============================================================================
 "增加*.txt的
     elseif a:filetype ==? "txt"
-        call s:MapDelimitersWithAlternative('(^ ',' ^)','// ','')
+        call s:MapDelimitersWithAlternative('(^ ',' ^)','| ',' |')
     elseif a:filetype ==? "uc"
         call s:MapDelimitersWithAlternative('// ','', '/* ',' */')
     elseif a:filetype ==? "uil"
