@@ -23,7 +23,7 @@ syn case ignore
 "(2010年 04月 28日 星期三 16:40:42 CST)
 "#=============================================================================
 "hi clear Normal
-"#=============================================================================
+"#============================================================================
 "colo default "desert
 "set bg&
 "set guifont=Monospace\ 11"set the gui font. 新宋体:h8:cGB2312"
@@ -33,7 +33,7 @@ syn case ignore
 " key words definition.
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Keywords
-syn keyword txtTodo todo fixme note debug comment notice analysis solution
+syn keyword txtTodo todo fixme note debug comment notice analysis solution question 注意 分析
 syn keyword txtError error bug caution dropped
 
 "txtTitle: Lines start with digit and '.'
@@ -94,17 +94,24 @@ syn match txtEmailQuote '^\(>\($\| \)\)\+'
 
 "(2010年 05月 01日 星期六 11:28:29 CST) "(2010年 05月 03日 星期一 19:34:15 CST)
 "#=============================================================================
+"命令行
+syn match   cmdLine '^[	 ]*\[.*\][#\$].*$'
+"syn match   cmdLine2 '^[	 ]*:.*$'
+
+"命令输出
+syn match cmdOut	"^[	 ]*\\\@<!|[^"*|]\+|" contains=cmdOutBar
+syn match cmdOutBar		contained "|"
+
+"书名号《》内文字, 不在行首(为了和txtList区别)
+syn match   txtBookParentesis "《.*》" contains=txtUrl
+syn match   txtBookParentesis2 "<<.*>>" contains=txtUrl
+
 "在(^ ^)内的为注释文本
 syn match txtComment   "(\^.*\^)"
 syn match txtComment2  '^#.*$' contains=txtTodo
-
-"命令行
-syn match   cmdLine '^[	 ]*\[.*\][#\$].*$'
-
-"命令输出
-syn match cmdOut	"\\\@<!|[^"*|]\+|" contains=cmdOutBar
-syn match cmdOutBar		contained "|"
-"#=============================================================================
+syn match txtComment3  '\/\/.*$' contains=txtTodo
+syn match txtComment4  '\/\*.*\*\/' contains=txtTodo
+"#============================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " color definitions (specific)
@@ -113,22 +120,27 @@ syn match cmdOutBar		contained "|"
 hi link txtUrl      Underlined"ModeMsg"Tabline"PmenuSbar
 hi link txtTitle      Title"ModeMsg"Tabline"PmenuSbar
 hi link txtList         SignColumn"Pmenu"DiffText"Statement
-hi link txtComment      comment
-hi link txtComment2    Comment
 hi link txtQuotes       MoreMsg"String
 hi link txtApostrophe    WarningMsg"Special
-hi link txtParentesis   Special "Comment
-hi link txtBrackets  Special
+hi link txtParentesis   String"Special "Comment
+hi link txtBrackets  Function"Special
 hi link txtError  ErrorMsg
 hi link txtTodo  Todo
 hi link txtEmailMsg     PmenuSbar
 hi link txtEmailQuote   Structure
 "(2010年 05月 01日 星期六 12:09:56 CST)
 "#=============================================================================
-hi link cmdLine  keyword
+hi link txtComment      comment
+hi link txtComment2    Comment
+hi link txtComment3    Comment
+hi link txtComment4    Comment
+hi link cmdLine  Keyword
+"hi link cmdLine2  Keyword
 hi def link cmdOut LineNr
 hi def link cmdOutBar Ignore
-"#=============================================================================
+hi def link txtBookParentesis Macro
+hi def link txtBookParentesis2 Macro
+"#============================================================================
 
 "set background=dark
 let b:current_syntax = 'txt'
