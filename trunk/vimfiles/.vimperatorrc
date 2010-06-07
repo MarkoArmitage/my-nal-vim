@@ -140,6 +140,8 @@ map <Leader>cbm :sbclose<cr>
 
 map <Leader>vif :! gvim ~/.vimperatorrc<cr><cr>
 map <Leader>vim :! gvim ~/.vimrc<cr><cr>
+map <Leader>vht :! gvim ~/notes/note/html.txt<cr><cr>
+map <Leader>fht :! firefox ~/notes/note/html.txt.html<cr><cr>
 
 
 

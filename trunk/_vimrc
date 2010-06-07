@@ -40,8 +40,9 @@ else
 	    set cursorline
 	endif
     else
-	set lines=30
-	set columns=86
+	set lines=40
+	set columns=106
+	    set cursorline
 	winpos  80  10
     endif
 endif
@@ -89,38 +90,43 @@ endfunction
 "#  从输出的第一行打印到下一部分的第一行.
 "sed '$d' | sed '$d'
 
-function! Mydict()
-	"let expl0=system('sdcv -n ' .
-	let expl=system('sdcv.sh ' .
-	\ expand("<cword>"))
-	windo if
-	\ expand("%:p")=="/tmp/diCtTmp" |
-	\ wq!|endif
-	botright vertical 20split /tmp/diCtTmp
-	"25vsp diCtTmp
-	"botright aboveleft 20split /tmp/diCtTmp
-	setlocal buftype= bufhidden=hide noswapfile
-	"setlocal buftype=nofile bufhidden=hide noswapfile
-	1s/^/\=expl/
-	1
+function! Mydict(wflag)
+    if a:wflag == 1
+	" . ==> 字符串连接(:help expression-syntax)
+	let expl=system('sdcv.sh ' . expand("<cword>"))
+    elseif a:wflag == 2
+	let fwords=getreg("z")
+	let expl=system('sdcv.sh ' . "\"" . fwords . " \"")
+    endif
+    windo if
+    \ expand("%:p")=="/tmp/diCtTmp" |
+    \ wq!|endif
+    botright vertical 20split /tmp/diCtTmp
+    "botright aboveleft 20split /tmp/diCtTmp
+    setlocal buftype= bufhidden=hide noswapfile
+    "setlocal buftype=nofile bufhidden=hide noswapfile
+    1s/^/\=expl/
+    1
 endfunction
 
 function! Firefox_jsp()
-	let ttmp=expand("<cWORD>")
-	let jsp_path="http://10.3.10.19:8080/sy/"
-	" jsp_fullpath="http://10.3.10.19:8080/sy/$ttmp"
-	let jsp_fullpath= jsp_path . ttmp			
-	let t3=system('firefox -height 50 -width 40 ' . jsp_fullpath)
+    let ttmp=expand("<cWORD>")
+    let jsp_path="http://127.0.0.1:8080/sy/"
+    " jsp_fullpath="http://10.3.10.19:8080/sy/$ttmp"
+    let jsp_fullpath= jsp_path . ttmp
+    let t3=system('firefox -height 50 -width 40 ' . jsp_fullpath)
+endfunction
+
+function! TestOKfun()
+    let tmp=getreg("z")
+    let tmp2="\"" . tmp
+    echo tmp2
 endfunction
 
 function! Testfun()
-	let ttmp=expand("<cWORD>")
-	let jsp_path="http://10.3.10.19:8080/sy/"
-	echo ttmp
-	let t2= jsp_path . ttmp
-	echo t2
-	let t3=system('firefox ' . t2)
-	echo t3
+    " :help function-list
+    let tmp=getreg("z")
+    echo tmp
 endfunction
 
 "Fast edit vimrc
@@ -129,11 +135,21 @@ if MySys() == 'linux'
     map <silent> <leader>vio :call SwitchToBuf("/media/F/notes/blog/vim/13vim_skill.txt")<cr>
     map <silent> <leader>vib :call SwitchToBuf("/media/F/notes/blog/book/01.txt")<cr>
     map <silent> <leader>vik :call SwitchToBuf("/media/F/notes/blog/vim/script/vim_script_settings_of_me.txt")<cr>
+    map <silent> <leader>vit :call SwitchToBuf("/media/F/notes/blog/sys/CentOS/soft/host/08Linux的ftp服务vsftp详细配置.txt")<cr>
     map <silent> <leader>vie :call SwitchToBuf("/media/F/notes/blog/english/e-new-words.txt")<cr>
     map <silent> <leader>vif :call SwitchToBuf("~/.vimperatorrc")<cr>
     map <silent> <leader>vir :call SwitchToBuf("/media/F/notes/blog/vim/regular-expression/regular_expressions.txt")<cr>
     map <silent> <leader>vig :call SwitchToBuf("/media/F/notes/blog/vim/regular-expression/regular_expressions_test.txt")<cr>
     map <silent> <leader>viw :call SwitchToBuf("/media/F/notes/blog/z_other/01OneThousandWrods.txt")<cr>
+
+    map <silent> <leader>vtm :call SwitchToBuf("/tmp/gvim.tmp.txt")<cr>
+    map <silent> <leader>vlc :call SwitchToBuf("/home/scr/notes/note/cmd.txt")<cr>
+    map <silent> <leader>vnt :call SwitchToBuf("/home/scr/notes/note/note.txt")<cr>
+    map <silent> <leader>vht :call SwitchToBuf("/home/scr/notes/note/html.txt")<cr>
+    map <silent> <leader>vfi :call SwitchToBuf("/home/scr/notes/note/02files_introduce.txt")<cr>
+    map <silent> <leader>vti :call SwitchToBuf("/home/scr/notes/note/cmd_network.txt")<cr>
+
+    map <silent> <leader>vin :call SwitchToBuf("/home/scr/notes/note/")<cr>
     map <silent> <leader>vll :call SwitchToBuf("~/.vim/log.txt")<cr>
     "Fast reloading of the .vimrc
     map <silent> <leader>vis :source ~/.vimrc<cr>
@@ -247,9 +263,11 @@ hi Normal guibg=#cfe8cc
 "set nowrap                     "允许向左右滚屏
 "set vb t_vb=                   "关闭响铃
 "set vb                         "出错时闪屏
-"set viminfo @@@@@
+"set viminfo= "@@@@@
 "set viminfo='20,<50,s10,h
-"########################## end of settings ##################################
+" http://tonykorn97.itpub.net/post/6414/252226
+set viminfo='1000,f1,<500,:50,@50
+"########################## end of settings sets #############################
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
@@ -301,7 +319,7 @@ abbreviate mian main
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "=============================================================================
-" ctags settings
+" ctags settings. see also: JumpInCode_Plus.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "nmap g] g]:pwd<cr>
 nmap <C-T> <C-T>:pwd<cr>
@@ -310,6 +328,10 @@ set complete=.,w,b,u,t,i
 set tags+=tags "最好写成+=
 set tags+=./tags,./../tags,./../../tags,./../../../tags,./**/tags,tags
 if MySys() == 'linux'
+    au FileType c     set tags+=/usr/include/netinet/tags
+    au FileType c     set tags+=/usr/include/tags
+    au FileType c     set tags+=/usr/include/sys/tags
+    au FileType c     set tags+=/usr/include/bits/tags
     au FileType c     set tags+=/home/scr/lang/cpp/minix_svn/tags
     "au FileType c,cpp set tags+=/home/scr/lang/0ctope/libc/libc/tags
     "au FileType c,cpp set tags+=/home/scr/lang/0ctope/cpp/cpp_src/tags
@@ -380,20 +402,23 @@ map <silent> <leader>cre :cs reset<cr>
 "TagList settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! TlistToggle_close_diCtTmp(filename, flag)
-	let bufwinnr = bufwinnr(a:filename)
-	if bufwinnr != -1
-		"把光标焦点移到号为bufwinnr的窗口
-		exec bufwinnr . "wincmd w"
-		close
-	endif
-	if a:flag == 0
-		TlistToggle
-	elseif a:flag == 1
-		call Mydict()
-	endif
+    let bufwinnr = bufwinnr(a:filename)
+    if bufwinnr != -1
+	"把光标焦点移到号为bufwinnr的窗口
+	exec bufwinnr . "wincmd w"
+	close
+    endif
+    if a:flag == 0
+	TlistToggle
+    elseif a:flag == 1
+	call Mydict(1) " nomally: <cword> 
+    elseif a:flag == 2
+	call Mydict(2) " virtual: select words
+    endif
 endfunction "tll
 map <silent> <leader>tl :call TlistToggle_close_diCtTmp("diCtTmp", 0)<cr>
-map <silent> <leader>tf  :call TlistToggle_close_diCtTmp("__Tag_List__", 1)<cr>j<C-W>h
+map <silent> <leader>tf :call TlistToggle_close_diCtTmp("__Tag_List__", 1)<cr>j<C-W>h
+vmap <silent> <leader>tf "zy:call TlistToggle_close_diCtTmp("__Tag_List__", 2)<cr>j<C-W>h
 "map <silent> <leader>tl :TlistToggle<CR>
 
 let Tlist_Show_One_File=4
@@ -818,6 +843,14 @@ let Txtbrowser_Search_Engine='http://www.baidu.com/s?wd=text&oq=text&f=3&rsp=2'
 au BufRead,BufNewFile *.txt setlocal ft=txt "syntax highlight txt for txt.vim
 "au BufRead,BufNewFile *.log setlocal ft=txt "syntax highlight log for txt.vim
 au BufRead,BufNewFile *log setlocal ft=txt "syntax highlight log for txt.vim
+au BufRead,BufNewFile readme setlocal ft=txt "syntax highlight log for txt.vim
+au BufRead,BufNewFile README setlocal ft=txt "syntax highlight log for txt.vim
+au BufRead,BufNewFile ReadMe setlocal ft=txt "syntax highlight log for txt.vim
+au BufRead,BufNewFile diCtTmp setlocal ft=txt "syntax highlight log for txt.vim
+au BufRead,BufNewFile *.conf setlocal ft=sh "syntax highlight log for sh.vim
+au BufRead,BufNewFile ifcfg-* setlocal ft=sh "syntax highlight log for sh.vim
+au BufRead,BufNewFile hosts* setlocal ft=sh "syntax highlight log for sh.vim
+
 
 "=============================================================================
 " ZoomWin.vim
@@ -905,18 +938,26 @@ if filereadable("vim72_wp.vim")
    source vim72_wsp.vim
 endif
 
-
+"#############################################################################
+"lets
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" let @a='ddpkJj'
 
 "#############################################################################
 "maps
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 把所选区域替换为当前日期和时间 :help visual_example
+vmap <silent> <leader>dat <Esc>`>a<CR><Esc>`<i<CR><Esc>!!date<CR>kJJ
+map <silent> <leader>afl mzlbce<><esc>P`z
+
 " for jsp jsps
 map <silent> <leader>utf mz:%s/GB2312/UTF-8/gi<cr>`z
 map <silent> <leader>b23 mz:%s/utf-8/GB2312/gi<cr>`z
-map <silent> <leader>sps gg0:w <C-R><C-W>.jsp<cr>,cccjfGcwutf-8<esc>
+map <silent> <leader>sps gg0:!mkdir <C-R><C-W><cr><cr>gg0vf.h<C-C>:w <C-V>.jsp<cr>,cccjfGcwutf-8<esc>:cd ..<cr>:pwd<cr>
 map <silent> <leader>sfj mzgg0W :call Firefox_jsp()<cr>`z
+map <silent> <leader>snew ,new<cr>:cd /usr/share/tomcat6/webapps/ROOT/sy<cr>
 
-" for shell-script
+" for bshell-script bash
 map <silent> <leader>ssa gg/^$<cr>qz"apjjf"mzggjlv$hy*`zpjqi
 map <silent> <leader>ssb gg/^$<cr>qz"bpjjf"mzggjlv$hy*`zpjqi
 map <silent> <leader>sss gg/#!<cr>h<C-E>G0dkddkddpi#<esc>
@@ -925,16 +966,19 @@ map <silent> <leader>d2s mz:%s/，/, /ge<cr>:%s/。/. /ge<cr>:%s/；/; /ge<cr>
 \:%s/：/: /ge<cr>:%s/　/  /ge<cr>:%s/“/"/ge<cr>:%s/”/"/ge<cr>:%s/？/?/ge<cr>
 \:%s/！/!/ge<cr>:%s/、/,/ge<cr>:%s/）/)/ge<cr>:%s/（/(/ge<cr>:%s/…/.../ge<cr>
 \:%s/＝/=/ge<cr>:%s/／/\//ge<cr>:%s/＊/\*/ge<cr>:%s/—/-/ge<cr>:%s/＃/#/ge<cr>
-\:%s/１/1/ge<cr>:%s/２/2/ge<cr>:%s/－/-/ge<cr>:%s/―/-/ge<cr>
+\:%s/１/1/ge<cr>:%s/２/2/ge<cr>:%s/－/-/ge<cr>:%s/―/-/ge<cr>:%s/’/'/ge<cr>
+\:%s/＞/>/ge<cr>:%s/\│/\|/ge<cr>:%s/–/-/ge<cr>:%s///ge<cr>:%s/←/<--/ge<cr>
+\:%s/．/./ge<cr>:%s/～/\~/ge<cr>:%s/◆//ge<cr>
 \`z
-":%s/―/--/ge<cr>
+":%s/◆//ge<cr>
 map <silent> <leader>s2t :%s/	/    /g<cr>
 map <silent> <leader>pwd :pwd<cr>
-map <silent> <leader>y mz:r!cat /tmp/pwd2vim.tmp<cr>0vEd`zi <esc>Pjdd`zf<Space>x
+map <silent> <leader>y mz:r!cat /tmp/pwd2vim.tmp<cr>0v$hd`zi@<esc>Pjdd`zf@x
+map <silent> <leader>vy mz:r!cat /tmp/pwd2vim.tmp<cr>0v$hd`zi@<esc>Pjdd`zf@x
 map <F3> :tabclose<CR>
-map <F4> :tabnew<CR>
-map <F5> :tabprevious<CR>
-map <F6> :tabnext<CR>
+map <A-t> :tabnew<CR>
+map <A-p> :tabprevious<CR>
+map <A-n> :tabnext<CR>
 "-------------------------窗口相关--------------------------------------------
 "改变窗口高度, 宽度
 noremap <silent> <leader>wi 10<C-W>+
@@ -966,7 +1010,7 @@ map <silent> <leader>new :new<cr>
 map <silent> <leader>vnw :vsplit<cr>
 map <silent> <leader>vne :vnew<cr>
 "-------------------------end of 窗口相关---------------------------------
-map <silent> <leader>afg A @@@@@<esc>
+map <silent> <leader>afg mzA // @@@@@<esc>`z
 map <silent> <leader>dfg $bhde<esc>
 " 从光标所在的行开始, 对下一个空行间的所有行进行排序
 map <silent> <leader>sfl :.,/^$/-1!sort<cr>
@@ -974,7 +1018,9 @@ map <silent> <leader>sor :!sort<cr>
 " 把选中区域中的空行删除掉
 map <silent> <leader>dsp mz:g/^$/d<cr>`z
 " 删除选中区域中行末空格
-map <silent> <leader>dep mz:%s/  *$//g<cr>`z
+map <silent> <leader>dep mz:%s/<tab><tab>*$//ge<cr>:%s/  *$//ge<cr>`z
+"
+map <silent> <leader>dap V:s/ //g<cr>*
 " 加上行号
 map <silent> <leader>anu :%s/^/\=line(".")." "/g<cr>
 " 字符数
@@ -1007,14 +1053,14 @@ map <silent> <leader>lhd o<Esc>I#ifdef  _NAL_HDEBUG_<Esc>o#else<Esc>o#endif
 vnoremap p <Esc>:let current_reg = @"<CR>gvs<C-R>=current_reg<CR><Esc>
 "中文也可以达78个字符时自动换行
 map <silent> <leader>sfo :set fo+=Mm<cr>
-map <silent> <leader>q :set noai<cr>:set fo+=Mm<cr>Vgq:set ai<cr>
+map <silent> <leader>q :set noai<cr>:set tw=78<cr>:set fo+=Mm<cr>Vgq:set ai<cr>
 inoremap <C-U> <C-G>u<C-U>
 "########################end of map##########################################
 
 
 
 "#############################################################################
-" some settings for windows
+" some settings for windows wins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CTRL-X and SHIFT-Del are Cut
 vnoremap <C-X> "+x
@@ -1035,8 +1081,7 @@ exe 'inoremap <script> <C-V>' paste#paste_cmd['i']
 exe 'vnoremap <script> <C-V>' paste#paste_cmd['v']
 imap <S-Insert>		<C-V>
 vmap <S-Insert>		<C-V>
-" Use CTRL-E to do what CTRL-V used to do
-"选中块
+" Use CTRL-E to do what CTRL-V used to do "选中块
 noremap <C-E>		<C-V>
 " Use CTRL-S for saving, also in Insert mode
 noremap <C-S>		:update<CR>
@@ -1086,7 +1131,7 @@ onoremap <C-F4> <C-C><C-W>c
 "  let &cpoptions = s:save_cpo
 "  unlet s:save_cpo
 "endif
-"######################## end of windows settings ############################
+"######################## end of windows settings wins ######################
 
 
 
@@ -1197,3 +1242,6 @@ onoremap <C-F4> <C-C><C-W>c
 "######################## end of notes #######################################
 "
 "set sessionoptions+=slash
+"register a "查看寄存器a
+" wviminfo ./cmd_network_i.vim
+" rviminfo ./cmd_network_i.vim
