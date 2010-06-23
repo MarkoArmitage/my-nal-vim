@@ -99,8 +99,9 @@ syn match   cmdLine '^[	 ]*\[.*\][#\$].*$'
 "syn match   cmdLine2 '^[	 ]*:.*$'
 
 "命令输出
-syn match cmdOut	"^[	 ]*\\\@<!|[^"*|]\+|" contains=cmdOutBar
-syn match cmdOutBar		contained "|"
+"syn match cmdOut	"^[	 ]*\\\@<!|[^"*|]\+|" contains=cmdOutBar
+"syn match cmdOutBar		contained "|"
+syn region cmdOut    matchgroup=txtOperator start="|&"        end="&|" contains=txtUrl
 
 "书名号《》内文字, 不在行首(为了和txtList区别)
 syn match   txtBookParentesis "《.*》" contains=txtUrl
@@ -110,7 +111,7 @@ syn match   txtBookParentesis2 "<<.*>>" contains=txtUrl
 syn match txtComment   "(\^.*\^)"
 syn match txtComment2  '^#.*$' contains=txtTodo
 syn match txtComment3  '\/\/.*$' contains=txtTodo
-syn match txtComment4  '\/\*.*\*\/' contains=txtTodo
+syn region txtComment4 matchgroup=txtOperator start="\/\*" end="\*\/" contains=txtTodo
 "#============================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
