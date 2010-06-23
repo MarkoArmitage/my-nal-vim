@@ -84,12 +84,6 @@ function! SwitchToBuf(filename)
     endif
 endfunction
 
-"用sdcv对vim进行屏幕取词
-"echo "$Definition" |
-"sed -n '1,/^[A-Z]/p' |
-"#  从输出的第一行打印到下一部分的第一行.
-"sed '$d' | sed '$d'
-
 function! Mydict(wflag)
     if a:wflag == 1
 	" . ==> 字符串连接(:help expression-syntax)
@@ -119,14 +113,24 @@ endfunction
 
 function! TestOKfun()
     let tmp=getreg("z")
+    let tmp=expand("%:p") " :help filename-modifiers
     let tmp2="\"" . tmp
     echo tmp2
 endfunction
 
+function! AddBkFileLists()
+    let tmp=expand("%:p")
+    let tmp="\"" . tmp . "\""
+    :call setreg('z', tmp)
+endfunction
+
 function! Testfun()
     " :help function-list
-    let tmp=getreg("z")
-    echo tmp
+    let tmp=expand("%:p")
+    let tmp="\"" . tmp . "\""
+    :call setreg('z', tmp)
+    "let tmp=getreg("z")
+    "echo tmp
 endfunction
 
 "Fast edit vimrc
@@ -411,7 +415,7 @@ function! TlistToggle_close_diCtTmp(filename, flag)
     if a:flag == 0
 	TlistToggle
     elseif a:flag == 1
-	call Mydict(1) " nomally: <cword> 
+	call Mydict(1) " nomally: <cword>
     elseif a:flag == 2
 	call Mydict(2) " virtual: select words
     endif
@@ -755,7 +759,7 @@ let NERDTreeCaseSensitiveSort=0     " 不分大小写排序
 let NERDTreeWinSize=23
 " let NERDTreeShowLineNumbers=1
 let NERDTreeShowBookmarks=1
-let NERDTreeQuitOnOpen=0    " 1: 打开文件后, 关闭NERDTrre窗口
+let NERDTreeQuitOnOpen=1    " 1: 打开文件后, 关闭NERDTrre窗口
 " let NERDTreeHighlightCursorline=1     " 高亮NERDTrre窗口的当前行
 " nmap <silent> <leader>tmk :Bookmark expand("<cword>")<cr>  "
 
@@ -848,6 +852,9 @@ au BufRead,BufNewFile README setlocal ft=txt "syntax highlight log for txt.vim
 au BufRead,BufNewFile ReadMe setlocal ft=txt "syntax highlight log for txt.vim
 au BufRead,BufNewFile diCtTmp setlocal ft=txt "syntax highlight log for txt.vim
 au BufRead,BufNewFile *.conf setlocal ft=sh "syntax highlight log for sh.vim
+au BufRead,BufNewFile named setlocal ft=sh "syntax highlight log for sh.vim
+au BufRead,BufNewFile named.conf setlocal ft=txt "syntax highlight log for sh.vim
+au BufRead,BufNewFile named.*.zones setlocal ft=txt "syntax highlight log for sh.vim
 au BufRead,BufNewFile ifcfg-* setlocal ft=sh "syntax highlight log for sh.vim
 au BufRead,BufNewFile hosts* setlocal ft=sh "syntax highlight log for sh.vim
 
@@ -946,6 +953,7 @@ endif
 "#############################################################################
 "maps
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <silent> <leader>abk :call AddBkFileLists()<cr>:!echo <C-R>z >> /home/scr/bin/bk/app_new_filelists.txt <cr>
 " 把所选区域替换为当前日期和时间 :help visual_example
 vmap <silent> <leader>dat <Esc>`>a<CR><Esc>`<i<CR><Esc>!!date<CR>kJJ
 map <silent> <leader>afl mzlbce<><esc>P`z
@@ -968,9 +976,9 @@ map <silent> <leader>d2s mz:%s/，/, /ge<cr>:%s/。/. /ge<cr>:%s/；/; /ge<cr>
 \:%s/＝/=/ge<cr>:%s/／/\//ge<cr>:%s/＊/\*/ge<cr>:%s/—/-/ge<cr>:%s/＃/#/ge<cr>
 \:%s/１/1/ge<cr>:%s/２/2/ge<cr>:%s/－/-/ge<cr>:%s/―/-/ge<cr>:%s/’/'/ge<cr>
 \:%s/＞/>/ge<cr>:%s/\│/\|/ge<cr>:%s/–/-/ge<cr>:%s///ge<cr>:%s/←/<--/ge<cr>
-\:%s/．/./ge<cr>:%s/～/\~/ge<cr>:%s/◆//ge<cr>
+\:%s/．/./ge<cr>:%s/～/\~/ge<cr>:%s/◆//ge<cr>:%s/『/</ge<cr>:%s/』/>/ge<cr>
 \`z
-":%s/◆//ge<cr>
+":%s/』//ge<cr>
 map <silent> <leader>s2t :%s/	/    /g<cr>
 map <silent> <leader>pwd :pwd<cr>
 map <silent> <leader>y mz:r!cat /tmp/pwd2vim.tmp<cr>0v$hd`zi@<esc>Pjdd`zf@x
@@ -1037,7 +1045,7 @@ map <silent> <leader>tof V:s/\\/\//g<cr>
 " source $VIMRUNTIME/syntax/2html.vim
 map <silent> <leader>v2h :source $VIMRUNTIME/syntax/2html.vim<cr>
 " write date under cursor
-map <silent> <leader>dte :r ! date<cr>I(<Esc>A)<Esc>o<Esc>i#<esc>77a=<Esc>0
+map <silent> <leader>dte :r ! date<cr>I(<Esc>A)<Esc>o<Esc>i#<esc>71a=<Esc>0
 "给某个单词加上()
 map <silent> <leader>eas i(<Esc>ea)<Esc>
 map <silent> <leader>eam i[<Esc>ea]<Esc>
