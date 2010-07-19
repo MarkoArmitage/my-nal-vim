@@ -35,7 +35,7 @@ else
     if has("gui_running")
 	set lines=48
 	set columns=134
-	winpos  140  0
+	winpos  100  20
 	if exists("&cursorline")
 	    set cursorline
 	endif
@@ -63,24 +63,24 @@ function! SwitchToBuf(filename)
     " find in current tab
     let bufwinnr = bufwinnr(fullfn)
     if bufwinnr != -1
-        exec bufwinnr . "wincmd w"
-        return
+	exec bufwinnr . "wincmd w"
+	return
     else
-        " find in each tab
-        tabfirst
-        let tab = 1
-        while tab <= tabpagenr("$")
-            let bufwinnr = bufwinnr(fullfn)
-            if bufwinnr != -1
-                exec "normal " . tab . "gt"
-                exec bufwinnr . "wincmd w"
-                return
-            endif
-            tabnext
-            let tab = tab + 1
-        endwhile
-        " not exist, new tab
-        exec "tabnew " . fullfn
+	" find in each tab
+	tabfirst
+	let tab = 1
+	while tab <= tabpagenr("$")
+	    let bufwinnr = bufwinnr(fullfn)
+	    if bufwinnr != -1
+		exec "normal " . tab . "gt"
+		exec bufwinnr . "wincmd w"
+		return
+	    endif
+	    tabnext
+	    let tab = tab + 1
+	endwhile
+	" not exist, new tab
+	exec "tabnew " . fullfn
     endif
 endfunction
 
@@ -147,11 +147,11 @@ if MySys() == 'linux'
     map <silent> <leader>viw :call SwitchToBuf("/media/F/notes/blog/z_other/01OneThousandWrods.txt")<cr>
 
     map <silent> <leader>vtm :call SwitchToBuf("/tmp/gvim.tmp.txt")<cr>
-    map <silent> <leader>vlc :call SwitchToBuf("/home/scr/notes/note/cmd.txt")<cr>
+    map <silent> <leader>vlc :call SwitchToBuf("/home/scr/notes/note/linux/note/cmd/cmd.txt")<cr>
     map <silent> <leader>vnt :call SwitchToBuf("/home/scr/notes/note/note.txt")<cr>
-    map <silent> <leader>vht :call SwitchToBuf("/home/scr/notes/note/html.txt")<cr>
-    map <silent> <leader>vfi :call SwitchToBuf("/home/scr/notes/note/02files_introduce.txt")<cr>
-    map <silent> <leader>vti :call SwitchToBuf("/home/scr/notes/note/cmd_network.txt")<cr>
+    map <silent> <leader>vht :call SwitchToBuf("/home/scr/notes/note/bookmark/html.txt")<cr>
+    map <silent> <leader>vfi :call SwitchToBuf("/home/scr/notes/note/linux/note/note/02files_introduce.txt")<cr>
+    map <silent> <leader>vti :call SwitchToBuf("/home/scr/notes/note/network/cmd_network.txt")<cr>
 
     map <silent> <leader>vin :call SwitchToBuf("/home/scr/notes/note/")<cr>
     map <silent> <leader>vll :call SwitchToBuf("~/.vim/log.txt")<cr>
@@ -201,7 +201,7 @@ set autoindent                  "设置自动缩进
 set backspace=indent,eol,start  "在插入状态使得可以用退格键和Delete键删除回车符
 set backup
 set backupcopy=yes              "设置备份时的行为为覆盖
-set bsdir=buffer                "设定文件浏览器目录为当前目录
+set bsdir=last                  "设定文件浏览器目录为当前目录
 set cindent                     "设置为 C 语言风格的缩进模式
 set cmdheight=1                 "设定命令行的行数为 1
 set fileencodings=utf-8,chinese "@@@@@
@@ -290,8 +290,6 @@ iabbrev CO $(COMPILE.c)
 iabbrev co $(COMPILE.c)
 iabbrev LI $(LINK.c)
 iabbrev li $(LINK.c)
-iabbrev inc include
-iabbrev PR PROGS =
 iabbrev pr PROGS =
 iabbrev pro $(PROGS)
 "iabbrev ob objects =
@@ -314,6 +312,9 @@ iabbrev fil C:\Program Files\Vim\vimfiles
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 abbreviate teh the
 abbreviate mian main
+abbreviate fualt fault
+abbreviate falut fault
+abbreviate ture true
 "######################## end of abbreviate ##################################
 
 
@@ -336,7 +337,6 @@ if MySys() == 'linux'
     au FileType c     set tags+=/usr/include/tags
     au FileType c     set tags+=/usr/include/sys/tags
     au FileType c     set tags+=/usr/include/bits/tags
-    au FileType c     set tags+=/home/scr/lang/cpp/minix_svn/tags
     "au FileType c,cpp set tags+=/home/scr/lang/0ctope/libc/libc/tags
     "au FileType c,cpp set tags+=/home/scr/lang/0ctope/cpp/cpp_src/tags
     "au FileType c,cpp set tags+=/home/scr/lang/0ctope/win32/winapi/tags
@@ -406,6 +406,7 @@ map <silent> <leader>cre :cs reset<cr>
 "TagList settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! TlistToggle_close_diCtTmp(filename, flag)
+    let curwinnr = winnr()
     let bufwinnr = bufwinnr(a:filename)
     if bufwinnr != -1
 	"把光标焦点移到号为bufwinnr的窗口
@@ -416,13 +417,15 @@ function! TlistToggle_close_diCtTmp(filename, flag)
 	TlistToggle
     elseif a:flag == 1
 	call Mydict(1) " nomally: <cword>
+	exec curwinnr . "wincmd w"
     elseif a:flag == 2
 	call Mydict(2) " virtual: select words
+	exec curwinnr . "wincmd w"
     endif
 endfunction "tll
 map <silent> <leader>tl :call TlistToggle_close_diCtTmp("diCtTmp", 0)<cr>
-map <silent> <leader>tf :call TlistToggle_close_diCtTmp("__Tag_List__", 1)<cr>j<C-W>h
-vmap <silent> <leader>tf "zy:call TlistToggle_close_diCtTmp("__Tag_List__", 2)<cr>j<C-W>h
+map <silent> <leader>tf :call TlistToggle_close_diCtTmp("__Tag_List__", 1)<cr>
+vmap <silent> <leader>tf "zy:call TlistToggle_close_diCtTmp("__Tag_List__", 2)<cr>
 "map <silent> <leader>tl :TlistToggle<CR>
 
 let Tlist_Show_One_File=4
@@ -754,9 +757,10 @@ let g:proj_run3='silent !gvim %f'
 nmap <silent> <leader>tto :NERDTreeToggle<cr>
 let NERDTreeIgnore=['\.vm$', '\~$']    " 不显示指定的类型的文件
 let NERDTreeShowHidden=0    " 不显示隐藏文件(好像只在linux环境中有效)
-let NERDTreeSortOrder=['\/$','\.cpp$','\.c$', '\.h$','\.java','.class','*']    " 排序
+let NERDTreeSortOrder=['\/$', '\.cpp$', '\.c$', '\.h$', '\.java', '.jsp',
+    \ '.xml', '.html', '.class', '*']    " 排序
 let NERDTreeCaseSensitiveSort=0     " 不分大小写排序
-let NERDTreeWinSize=23
+let NERDTreeWinSize=33
 " let NERDTreeShowLineNumbers=1
 let NERDTreeShowBookmarks=1
 let NERDTreeQuitOnOpen=1    " 1: 打开文件后, 关闭NERDTrre窗口
@@ -767,14 +771,19 @@ let NERDTreeQuitOnOpen=1    " 1: 打开文件后, 关闭NERDTrre窗口
 " NERD_commenter.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <silent> <leader>ccc ,cc<cr>k
-imap <silent> <leader>ccc /*<esc>a
+autocmd FileType c    imap <silent> <leader>ccc /*<esc>a
+autocmd FileType JAVA imap <silent> <leader>ccc /* <esc>mza */<esc>`za
+autocmd FileType jsp  imap <silent> <leader>ccc <%-- <esc>mza --%><esc>`za
+autocmd FileType html imap <silent> <leader>ccc <!-- <esc>mza --><esc>`za
+autocmd FileType xml  imap <silent> <leader>ccc <!-- <esc>mza --><esc>`za
+autocmd FileType xsl  imap <silent> <leader>ccc <!-- <esc>mza --><esc>`za
+autocmd FileType tag  imap <silent> <leader>ccc <!-- <esc>mza --><esc>`za
 map <silent> <leader>cca ,ca<cr>k
 map <silent> <leader>ccs mz:.,.s/ //g<cr>/<Up><Up><cr>`z
 vnoremap <silent> <leader>scs :s/ //g<cr>
 vmap <silent> <leader>ct :s/\( .*$\)/ (\^\1\^)<cr>
 "map <silent> <leader>ct $F!,c$<cr>k$F!x
 map <silent> <leader>ct $F<space>l,c$<cr>k$2F<space>l
-map <silent> <leader>cis :source $VIM/vimfiles/syntax/txt.vim<cr>
 "map <silent> <leader>cqt qa,ctjq10@a
 "map <F2> $F<space>l,c$<cr>k
 "let NERD_java_alt_style=1
@@ -845,12 +854,12 @@ let tlist_txt_settings = 'txt;c:content;f:figures;t:tables'
 let TxtBrowser_Dict_Url='http://dict.cn/text'	"英文词典
 let Txtbrowser_Search_Engine='http://www.baidu.com/s?wd=text&oq=text&f=3&rsp=2'
 au BufRead,BufNewFile *.txt setlocal ft=txt "syntax highlight txt for txt.vim
-"au BufRead,BufNewFile *.log setlocal ft=txt "syntax highlight log for txt.vim
 au BufRead,BufNewFile *log setlocal ft=txt "syntax highlight log for txt.vim
 au BufRead,BufNewFile readme setlocal ft=txt "syntax highlight log for txt.vim
 au BufRead,BufNewFile README setlocal ft=txt "syntax highlight log for txt.vim
 au BufRead,BufNewFile ReadMe setlocal ft=txt "syntax highlight log for txt.vim
 au BufRead,BufNewFile diCtTmp setlocal ft=txt "syntax highlight log for txt.vim
+
 au BufRead,BufNewFile *.conf setlocal ft=sh "syntax highlight log for sh.vim
 au BufRead,BufNewFile named setlocal ft=sh "syntax highlight log for sh.vim
 au BufRead,BufNewFile named.conf setlocal ft=txt "syntax highlight log for sh.vim
@@ -922,7 +931,7 @@ set path+=./**
 
 ":cd src                            "切换到/home/easwy/src/vim70/src目录
 ":set sessionoptions-=curdir        "在session option中去掉curdir
-":set sessionoptions+=sesdir        "在session option中加入sesdir
+":set sessionoptions-=sesdir        "在session option中去掉sesdir
 ":mksession vim70.vim               "创建一个会话文件
 ":wviminfo vim70.viminfo            "创建一个viminfo文件
 ":qa                                "退出vim
@@ -942,7 +951,7 @@ if filereadable("workspace.vim")
     source workspace.vim
 endif
 if filereadable("vim72_wp.vim")
-   source vim72_wsp.vim
+    source vim72_wsp.vim
 endif
 
 "#############################################################################
@@ -989,8 +998,8 @@ map <A-p> :tabprevious<CR>
 map <A-n> :tabnext<CR>
 "-------------------------窗口相关--------------------------------------------
 "改变窗口高度, 宽度
-noremap <silent> <leader>wi 10<C-W>+
-noremap <silent> <leader>wd 10<C-W>-
+noremap <silent> <leader>wi   7<C-W>+
+noremap <silent> <leader>wd   7<C-W>-
 noremap <silent> <leader>vwi 18<C-W>>
 noremap <silent> <leader>vwd 18<C-W><
 "移动窗口位置
@@ -1027,6 +1036,8 @@ map <silent> <leader>sor :!sort<cr>
 map <silent> <leader>dsp mz:g/^$/d<cr>`z
 " 删除选中区域中行末空格
 map <silent> <leader>dep mz:%s/<tab><tab>*$//ge<cr>:%s/  *$//ge<cr>`z
+vmap <silent> <leader>dep mz:s/<tab><tab>*$//ge<cr>:s/  *$//ge<cr>`z
+
 "
 map <silent> <leader>dap V:s/ //g<cr>*
 " 加上行号
@@ -1182,7 +1193,7 @@ onoremap <C-F4> <C-C><C-W>c
 "|:stop|	  :st[op][!]		Suspend VIM or start new shell.  If 'aw' option
 "|CTRL-Z|     CTRL-Z		Same as ":stop"
 "-----------------------------------------------------------------------------
-"|CTRL-W_]|	CTRL-W ]		Split window and jump to tag under cursor
+    "|CTRL-W_]|	CTRL-W ]		Split window and jump to tag under cursor
 "|CTRL-W_f|	CTRL-W f		Split window and edit file name under the cursor
 "|CTRL-W_^|	CTRL-W ^		Split window and edit alternate file
 "|CTRL-W_n|	CTRL-W n  or  :new	Create new empty window
@@ -1193,9 +1204,9 @@ onoremap <C-F4> <C-C><C-W>c
 "|CTRL-W_k|	CTRL-W k		Move cursor to window above
 "|CTRL-W_CTRL-W|	CTRL-W CTRL-W		Move cursor to window below (wrap)
 "|CTRL-W_W|	CTRL-W W		Move cursor to window above (wrap)
-"|CTRL-W_t|	CTRL-W t		Move cursor to top window
-"|CTRL-W_b|	CTRL-W b		Move cursor to bottom window
-"|CTRL-W_p|	CTRL-W p		Move cursor to previous active window
+    "|CTRL-W_t|	CTRL-W t		Move cursor to top window
+    "|CTRL-W_b|	CTRL-W b		Move cursor to bottom window
+    "|CTRL-W_p|	CTRL-W p		Move cursor to previous active window
 "|CTRL-W_r|	CTRL-W r		Rotate windows downwards
 "|CTRL-W_R|	CTRL-W R		Rotate windows upwards
 "|CTRL-W_x|	CTRL-W x		Exchange current window with next one
