@@ -69,10 +69,10 @@ autocmd LocationChange .* :js modes.passAllKeys = /wave\.google\.com|mail\.googl
 cnoremap <C-n> :<cr>
 noremap <C-J> :dialog downloads<cr>
 "noremap <C-K> :t http://www.google.cn<cr>
-noremap <C-G> :t http://www.google.com.hk/firefox<cr>
+noremap <C-G> :t http://www.google.com.hk<cr>
 noremap <C-H> :t http://www.hao123.com<cr>
 noremap <C-L> :t http://211.64.120.6/eol/homepage/common/opencourse<cr>
-noremap <C-;> :t http://www.sdjtu.edu.cn/sdjtunet/wzdh.htm<cr>
+noremap <C-;> :o http://www.sdjtu.edu.cn/sdjtunet/wzdh.htm<cr>
 
 noremap <C-q> <C-v>
 noremap <C-Q> <C-z>

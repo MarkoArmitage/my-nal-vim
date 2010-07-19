@@ -237,9 +237,9 @@ function s:SetUpForNewFiletype(filetype, forceReset)
     elseif a:filetype ==? "diff"
         call s:MapDelimiters('# ', '')
     elseif a:filetype ==? "django"
-        call s:MapDelimitersWithAlternative('<!--','-->', '{#', '#}')
+        call s:MapDelimitersWithAlternative('<!-- ',' -->', '{#', '#}')
     elseif a:filetype ==? "docbk"
-        call s:MapDelimiters('<!--', '-->')
+        call s:MapDelimiters('<!-- ', ' -->')
     elseif a:filetype ==? "dns"
         call s:MapDelimiters('; ', '')
     elseif a:filetype ==? "dosbatch"
@@ -271,7 +271,7 @@ function s:SetUpForNewFiletype(filetype, forceReset)
     elseif a:filetype ==? "erlang"
         call s:MapDelimiters('%', '')
     elseif a:filetype ==? "eruby"
-        call s:MapDelimitersWithAlternative('<%#', '%>', '<!--', '-->')
+        call s:MapDelimitersWithAlternative('<%#', '%>', '<!-- ', ' -->')
     elseif a:filetype ==? "expect"
         call s:MapDelimiters('# ', '')
     elseif a:filetype ==? "exports"
@@ -301,7 +301,7 @@ function s:SetUpForNewFiletype(filetype, forceReset)
     elseif a:filetype ==? "geek"
         call s:MapDelimiters('GEEK_COMMENT:', '')
     elseif a:filetype ==? "genshi"
-        call s:MapDelimitersWithAlternative('<!--','-->', '{#', '#}')
+        call s:MapDelimitersWithAlternative('<!-- ',' -->', '{#', '#}')
     elseif a:filetype ==? "gentoo-conf-d"
         call s:MapDelimiters('# ', '')
     elseif a:filetype ==? "gentoo-env-d"
@@ -345,7 +345,7 @@ function s:SetUpForNewFiletype(filetype, forceReset)
     elseif a:filetype ==? "htmlcheetah"
         call s:MapDelimiters('##','')
     elseif a:filetype ==? "htmldjango"
-        call s:MapDelimitersWithAlternative('<!--','-->', '{#', '#}')
+        call s:MapDelimitersWithAlternative('<!--  ','  -->', '{# ', ' #}')
     elseif a:filetype ==? "htmlos"
         call s:MapDelimiters('# ','/#')
     elseif a:filetype ==? "ia64"
@@ -427,7 +427,7 @@ function s:SetUpForNewFiletype(filetype, forceReset)
     elseif a:filetype ==? "maple"
         call s:MapDelimiters('# ', '')
     elseif a:filetype ==? "markdown"
-        call s:MapDelimiters('<!--', '-->')
+        call s:MapDelimiters('<!-- ', ' -->')
     elseif a:filetype ==? "masm"
         call s:MapDelimiters('; ', '')
     elseif a:filetype ==? "mason"
@@ -585,7 +585,7 @@ function s:SetUpForNewFiletype(filetype, forceReset)
     elseif a:filetype ==? "sgmldecl"
         call s:MapDelimiters('-- ','-- ')
     elseif a:filetype ==? "sgmllnx"
-        call s:MapDelimiters('<!--','-->')
+        call s:MapDelimiters('<!-- ',' -->')
     elseif a:filetype ==? "sicad"
         call s:MapDelimiters('*', '')
     elseif a:filetype ==? "simula"
@@ -708,7 +708,7 @@ function s:SetUpForNewFiletype(filetype, forceReset)
     elseif a:filetype ==? "wget"
         call s:MapDelimiters('# ', '')
     elseif a:filetype ==? "Wikipedia"
-        call s:MapDelimiters('<!--','-->')
+        call s:MapDelimiters('<!-- ',' -->')
     elseif a:filetype ==? "winbatch"
         call s:MapDelimiters('; ', '')
     elseif a:filetype ==? "wml"
