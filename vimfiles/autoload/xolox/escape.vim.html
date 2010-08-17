@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>/usr/local/share/vimsvn/vim/vimfiles/autoload/xolox/escape.vim.html</title>
+<meta name="Generator" content="Vim/7.2">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+.Identifier { color: #008b8b; }
+.Constant { color: #ff00ff; }
+.Normal { background-color: #cfe8cc; }
+.PreProc { color: #a020f0; }
+.Statement { color: #a52a2a; font-weight: bold; }
+.Comment { color: #0000ff; }
+pre { font-family: monospace; color: #000000; background-color: #cfe8cc; }
+body { font-family: monospace; color: #000000; background-color: #cfe8cc; }
+.lnr { color: #a52a2a; }
+-->
+</style>
+</head>
+<body>
+<pre>
+<span class="lnr"> 1 </span><span class="Comment">&quot; Vim script</span>
+<span class="lnr"> 2 </span><span class="Comment">&quot;</span> <span class="PreProc">Maintainer:</span><span class="Comment"> Peter Odding &lt;peter@peterodding.com&gt;</span>
+<span class="lnr"> 3 </span><span class="Comment">&quot;</span> <span class="PreProc">Last Change:</span><span class="Comment"> June 5, 2010</span>
+<span class="lnr"> 4 </span><span class="Comment">&quot;</span> <span class="PreProc">URL:</span><span class="Comment"> <a href="http://peterodding.com/code/vim/profile/autoload/xolox/escape.vim">http://peterodding.com/code/vim/profile/autoload/xolox/escape.vim</a></span>
+<span class="lnr"> 5 </span>
+<span class="lnr"> 6 </span><span class="Comment">&quot; pattern() -- convert a string into a :substitute pattern that matches the string literally {{{1</span>
+<span class="lnr"> 7 </span>
+<span class="lnr"> 8 </span><span class="Statement">function</span>! xolox#escape#<span class="Normal">pattern</span><span class="Statement">(</span>string<span class="Statement">)</span>
+<span class="lnr"> 9 </span>  <span class="Statement">if</span> <span class="Identifier">type</span><span class="Statement">(</span>a:string<span class="Statement">)</span> <span class="Statement">==</span> <span class="Identifier">type</span><span class="Statement">(</span><span class="Constant">''</span><span class="Statement">)</span>
+<span class="lnr">10 </span>    <span class="Statement">let</span> string <span class="Statement">=</span> <span class="Identifier">escape</span><span class="Statement">(</span>a:string, <span class="Constant">'^$.*\~[]'</span><span class="Statement">)</span>
+<span class="lnr">11 </span>    <span class="Statement">return</span> <span class="Identifier">substitute</span><span class="Statement">(</span>string, <span class="Constant">'\n'</span>, <span class="Constant">'\\n'</span>, <span class="Constant">'g'</span><span class="Statement">)</span>
+<span class="lnr">12 </span>  <span class="Statement">endif</span>
+<span class="lnr">13 </span>  <span class="Statement">return</span> <span class="Constant">''</span>
+<span class="lnr">14 </span><span class="Statement">endfunction</span>
+<span class="lnr">15 </span>
+<span class="lnr">16 </span><span class="Comment">&quot; substitute() -- convert a string into a :substitute replacement that inserts the string literally {{{1</span>
+<span class="lnr">17 </span>
+<span class="lnr">18 </span><span class="Statement">function</span>! xolox#escape#<span class="Identifier">substitute</span><span class="Statement">(</span>string<span class="Statement">)</span>
+<span class="lnr">19 </span>  <span class="Statement">if</span> <span class="Identifier">type</span><span class="Statement">(</span>a:string<span class="Statement">)</span> <span class="Statement">==</span> <span class="Identifier">type</span><span class="Statement">(</span><span class="Constant">''</span><span class="Statement">)</span>
+<span class="lnr">20 </span>    <span class="Statement">let</span> string <span class="Statement">=</span> <span class="Identifier">escape</span><span class="Statement">(</span>a:string, <span class="Constant">'\&amp;~'</span><span class="Statement">)</span>
+<span class="lnr">21 </span>    <span class="Statement">return</span> <span class="Identifier">substitute</span><span class="Statement">(</span>string, <span class="Constant">'\n'</span>, <span class="Constant">'\\r'</span>, <span class="Constant">'g'</span><span class="Statement">)</span>
+<span class="lnr">22 </span>  <span class="Statement">endif</span>
+<span class="lnr">23 </span>  <span class="Statement">return</span> <span class="Constant">''</span>
+<span class="lnr">24 </span><span class="Statement">endfunction</span>
+<span class="lnr">25 </span>
+<span class="lnr">26 </span><span class="Comment">&quot; vim: ts=2 sw=2 et</span>
+</pre>
+</body>
+</html>
