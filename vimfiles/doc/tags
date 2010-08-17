@@ -1745,6 +1745,7 @@ project-settings	project.txt	/*project-settings*
 project-syntax	project.txt	/*project-syntax*
 project-tips	project.txt	/*project-tips*
 project.txt	project.txt	/*project.txt*
+publish.txt	publish.txt	/*publish.txt*
 pyclewn	pyclewn.txt	/*pyclewn*
 pyclewn-console	pyclewn.txt	/*pyclewn-console*
 pyclewn-extending	pyclewn.txt	/*pyclewn-extending*

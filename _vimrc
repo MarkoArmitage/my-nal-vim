@@ -1,4 +1,5 @@
 let mapleader=","
+"echo $VIMRUNTIME
 "kkkkkk" ……
 " :echo $VIMRUNTIME/../vimfiles/plugin/
 ":bdelete 3     "把一个缓冲区从列表中去除
@@ -55,13 +56,60 @@ function! MySys()
 	return "linux"
 endfunction
 
+
+" Platform settings
+if MySys() == 'linux'
+    let $TMPDIR = "/tmp"
+    let $BLOGP = "/media/F/notes/blog"
+    let $VIMDIR = "~"
+    let $VIMRC = ".vimrc"
+    let $VIMPERATORRC = ".vimperatorrc"
+    let $NOTEP = "/home/scr/.rt/notes/note"
+elseif MySys() == 'windows'
+    let path="C:/Vim/Vim"
+    let $TMPDIR = "C:/tmp"
+    let $BLOGP = "F:/notes/blog"
+    let $VIMDIR = "C:/Vim/Vim"
+    let $VIMRC = "_vimrc"
+    let $VIMPERATORRC = "_vimperatorrc"
+endif
+"Fast edit vimrc
+autocmd! bufwritepost $VIMRC source $VIMDIR/$VIMRC
+map <silent> <leader>vis  :source $VIMDIR/$VIMRC<cr>
+map <silent> <leader>wvim :call SwitchToBuf("/media/C/Vim/Vim/_vimrc")<cr>
+map <silent> <leader>vim  :call SwitchToBuf("$VIMDIR/$VIMRC")<cr>
+map <silent> <leader>vif  :call SwitchToBuf("$VIMDIR/$VIMPERATORRC")<cr>
+map <silent> <leader>vll  :call SwitchToBuf("$VIMDIR/.vim/log.txt")<cr>
+map <silent> <leader>vio  :call SwitchToBuf("$BLOGP/vim/13vim_skill.txt")<cr>
+map <silent> <leader>vib  :call SwitchToBuf("$BLOGP/book/01.txt")<cr>
+map <silent> <leader>vik  :call SwitchToBuf("$BLOGP/vim/script/vim_script_settings_of_me.txt")<cr>
+map <silent> <leader>vit  :call SwitchToBuf("$BLOGP/sys/CentOS/soft/host/08Linux的ftp服务vsftp详细配置.txt")<cr>
+map <silent> <leader>vie  :call SwitchToBuf("$BLOGP/english/e-new-words.txt")<cr>
+map <silent> <leader>vir  :call SwitchToBuf("$BLOGP/vim/regular-expression/regular_expressions.txt")<cr>
+map <silent> <leader>vig  :call SwitchToBuf("$BLOGP/vim/regular-expression/regular_expressions_test.txt")<cr>
+map <silent> <leader>viw  :call SwitchToBuf("$BLOGP/z_other/01OneThousandWrods.txt")<cr>
+map <silent> <leader>vlc  :call SwitchToBuf("$NOTEP/linux/note/cmd/cmd.txt")<cr>
+map <silent> <leader>vnt  :call SwitchToBuf("$NOTEP/note.txt")<cr>
+map <silent> <leader>vht  :call SwitchToBuf("$NOTEP/bookmark/html.txt")<cr>
+map <silent> <leader>vfi  :call SwitchToBuf("$NOTEP/linux/note/note/02files_introduce.txt")<cr>
+map <silent> <leader>vti  :call SwitchToBuf("$NOTEP/network/cmd_network.txt")<cr>
+map <silent> <leader>vin  :call SwitchToBuf("$NOTEP/network")<cr>
+map <silent> <leader>vtm  :call SwitchToBuf("$TMPDIR/gvim.tmp.txt")<cr>
+
+
+
 " Switch to buffer according to file name
 function! SwitchToBuf(filename)
-    let fullfn = substitute(a:filename, "^\\~/", $HOME . "/", "")   "For linux
+    "let fullfn = substitute(a:filename, "^\\~/", $HOME . "/", "")   "For linux
+    let fullfn = a:filename
     "把filename赋给fullfn, 不作任何替换
-    "let fullfn = substitute(a:filename, "NotFounded", $HOME . "/", "")
+    "let fullfn = substitute(fpname, "NotFounded", $HOME . "/", "")
     " find in current tab
-    let bufwinnr = bufwinnr(fullfn)
+    let idx = strridx(a:filename, "\/")
+    let len = strlen(a:filename)
+    let lastpar = strpart(a:filename, idx + 1, len - idx - 1)
+    let lastpar = expand(lastpar)
+    let bufwinnr = bufwinnr(lastpar)
     if bufwinnr != -1
 	exec bufwinnr . "wincmd w"
 	return
@@ -70,7 +118,7 @@ function! SwitchToBuf(filename)
 	tabfirst
 	let tab = 1
 	while tab <= tabpagenr("$")
-	    let bufwinnr = bufwinnr(fullfn)
+	    let bufwinnr = bufwinnr(lastpar)
 	    if bufwinnr != -1
 		exec "normal " . tab . "gt"
 		exec bufwinnr . "wincmd w"
@@ -94,7 +142,7 @@ function! Mydict(wflag)
     endif
     windo if
     \ expand("%:p")=="/tmp/diCtTmp" |
-    \ wq!|endif
+    \ close|endif
     botright vertical 20split /tmp/diCtTmp
     "botright aboveleft 20split /tmp/diCtTmp
     setlocal buftype= bufhidden=hide noswapfile
@@ -133,50 +181,6 @@ function! Testfun()
     "echo tmp
 endfunction
 
-"Fast edit vimrc
-if MySys() == 'linux'
-    map <silent> <leader>wvim :call SwitchToBuf("/media/C/Vim/Vim/_vimrc")<cr>
-    map <silent> <leader>vio :call SwitchToBuf("/media/F/notes/blog/vim/13vim_skill.txt")<cr>
-    map <silent> <leader>vib :call SwitchToBuf("/media/F/notes/blog/book/01.txt")<cr>
-    map <silent> <leader>vik :call SwitchToBuf("/media/F/notes/blog/vim/script/vim_script_settings_of_me.txt")<cr>
-    map <silent> <leader>vit :call SwitchToBuf("/media/F/notes/blog/sys/CentOS/soft/host/08Linux的ftp服务vsftp详细配置.txt")<cr>
-    map <silent> <leader>vie :call SwitchToBuf("/media/F/notes/blog/english/e-new-words.txt")<cr>
-    map <silent> <leader>vif :call SwitchToBuf("~/.vimperatorrc")<cr>
-    map <silent> <leader>vir :call SwitchToBuf("/media/F/notes/blog/vim/regular-expression/regular_expressions.txt")<cr>
-    map <silent> <leader>vig :call SwitchToBuf("/media/F/notes/blog/vim/regular-expression/regular_expressions_test.txt")<cr>
-    map <silent> <leader>viw :call SwitchToBuf("/media/F/notes/blog/z_other/01OneThousandWrods.txt")<cr>
-
-    map <silent> <leader>vtm :call SwitchToBuf("/tmp/gvim.tmp.txt")<cr>
-    map <silent> <leader>vlc :call SwitchToBuf("/home/scr/notes/note/linux/note/cmd/cmd.txt")<cr>
-    map <silent> <leader>vnt :call SwitchToBuf("/home/scr/notes/note/note.txt")<cr>
-    map <silent> <leader>vht :call SwitchToBuf("/home/scr/notes/note/bookmark/html.txt")<cr>
-    map <silent> <leader>vfi :call SwitchToBuf("/home/scr/notes/note/linux/note/note/02files_introduce.txt")<cr>
-    map <silent> <leader>vti :call SwitchToBuf("/home/scr/notes/note/network/cmd_network.txt")<cr>
-
-    map <silent> <leader>vin :call SwitchToBuf("/home/scr/notes/note/")<cr>
-    map <silent> <leader>vll :call SwitchToBuf("~/.vim/log.txt")<cr>
-    "Fast reloading of the .vimrc
-    map <silent> <leader>vis :source ~/.vimrc<cr>
-    "Fast editing of .vimrc
-    map <silent> <leader>vim :call SwitchToBuf("~/.vimrc")<cr>
-    "When .vimrc is edited, reload it
-    autocmd! bufwritepost .vimrc source ~/.vimrc
-elseif MySys() == 'windows'
-    let path="C:\Vim\Vim"
-    "Fast reloading of the _vimrc
-    map <silent> <leader>vis :source ~\_vimrc<cr>
-    "Fast editing of _vimrc
-    map <silent> <leader>vim :call SwitchToBuf("C:/Vim/Vim/_vimrc")<cr>
-    map <silent> <leader>vio :call SwitchToBuf("F:/notes/blog/vim/13vim_skill.txt")<cr>
-    map <silent> <leader>vib :call SwitchToBuf("F:/notes/blog/book/01.txt")<cr>
-    map <silent> <leader>vik :call SwitchToBuf("F:/notes/blog/vim/script/vim_script_settings_of_me.txt")<cr>
-    map <silent> <leader>vie :call SwitchToBuf("F:/notes/blog/english/e-new-words.txt")<cr>
-    map <silent> <leader>vif :call SwitchToBuf("C:/Vim/Vim/_vimperatorrc")<cr>
-    map <silent> <leader>vig :call SwitchToBuf("F:/notes/blog/vim/regular-expression/regular_expressions_test.txt")<cr>
-    map <silent> <leader>viw :call SwitchToBuf("F:/notes/blog/z_other/01OneThousandWrods.txt")<cr>
-    "When _vimrc is edited, reload it
-    autocmd! bufwritepost _vimrc source ~\_vimrc
-endif
 
 "#############################################################################
 " settings sets
@@ -256,7 +260,8 @@ hi Normal guibg=#cfe8cc
 "set confirm                    "用确认对话框弹出警告信息
 "set display=lastline           "长行不能完全显示时显示当前屏幕能显示的部分
 "set encoding=utf-8             "设置字符编码 @@@@@
-"set expandtab                  "使用space代替tab.
+set expandtab                   "使用space代替tab
+au FileType MAKE  set noet      "对于Makefile文件不能用space代替tab
 "set fileformats=unix,dos       "设置保存文件格式
 "set filetype=php               "设置默认文件类型
 "set guifont=SimSun\ 10         "设置用于GUI图形用户界面的字体列表。
@@ -279,33 +284,8 @@ set viminfo='1000,f1,<500,:50,@50
 "#############################################################################
 " use iabbrev
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"下面的命令告诉Vim你想在每次键入"ad"和空格后都自动扩展为"advertisement":
-iabbrev ad advertisement
-iabbrev crv createvar
-iabbrev LDD $(LDDIR)
-iabbrev ldd $(LDDIR)
-iabbrev LDL $(LDLIBS)
-iabbrev ldl $(LDLIBS)
-iabbrev CO $(COMPILE.c)
-iabbrev co $(COMPILE.c)
-iabbrev LI $(LINK.c)
-iabbrev li $(LINK.c)
-iabbrev pr PROGS =
-iabbrev pro $(PROGS)
-"iabbrev ob objects =
-"iabbrev obj $(objects)
-iabbrev //b /*************************************************************************
-iabbrev //e <space>*************************************************************************/
-iabbrev "b """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-iabbrev "e """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-iabbrev /u /usr/local/share/vim/vim72/
-iabbrev plu $HOME/.vim/plugin
-iabbrev doc $HOME/.vim/doc
-iabbrev vimm C:\Program Files\Vim\vim72
-iabbrev fil C:\Program Files\Vim\vimfiles
+map <silent> <leader>vtc :call SwitchToBuf("$VIM/vimfiles/plugin/typecorr.vim")<cr>
 "######################## end of iabbrev #####################################
-
-
 
 "#############################################################################
 " use abbreviate
@@ -320,7 +300,7 @@ abbreviate ture true
 
 
 "#############################################################################
-" plugins
+" plugins pls
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "=============================================================================
@@ -337,11 +317,11 @@ if MySys() == 'linux'
     au FileType c     set tags+=/usr/include/tags
     au FileType c     set tags+=/usr/include/sys/tags
     au FileType c     set tags+=/usr/include/bits/tags
-    "au FileType c,cpp set tags+=/home/scr/lang/0ctope/libc/libc/tags
-    "au FileType c,cpp set tags+=/home/scr/lang/0ctope/cpp/cpp_src/tags
-    "au FileType c,cpp set tags+=/home/scr/lang/0ctope/win32/winapi/tags
-    "au FileType   cpp set tags+=/home/scr/lang/0ctope/win32/mfc/tags
-    au FileType  java set tags+=/home/scr/lang/0ctope/java_api/src/tags
+    "au FileType c,cpp set tags+=/home/scr/.rt/lang/0ctope/libc/libc/tags
+    "au FileType c,cpp set tags+=/home/scr/.rt/lang/0ctope/cpp/cpp_src/tags
+    "au FileType c,cpp set tags+=/home/scr/.rt/lang/0ctope/win32/winapi/tags
+    "au FileType   cpp set tags+=/home/scr/.rt/lang/0ctope/win32/mfc/tags
+    au FileType  java set tags+ /home/scr/.rt/lang/0ctope/java_api/src/tags
 elseif MySys() == 'windows'
     au FileType c,cpp set tags+=E:\lang\cpp\cpp\cpp_src\tags "cpp_src.tar.bz2
     au FileType c,cpp set tags+=E:\lang\win32\mfc\tags
@@ -398,9 +378,9 @@ elseif MySys() == 'windows'
     "cs a E:\lang\java\java_api\src\cscope.out
 endif
 " 显示当前的连接。
-"map <silent> <leader>csh :cs show<cr>
+"map <silent> <leader>css :cs show<cr>
 " 重新初始化所有连接。
-map <silent> <leader>cre :cs reset<cr>
+map <silent> <leader>csr :cs reset<cr>
 
 "=============================================================================
 "TagList settings
@@ -757,8 +737,8 @@ let g:proj_run3='silent !gvim %f'
 nmap <silent> <leader>tto :NERDTreeToggle<cr>
 let NERDTreeIgnore=['\.vm$', '\~$']    " 不显示指定的类型的文件
 let NERDTreeShowHidden=0    " 不显示隐藏文件(好像只在linux环境中有效)
-let NERDTreeSortOrder=['\/$', '\.cpp$', '\.c$', '\.h$', '\.java', '.jsp',
-    \ '.xml', '.html', '.class', '*']    " 排序
+let NERDTreeSortOrder=['\/$', '\.cpp$', '\.c$', '\.h$', '\.o$', '\.asm$',
+            \ '\.java', '.jsp', '.xml', '.html', '.class', '*']    " 排序
 let NERDTreeCaseSensitiveSort=0     " 不分大小写排序
 let NERDTreeWinSize=33
 " let NERDTreeShowLineNumbers=1
@@ -771,13 +751,13 @@ let NERDTreeQuitOnOpen=1    " 1: 打开文件后, 关闭NERDTrre窗口
 " NERD_commenter.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <silent> <leader>ccc ,cc<cr>k
-autocmd FileType c    imap <silent> <leader>ccc /*<esc>a
-autocmd FileType JAVA imap <silent> <leader>ccc /* <esc>mza */<esc>`za
-autocmd FileType jsp  imap <silent> <leader>ccc <%-- <esc>mza --%><esc>`za
-autocmd FileType html imap <silent> <leader>ccc <!-- <esc>mza --><esc>`za
-autocmd FileType xml  imap <silent> <leader>ccc <!-- <esc>mza --><esc>`za
-autocmd FileType xsl  imap <silent> <leader>ccc <!-- <esc>mza --><esc>`za
-autocmd FileType tag  imap <silent> <leader>ccc <!-- <esc>mza --><esc>`za
+autocmd FileType c,cpp imap <silent> <leader>ccc /*<esc>a
+autocmd FileType JAVA  imap <silent> <leader>ccc /* <esc>mza */<esc>`za
+autocmd FileType jsp   imap <silent> <leader>ccc <%-- <esc>mza --%><esc>`za
+autocmd FileType html  imap <silent> <leader>ccc <!-- <esc>mza --><esc>`za
+autocmd FileType xml   imap <silent> <leader>ccc <!-- <esc>mza --><esc>`za
+autocmd FileType xsl   imap <silent> <leader>ccc <!-- <esc>mza --><esc>`za
+autocmd FileType tag   imap <silent> <leader>ccc <!-- <esc>mza --><esc>`za
 map <silent> <leader>cca ,ca<cr>k
 map <silent> <leader>ccs mz:.,.s/ //g<cr>/<Up><Up><cr>`z
 vnoremap <silent> <leader>scs :s/ //g<cr>
@@ -887,8 +867,37 @@ au BufRead,BufNewFile hosts* setlocal ft=sh "syntax highlight log for sh.vim
 " In your .vimrc file
 
 "=============================================================================
-" grep.vim
+" Grep.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+"=============================================================================
+" Publish.vim
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" BUGS: 若 tags 非常大或非常多, 则无法正常运行.
+function! MakePublishTags(dirname, filename)
+    let discard = 
+    \ system('cd ' . a:dirname .';' . 'ctags -Rf publish_tags .')
+    "\ system('cd ' . a:dirname .';' . 'ctags -Rf publish_tags ' . a:filename)
+endfunction
+
+if filereadable("publish.vim")
+    map <silent> <leader>pub :source publish.vim
+else
+    map <silent> <leader>pub :call My_Publish()<cr>
+    function! My_Publish()
+        let publish_tags_dir = expand("%:p:h")
+        let $PUBLISH_TAGS = publish_tags_dir . "/publish_tags"
+        set tags=$PUBLISH_TAGS
+        let sources = publish_tags_dir
+        let target  = publish_tags_dir
+        let curfile = expand("%")
+        if !filereadable($PUBLISH_TAGS)
+            call MakePublishTags(publish_tags_dir, curfile)
+        endif
+        call Publish(sources, target, [  curfile ])
+    endfunction
+endif
 
 
 "=============================================================================
@@ -962,6 +971,8 @@ endif
 "#############################################################################
 "maps
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <silent> <leader>exd :!nautilus .<cr><cr>
+" backup files to 'bk' directory
 map <silent> <leader>abk :call AddBkFileLists()<cr>:!echo <C-R>z >> /home/scr/bin/bk/app_new_filelists.txt <cr>
 " 把所选区域替换为当前日期和时间 :help visual_example
 vmap <silent> <leader>dat <Esc>`>a<CR><Esc>`<i<CR><Esc>!!date<CR>kJJ
@@ -986,8 +997,9 @@ map <silent> <leader>d2s mz:%s/，/, /ge<cr>:%s/。/. /ge<cr>:%s/；/; /ge<cr>
 \:%s/１/1/ge<cr>:%s/２/2/ge<cr>:%s/－/-/ge<cr>:%s/―/-/ge<cr>:%s/’/'/ge<cr>
 \:%s/＞/>/ge<cr>:%s/\│/\|/ge<cr>:%s/–/-/ge<cr>:%s///ge<cr>:%s/←/<--/ge<cr>
 \:%s/．/./ge<cr>:%s/～/\~/ge<cr>:%s/◆//ge<cr>:%s/『/</ge<cr>:%s/』/>/ge<cr>
+\:%s/•/./ge<cr>:%s/﹐/,/ge<cr>:%s/‘/'/ge<cr>
 \`z
-":%s/』//ge<cr>
+":%s/‘/'/ge<cr>
 map <silent> <leader>s2t :%s/	/    /g<cr>
 map <silent> <leader>pwd :pwd<cr>
 map <silent> <leader>y mz:r!cat /tmp/pwd2vim.tmp<cr>0v$hd`zi@<esc>Pjdd`zf@x
@@ -1027,8 +1039,15 @@ map <silent> <leader>new :new<cr>
 map <silent> <leader>vnw :vsplit<cr>
 map <silent> <leader>vne :vnew<cr>
 "-------------------------end of 窗口相关---------------------------------
-map <silent> <leader>afg mzA // @@@@@<esc>`z
+map <silent> <leader>dlp mz:.,.s/<tab><tab>*$//ge<cr>:.,.s/  *$//ge<cr>`z
+map <silent> <leader>afg ,dlpmzA // @@@@@<esc>/<up><up><cr>`z
+map <silent> <leader>fag ,dlpmzA // @@@@@<esc>/<up><up><cr>`z
+map <silent> <leader>fg  ,dlpmzA // @@@@@<esc>0/<up><up><cr>`z
+map <silent> <leader>dg  0f/D0
 map <silent> <leader>dfg $bhde<esc>
+"map <silent> n nzb<C-y><C-y><C-y>
+map <silent> <leader>fj  ,dlpmzA // &&&&&<esc>0/<up><up><cr>`z
+map <silent> <leader>fk  ,dlpmzA // KKKKK<esc>0/<up><up><cr>`z
 " 从光标所在的行开始, 对下一个空行间的所有行进行排序
 map <silent> <leader>sfl :.,/^$/-1!sort<cr>
 map <silent> <leader>sor :!sort<cr>
@@ -1067,7 +1086,7 @@ map <silent> <leader>bab i{<Esc>$a}<Esc>
 map <silent> <leader>g %
 map <silent> <leader>hh [[
 map Q gq
-map <silent> <leader>lhd o<Esc>I#ifdef  _NAL_HDEBUG_<Esc>o#else<Esc>o#endif
+map <silent> <leader>ldb o<Esc>I#ifdef  _NAL_DEBUG_<Esc>o#else<Esc>o#endif<esc>k
 "In order to use "p" in visual mordel
 vnoremap p <Esc>:let current_reg = @"<CR>gvs<C-R>=current_reg<CR><Esc>
 "中文也可以达78个字符时自动换行
@@ -1100,6 +1119,12 @@ exe 'inoremap <script> <C-V>' paste#paste_cmd['i']
 exe 'vnoremap <script> <C-V>' paste#paste_cmd['v']
 imap <S-Insert>		<C-V>
 vmap <S-Insert>		<C-V>
+" Modify <C-E> to <A-e>
+noremap <A-e>		<C-E>
+noremap <A-y>		<C-Y>
+" Quickly move between consecutive lines
+noremap <A-j>		<C-E><C-E><C-E>
+noremap <A-k>		<C-Y><C-Y><C-Y>
 " Use CTRL-E to do what CTRL-V used to do "选中块
 noremap <C-E>		<C-V>
 " Use CTRL-S for saving, also in Insert mode
@@ -1251,6 +1276,7 @@ onoremap <C-F4> <C-C><C-W>c
 "-----------------------------------------------------------------------------
 ":Explore"等Ex命令来打开文件浏览器
 "-----------------------------------------------------------------------------
+":/The Start/,$delete      "" 把所有匹配"The Start"的字串删除掉
 "-----------------------------------------------------------------------------
 "-----------------------------------------------------------------------------
 "-----------------------------------------------------------------------------
@@ -1264,3 +1290,4 @@ onoremap <C-F4> <C-C><C-W>c
 "register a "查看寄存器a
 " wviminfo ./cmd_network_i.vim
 " rviminfo ./cmd_network_i.vim
+" *starting.txt*  For Vim version 7.2.  最近更新: 2008年6月
