@@ -140,7 +140,7 @@ map <Leader>cbm :sbclose<cr>
 
 map <Leader>vif :! gvim ~/.vimperatorrc<cr><cr>
 map <Leader>vim :! gvim ~/.vimrc<cr><cr>
-map <Leader>vht :! gvim ~/notes/note/html.txt<cr><cr>
+map <Leader>vht :! gvim /home/scr/.rt/notes/note/bookmark/html.txt<cr><cr>
 map <Leader>fht :! firefox ~/notes/note/html.txt.html<cr><cr>
 
 
@@ -174,10 +174,14 @@ map <Leader>blbl t http://blog.chinaunix.net/u3/112454/index.html<cr>
 
 noremap J <esc>12j
 noremap K <esc>12k
+noremap <A-j> <esc>12j
+noremap <A-k> <esc>12k
 imap j <esc>j
 imap k <esc>k
 noremap j <esc>j
 noremap k <esc>k
+noremap <A-n> <C-n>
+noremap <A-p> <C-P>
 
 
 

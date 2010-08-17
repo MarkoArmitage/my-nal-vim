@@ -33,7 +33,7 @@ syn case ignore
 " key words definition.
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Keywords
-syn keyword txtTodo todo fixme note debug comment notice analysis solution question 注意 分析
+syn keyword txtTodo todo fixme note debug comment notice analysis solution question 注意 分析 seealso
 syn keyword txtError error bug caution dropped
 
 "txtTitle: Lines start with digit and '.'
@@ -94,6 +94,8 @@ syn match txtEmailQuote '^\(>\($\| \)\)\+'
 
 "(2010年 05月 01日 星期六 11:28:29 CST) "(2010年 05月 03日 星期一 19:34:15 CST)
 "#=============================================================================
+" `...`
+syn match  cmdLine "[`][^`]\+\(\n\)\=[^`]*[`]" contains=txtUrl
 "命令行
 syn match   cmdLine '^[	 ]*\[.*\][#\$].*$'
 "syn match   cmdLine2 '^[	 ]*:.*$'
@@ -102,6 +104,8 @@ syn match   cmdLine '^[	 ]*\[.*\][#\$].*$'
 "syn match cmdOut	"^[	 ]*\\\@<!|[^"*|]\+|" contains=cmdOutBar
 "syn match cmdOutBar		contained "|"
 syn region cmdOut    matchgroup=txtOperator start="|&"        end="&|" contains=txtUrl
+syn region cmdOut2    matchgroup=txtOperator start="<code>"        end="</code>" contains=txtUrl
+syn region cmdOut3    matchgroup=txtOperator start="<cmdout>"        end="</cmdout>" contains=txtUrl
 
 "书名号《》内文字, 不在行首(为了和txtList区别)
 syn match   txtBookParentesis "《.*》" contains=txtUrl
@@ -138,6 +142,8 @@ hi link txtComment4    Comment
 hi link cmdLine  Keyword
 "hi link cmdLine2  Keyword
 hi def link cmdOut LineNr
+hi def link cmdOut2 LineNr
+hi def link cmdOut3 LineNr
 hi def link cmdOutBar Ignore
 hi def link txtBookParentesis Macro
 hi def link txtBookParentesis2 Macro
