@@ -971,6 +971,7 @@ endif
 "#############################################################################
 "maps
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
 map <silent> <leader>exd :!nautilus .<cr><cr>
 " backup files to 'bk' directory
 map <silent> <leader>abk :call AddBkFileLists()<cr>:!echo <C-R>z >> /home/scr/bin/bk/app_new_filelists.txt <cr>
