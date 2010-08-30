@@ -894,6 +894,12 @@ au BufNewFile,BufRead *.jpl,*.jpr		setf jam
 " Java
 au BufNewFile,BufRead *.java,*.jav		setf java
 
+"(2010年 08月 28日 星期六 20:29:45 CST)
+"#=======================================================================
+" Viki viki
+au BufNewFile,BufRead *.viki      		setf viki
+"#=======================================================================
+
 " JavaCC
 au BufNewFile,BufRead *.jj,*.jjt		setf javacc
 
