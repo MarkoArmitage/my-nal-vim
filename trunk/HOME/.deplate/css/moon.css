@@ -1,0 +1,633 @@
+/* A  sample style sheet for use with deplate generated html files */
+/* @Author:      Thomas Link (samul AT web.de) */
+/* @Created:     13-Apr-2004. */
+/* @Last Change: 05-Aug-2004. */
+/* @Revision:    0.346 */
+
+/* this moon.css is based on deplate.css 
+   mod by Rongjun Mu
+   30-Aug-2004
+*/
+
+body {
+    margin-left: 20pt;
+    margin-right: 20pt;
+    padding: 1pt;
+    /* font-family: Verdana, Geneva, Sans-Serif; */
+    font-family : Verdana, Monaco, Sans-Serif;
+    /* font-family : Georgia, Serif; */
+    /* font-size: 11pt; */
+	font-size: medium;
+	/* line-height: 150% !important; */ 
+    color: #000000;
+    background-color: #ffffff;
+    /* text-align: justify; */
+}
+
+a {
+    /* text-decoration: none; */
+    color : black;
+}
+
+a:link {
+    /* border-bottom: 1pt solid #0071f0; */
+    /* color : #30306f; */
+    color : #0071f0;
+}
+a:visited {
+    /* border-bottom: 1pt dotted #666666; */
+    color : #30306f;
+    /* color : #666666; */
+}
+a:hover {
+    color: #0071f0;
+    /* color: #7f607f; */
+    /* background-color: #ffdf70; */
+}
+a:link.ref {
+    /* font-weight: bold; */
+}
+a:visited.ref {
+    /* font-weight: bold; */
+}
+
+p {
+    /* border-left: 10pt solid #ffffff; */
+    /* border-right: 10pt solid #ffffff; */
+	/* margin: 0, 10pt, 0, 10pt; */
+    /* padding: 5pt; */
+	padding-top: 0pt;
+	padding-right: 15pt;
+	padding-bottom: 5pt;
+	padding-left: 15pt;
+	line-height: 150%;
+}
+
+
+big {
+    font-weight: bolder;
+    font-stretch: expanded;
+}
+
+hr {
+}
+
+hr.pagebreak {
+    color: #000000;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    padding-left: 20pt;
+    font-weight: bold;
+    text-align: left;
+    font-family : Verdana, Monaco, Sans-Serif;
+    /* margin-right: 20%; */
+}
+h1 {
+    margin-top: 20pt;
+    margin-bottom: 10pt;
+    /* border-left:10pt solid #f1f08f; */
+    /* border-bottom:2pt solid #f1f08f; */
+    border-left:10pt solid #ffdf70;
+    border-bottom:2pt solid #ffdf70;
+	padding: 0, 0, 5pt, 0;
+    /* padding-bottom: 5pt; */
+    /* margin-right: 20%; */
+    /* font-size: 28pt; */
+	/* font-size: 2.06em; */
+	font-size: 150%;
+}
+
+h2 {
+    margin-top: 15pt;
+    margin-bottom: 10pt;
+    /* border-left:10pt solid #f1f08f; */
+    border-left:10pt solid #ffdf70;
+	padding: 0, 0, 0, 5pt;
+    /* border-bottom:2pt solid #f1f08f; */
+    /* padding-bottom: 10pt; */
+    /* margin-right: 30%; */
+    /* font-size: 24pt; */
+	/* font-size: 1.72em; */
+	font-size: 135%;
+}
+h3 {
+    border-left:10pt solid #ffdf70;
+    /* margin-left: 10pt; */
+	margin-top: 10pt;
+	margin-bottom: 5pt;
+	padding: 0, 0, 0, 8pt;
+    /* font-size: 20pt; */
+	/* font-size: 1.44em; */
+	font-size: 120%;
+}
+h4 {
+    border-left:10pt solid #ffdf70;
+    /* margin-left: 10pt; */
+	margin-top: 10pt;
+	margin-bottom: 5pt;
+	padding: 0, 0, 0, 11pt;
+    /* font-size: 18pt; */
+	/* font-size: 1.2em; */
+	font-size: 110%;
+}
+h5 {
+    border-left:10pt solid #ffdf70;
+    /* margin-left: 10pt; */
+	margin-top: 10pt;
+	margin-bottom: 5pt;
+	padding: 0, 0, 0, 14pt;
+    /* font-size: 16pt; */
+	/* font-size: 1.1em; */
+	font-size: 100%;
+}
+h6 {
+    border-left:10pt solid #ffdf70;
+	margin-top: 10pt;
+	padding: 0, 0, 0, 17pt;
+    /* font-size: 14pt; */
+	font-size: 1.0em;
+}
+
+em {
+}
+
+table {
+    border-style: none;
+    border-left: 10pt solid #ffffff;
+    border-right: 10pt solid #ffffff;
+    /* margin-left: 40pt; */
+    /* margin-right: 40pt; */
+}
+tr {
+}
+tr.head {
+    /* font-family : Verdana, Monaco, Sans-Serif; */
+    font-weight: bold;
+    /* font-size: 12pt; */
+}
+thead {
+}
+th {
+    /* font-family : Verdana, Monaco, Sans-Serif; */
+    /* font-size: 12pt; */
+    font-weight: bold;
+    border-style: none;
+    background-color:#eaeaea;
+    color : black;
+}
+td {
+    border-style: none;
+    background-color:#eaeaea;
+    color : black;
+}
+
+caption {
+    /* font-family : Verdana, Monaco, Sans-Serif; */
+    font-weight: bold;
+    /* font-size: 12pt; */
+}
+
+blockquote {
+    margin-top: 20pt;
+    margin-bottom: 20pt;
+    margin-left: 60pt;
+    margin-right: 60pt;
+}
+
+blockquote.quote {
+    font-family : Serif;
+}
+
+blockquote.longquote {
+    font-family : Serif;
+}
+
+blockquote.abstract {
+    font-family : Serif;
+    /* font-size: 12pt; */
+    font-style: italic;
+}
+
+li {
+    /* font-family : Verdana, Monaco, Sans-Serif; */
+    /* font-size: 12pt; */
+    padding: 2pt;
+    margin-right: 20pt;
+}
+
+p.itempara {
+    border-left: 0pt;
+    border-right: 0pt;
+    padding: 0pt;
+    /* text-indent: 0.5cm; */
+}
+
+ul {
+    /* margin-left: 20pt; */
+    /* border-left:10pt solid #ffffff; */
+}
+
+ol {
+    /* margin-left: 20pt; */
+    /* border-left:10pt solid #ffffff; */
+}
+
+dl {
+    /* font-family : Verdana, Monaco, Sans-Serif; */
+    /* font-size: 12pt; */
+    /* margin-left: 20pt; */
+}
+dt {
+    /* background-color: #f1f08f; */
+    /* background-color: #dfefcf; */
+    /* background-color: #e4f8fc; */
+    /* margin-right: 200pt; */
+    /* margin-right: 60%; */
+    margin-left: 10pt;
+    /* border-left:10pt solid #e4f8fc; */
+    padding-left: 10pt;
+    padding-top: 2pt;
+    padding-bottom: 2pt;
+    /* font-family : Verdana, Monaco, Sans-Serif; */
+    font-weight: bold;
+}
+dd {
+    margin-bottom: 10pt;
+}
+
+pre {
+    font-family : Courier New, Courier, Monospace;
+    font-size: 10pt;
+    /* border: 1pt dashed #f1f08f; */
+    /* background-color: #f1e6e6; */
+    background-color: #eaeaea;
+    border-left: 5pt solid #efefef;
+    /* border-bottom: 5pt solid #e8e8e8; */
+    /* border-right: 1pt solid #e8e8e8; */
+    /* border-top: 1pt solid #e8e8e8; */
+	margin-left: 40pt;
+	margin-right: 40pt;
+    padding: 5pt;
+}
+
+code {
+	font-family : Courier New, Courier, Monospace;
+	background-color: #eaeaea;
+}
+
+
+/* htmlslides: Usage note */
+
+p.htmlslidesnote {
+}
+ul.htmlslidesnote {
+}
+li.htmlslidesnote {
+    padding: 0pt;
+    color: #888888;
+}
+hr.htmlslidesnote {
+    border:0pt;
+}
+
+
+/* Navigation bar */
+
+a:link.navbar {
+    color : #7f607f;
+    text-decoration: none;
+    font-size: 10pt;
+}
+a:visited.navbar {
+    color : #7f607f;
+    text-decoration: none;
+    font-size: 10pt;
+}
+table.navbar {
+    width: 100%;
+    margin-left: 0pt;
+    margin-right: 0pt;
+}
+td.navbar {
+    width: 33%;
+    text-align: center;
+    vertical-align: center;
+}
+
+/* Figure */
+div.figure {
+    text-align: center;
+}
+
+/* Caption */
+p.caption {
+    font-weight: bold;
+}
+
+/* Title */
+
+div.title {
+    /* text-align: center; */
+    text-align: left;
+    padding: 20pt;
+    margin: 20pt;
+    /* padding: 0pt; */
+    /* background-color: #f1f08f; */
+    /* background-color: #ffdf70; */
+    /* background-color: #e4f0e8; */
+    /* background-color: #f1f8db; */
+    /* background-color: #ffffce; */
+    /* color: #30306f; */
+    /* border-left:20pt solid #e4f0e8; */
+    /* border-right 10pt solid #e4f0e8; */
+    /* border-left: 10pt solid #f1f08f; */
+    /* border: 1pt dashed #ffdf70; */
+    /* border-top: 1pt solid #e4f0e8; */
+    /* border-left: 1pt solid #ffdf70; */
+    /* border-bottom: 1pt solid #ffdf70; */
+    /* border-right: 1pt solid #e4f0e8; */
+    border-top: 1pt solid #eaeaea;
+    border-right: 10pt solid #eaeaea;
+    border-left: 1pt solid #eaeaea;
+    border-bottom: 5pt solid #eaeaea;
+    /* border-bottom: 1pt solid #ffdf70; */
+    /* border-right: 0pt; */
+    /* border-left: 0pt; */
+    /* border-top: 20pt solid #e4f0e8; */
+    /* padding-bottom: 20pt; */
+    /* margin-right: 20%; */
+}
+p.title {
+    margin: 0pt;
+    /* padding: 0pt; */
+    border: 0pt;
+    font-size: 28pt;
+    font-weight: bold;
+}
+p.author {
+    margin: 0pt;
+    /* padding: 0pt; */
+    border: 0pt;
+    font-size: 24pt;
+    font-weight: bold;
+}
+p.authornote {
+    margin: 0pt;
+    /* padding: 0pt; */
+    border: 0pt;
+    font-size: 18pt;
+    font-weight: bold;
+}
+p.date {
+    margin: 0pt;
+    /* padding: 0pt; */
+    border: 0pt;
+    font-size: 18pt;
+    font-weight: bold;
+}
+hr.title {
+    color: #f1f08f;
+    /* background-color: #f1f08f; */
+    /* background-color: #eaeaea; */
+    background-color: #e4f8fc;
+    border:1pt solid #f1f08f;
+    padding: 1pt;
+    /* margin-left: 20pt; */
+    /* margin-right: 20pt; */
+    margin-left: 45%;
+    margin-right: 45%;
+}
+
+
+/* Table of Contents etc. */
+
+div.toc {
+    margin-left: 10%;
+}
+p.toc {
+}
+ul.toc {
+    list-style-type : none;
+}
+li.toc {
+    padding: 0pt;
+    list-style-type : none;
+}
+
+div.lot {
+    margin-left: 10%;
+}
+p.lot {
+}
+ul.lot {
+    list-style-type : none;
+}
+li.lot {
+    padding: 0pt;
+    list-style-type : none;
+}
+
+div.lof {
+    margin-left: 10%;
+}
+p.lof {
+}
+ul.lof {
+    list-style-type : none;
+}
+li.lof {
+    padding: 0pt;
+    list-style-type : none;
+}
+
+hr.list {
+    color:#f1f08f;
+    /* background-color: #f1f08f; */
+    /* background-color: #eaeaea; */
+    background-color: #e4f8fc;
+    border:1pt solid #f1f08f;
+    padding: 1pt;
+    /* margin-left: 20pt; */
+    /* margin-right: 20pt; */
+    margin-left: 45%;
+    margin-right: 45%;
+}
+
+
+/* Mini Table of Contents */
+
+#Contents { 
+    position: absolute;
+    top:50px; 
+    left:0px; 
+    padding:0px; 
+    visibility:hidden; 
+    margin:0px;
+    /* border:0px; */
+}
+#ContentsBlock { 
+    position: absolute;
+    top:30px; 
+    left:0px; 
+    padding:0px; 
+}
+div.minitoc {
+    /* position: fixed; */
+    /* top:    80px; */
+    /* left:   10px; */
+    /* width:  260px; */
+    max-height: 500px;
+    /* overflow: scroll; */
+    /* z-index: 5; */
+    /* float: left; */
+    background: #f1f1f1;
+    border-top: 1pt solid #e0e0e0;
+    border-bottom: 1pt solid #e0e0e0;
+    border-right: 1pt solid #e0e0e0;
+    /* color: #7f3737; */
+}
+h1.minitoc {
+    margin: 0pt;
+    padding: 5pt;
+    border: 0pt;
+}
+ul.minitoc {
+}
+li.minitoc {
+}
+
+
+/* Footnotes */
+a:link.footnote {
+    font-size: 8pt;
+    text-decoration: none;
+    vertical-align: top;
+}
+a:visited.footnote {
+    font-size: 8pt;
+    text-decoration: none;
+    vertical-align: top;
+}
+p.footnotes {
+    border-top: 1pt solid #ffdf70;
+    padding-top: 10pt;
+    margin-top: 40pt;
+    margin-right: 60%;
+    font-size: 10pt;
+    font-weight: bold;
+}
+ol.footnotes {
+}
+li.footnotes {
+    font-size: 10pt;
+}
+
+/* OpenOffice compatible footnotes */
+
+.sdfootnoteanc {
+    font-size: 8pt;
+    vertical-align: top;
+    color: #30306f;
+}
+.sdfootnotesym {
+    /* text-decoration: none; */
+    /* background-color: #ffdf70; */
+    background-color: #e4f8fc;
+    /* font-size: 8pt; */
+    font-size: 10pt;
+    vertical-align: top;
+    color: #30306f;
+}
+
+p.sdfootnote {
+    font-size: 10pt;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+
+/* Bibliography */
+
+table.bib {
+    width: 100%;
+}
+td.bibLeft {
+    /* width: 5%; */
+    background-color:#ffffff;
+}
+td.bib {
+    background-color:#ffffff;
+}
+td.bibRight {
+    /* width: 5%; */
+    background-color:#ffffff;
+}
+h1.bib {
+}
+p.bib {
+    margin-left: 20pt;
+    text-indent: -20pt;
+}
+
+
+/* Index */
+h2.index {
+}
+p.indextoc {
+}
+dl.index {
+}
+dt.index {
+}
+dd.index {
+}
+
+
+/* Marker */
+em.marker {
+    color : #910000;
+    background-color:#ffff00;
+}
+span.marker {
+    position: absolute;
+    right: 10pt;
+    width: 60pt;
+}
+
+
+/* Header, Footer */
+div.header {
+    background-color:#eaeaea;
+}
+div.footer {
+    background-color:#eaeaea;
+	text-align: right;
+}
+
+table.header, table.footer {
+    width: 100%;
+}
+
+thead.header, thead.footer {
+}
+
+tr.header, tr.footer {
+}
+
+th.header, th.footer {
+}
+
+td.header, td.footer {
+    background-color:#eaeaea;
+}
+
+p.header, p.footer {
+	padding-top: 5pt;
+	padding-right: 15pt;
+	padding-bottom: 5pt;
+	padding-left: 15pt;
+	font-size: small;
+}
+

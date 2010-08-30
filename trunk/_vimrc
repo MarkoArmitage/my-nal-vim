@@ -87,7 +87,7 @@ map <silent> <leader>vit  :call SwitchToBuf("$BLOGP/sys/CentOS/soft/host/08Linux
 map <silent> <leader>vie  :call SwitchToBuf("$BLOGP/english/e-new-words.txt")<cr>
 map <silent> <leader>vir  :call SwitchToBuf("$BLOGP/vim/regular-expression/regular_expressions.txt")<cr>
 map <silent> <leader>vig  :call SwitchToBuf("$BLOGP/vim/regular-expression/regular_expressions_test.txt")<cr>
-map <silent> <leader>viw  :call SwitchToBuf("$BLOGP/z_other/01OneThousandWrods.txt")<cr>
+"map <silent> <leader>viw  :call SwitchToBuf("$BLOGP/z_other/01OneThousandWrods.txt")<cr>
 map <silent> <leader>vlc  :call SwitchToBuf("$NOTEP/linux/note/cmd/cmd.txt")<cr>
 map <silent> <leader>vnt  :call SwitchToBuf("$NOTEP/note.txt")<cr>
 map <silent> <leader>vht  :call SwitchToBuf("$NOTEP/bookmark/html.txt")<cr>
@@ -109,6 +109,7 @@ function! SwitchToBuf(filename)
     let len = strlen(a:filename)
     let lastpar = strpart(a:filename, idx + 1, len - idx - 1)
     let lastpar = expand(lastpar)
+
     let bufwinnr = bufwinnr(lastpar)
     if bufwinnr != -1
 	exec bufwinnr . "wincmd w"
@@ -132,10 +133,27 @@ function! SwitchToBuf(filename)
     endif
 endfunction
 
+function! FomartTable()
+    let in = getreg("\"")
+    echo in
+endfunction
+
+" Remove trailing whitespace when writing a buffer, but not for diff files.
+" From: Vigil
+function! RemoveTrailingWhitespace()
+    if &ft != "diff"
+        let b:curcol = col(".")
+        let b:curline = line(".")
+        silent! %s/\s\+$//
+        silent! %s/\(\s*\n\)\+\%$//
+        call cursor(b:curline, b:curcol)
+    endif
+endfunction
+
 function! Mydict(wflag)
     if a:wflag == 1
 	" . ==> 字符串连接(:help expression-syntax)
-	let expl=system('sdcv.sh ' . expand("<cword>"))
+        let expl=system('sdcv.sh ' . expand("<cword>"))
     elseif a:wflag == 2
 	let fwords=getreg("z")
 	let expl=system('sdcv.sh ' . "\"" . fwords . " \"")
@@ -185,6 +203,7 @@ endfunction
 "#############################################################################
 " settings sets
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd BufWritePre * call RemoveTrailingWhitespace()
 au FileType c,cpp set nomodeline " @@@@@
 au FileType text, txt, TXT set tw=78 fo+=Mm "选中，然后按gq就可以
 autocmd BufReadPost *       " @@@@@
@@ -302,6 +321,14 @@ abbreviate ture true
 "#############################################################################
 " plugins pls
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"=============================================================================
+" vim-viki
+" http://nic-nac-project.de/~murj/viki/vim/VimViki.html
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" <c-cr> 新建该页时将使用同当前所在的页相同的文件后缀
+let g:vikiUseParentSuffix = 1
+map <silent> <leader>vb \vb
+
 
 "=============================================================================
 " ctags settings. see also: JumpInCode_Plus.vim
@@ -454,7 +481,7 @@ let g:winManagerWindowLayout='FileExplorer|BufExplorer'
 let g:persistentBehaviour=0		"只剩一个窗口时, 退出vim.
 let g:winManagerWidth=26
 let g:defaultExplorer=1
-nmap <silent> <leader>fir :FirstExplorerWindow<cr>
+"nmap <silent> <leader>fir :FirstExplorerWindow<cr>
 nmap <silent> <leader>bot :BottomExplorerWindow<cr>
 nmap <silent> <leader>wm :WMToggle<cr>
 
@@ -738,7 +765,7 @@ nmap <silent> <leader>tto :NERDTreeToggle<cr>
 let NERDTreeIgnore=['\.vm$', '\~$']    " 不显示指定的类型的文件
 let NERDTreeShowHidden=0    " 不显示隐藏文件(好像只在linux环境中有效)
 let NERDTreeSortOrder=['\/$', '\.cpp$', '\.c$', '\.h$', '\.o$', '\.asm$',
-            \ '\.java', '.jsp', '.xml', '.html', '.class', '*']    " 排序
+    \ '\.java$', '.jsp$', '.xml$', '.html$', '.class$', '.tex$', '.viki$', '*']    " 排序
 let NERDTreeCaseSensitiveSort=0     " 不分大小写排序
 let NERDTreeWinSize=33
 " let NERDTreeShowLineNumbers=1
@@ -833,19 +860,20 @@ map <silent> <leader>bgs :TxtBrowserSearch<cr>
 let tlist_txt_settings = 'txt;c:content;f:figures;t:tables'
 let TxtBrowser_Dict_Url='http://dict.cn/text'	"英文词典
 let Txtbrowser_Search_Engine='http://www.baidu.com/s?wd=text&oq=text&f=3&rsp=2'
-au BufRead,BufNewFile *.txt setlocal ft=txt "syntax highlight txt for txt.vim
-au BufRead,BufNewFile *log setlocal ft=txt "syntax highlight log for txt.vim
+au BufRead,BufNewFile *.txt   setlocal ft=txt "syntax highlight txt for txt.vim
+au BufRead,BufNewFile *log    setlocal ft=txt "syntax highlight log for txt.vim
 au BufRead,BufNewFile readme setlocal ft=txt "syntax highlight log for txt.vim
 au BufRead,BufNewFile README setlocal ft=txt "syntax highlight log for txt.vim
 au BufRead,BufNewFile ReadMe setlocal ft=txt "syntax highlight log for txt.vim
+"au FileType rd                setlocal ft=txt "syntax highlight readme for txt.vim
 au BufRead,BufNewFile diCtTmp setlocal ft=txt "syntax highlight log for txt.vim
 
-au BufRead,BufNewFile *.conf setlocal ft=sh "syntax highlight log for sh.vim
-au BufRead,BufNewFile named setlocal ft=sh "syntax highlight log for sh.vim
-au BufRead,BufNewFile named.conf setlocal ft=txt "syntax highlight log for sh.vim
+au BufRead,BufNewFile *.conf  setlocal ft=sh "syntax highlight log for sh.vim
+au BufRead,BufNewFile named   setlocal ft=sh "syntax highlight log for sh.vim
+au BufRead,BufNewFile named.conf    setlocal ft=txt "syntax highlight log for sh.vim
 au BufRead,BufNewFile named.*.zones setlocal ft=txt "syntax highlight log for sh.vim
 au BufRead,BufNewFile ifcfg-* setlocal ft=sh "syntax highlight log for sh.vim
-au BufRead,BufNewFile hosts* setlocal ft=sh "syntax highlight log for sh.vim
+au BufRead,BufNewFile hosts*  setlocal ft=sh "syntax highlight log for sh.vim
 
 
 "=============================================================================
@@ -876,7 +904,7 @@ au BufRead,BufNewFile hosts* setlocal ft=sh "syntax highlight log for sh.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BUGS: 若 tags 非常大或非常多, 则无法正常运行.
 function! MakePublishTags(dirname, filename)
-    let discard = 
+    let discard =
     \ system('cd ' . a:dirname .';' . 'ctags -Rf publish_tags .')
     "\ system('cd ' . a:dirname .';' . 'ctags -Rf publish_tags ' . a:filename)
 endfunction
@@ -971,7 +999,10 @@ endif
 "#############################################################################
 "maps
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
+map <silent> <leader>acl mzI[~]# <esc>`z
+map <silent> <leader>viw :set lines=50<cr>:set columns=99<cr>:winpos 0 0<cr>
+vmap <silent> <leader>fom d:new $TMPDIR/column_vim2424 <cr>VGP:wq<cr>k
+\ :r! cat $TMPDIR/column_vim2424 \| column -t <cr>
 map <silent> <leader>exd :!nautilus .<cr><cr>
 " backup files to 'bk' directory
 map <silent> <leader>abk :call AddBkFileLists()<cr>:!echo <C-R>z >> /home/scr/bin/bk/app_new_filelists.txt <cr>
@@ -998,9 +1029,9 @@ map <silent> <leader>d2s mz:%s/，/, /ge<cr>:%s/。/. /ge<cr>:%s/；/; /ge<cr>
 \:%s/１/1/ge<cr>:%s/２/2/ge<cr>:%s/－/-/ge<cr>:%s/―/-/ge<cr>:%s/’/'/ge<cr>
 \:%s/＞/>/ge<cr>:%s/\│/\|/ge<cr>:%s/–/-/ge<cr>:%s///ge<cr>:%s/←/<--/ge<cr>
 \:%s/．/./ge<cr>:%s/～/\~/ge<cr>:%s/◆//ge<cr>:%s/『/</ge<cr>:%s/』/>/ge<cr>
-\:%s/•/./ge<cr>:%s/﹐/,/ge<cr>:%s/‘/'/ge<cr>
+\:%s/•/./ge<cr>:%s/﹐/,/ge<cr>:%s/‘/'/ge<cr>:%s/∶/: /ge<cr>:%s/·/\. /ge<cr>
 \`z
-":%s/‘/'/ge<cr>
+":%s/·/\./ge<cr>
 map <silent> <leader>s2t :%s/	/    /g<cr>
 map <silent> <leader>pwd :pwd<cr>
 map <silent> <leader>y mz:r!cat /tmp/pwd2vim.tmp<cr>0v$hd`zi@<esc>Pjdd`zf@x
@@ -1045,10 +1076,11 @@ map <silent> <leader>afg ,dlpmzA // @@@@@<esc>/<up><up><cr>`z
 map <silent> <leader>fag ,dlpmzA // @@@@@<esc>/<up><up><cr>`z
 map <silent> <leader>fg  ,dlpmzA // @@@@@<esc>0/<up><up><cr>`z
 map <silent> <leader>dg  0f/D0
-map <silent> <leader>dfg $bhde<esc>
+map <silent> <leader>df  0f/D0
 "map <silent> n nzb<C-y><C-y><C-y>
 map <silent> <leader>fj  ,dlpmzA // &&&&&<esc>0/<up><up><cr>`z
 map <silent> <leader>fk  ,dlpmzA // KKKKK<esc>0/<up><up><cr>`z
+map <silent> <leader>fi  ,dlpmzA // IIIII<esc>0/<up><up><cr>`z
 " 从光标所在的行开始, 对下一个空行间的所有行进行排序
 map <silent> <leader>sfl :.,/^$/-1!sort<cr>
 map <silent> <leader>sor :!sort<cr>
@@ -1279,6 +1311,9 @@ onoremap <C-F4> <C-C><C-W>c
 "-----------------------------------------------------------------------------
 ":/The Start/,$delete      "" 把所有匹配"The Start"的字串删除掉
 "-----------------------------------------------------------------------------
+"" 红色高亮行尾空格
+"highlight WhitespaceEOL ctermbg=red guibg=red
+"match WhitespaceEOL /\s\+$/
 "-----------------------------------------------------------------------------
 "-----------------------------------------------------------------------------
 "-----------------------------------------------------------------------------

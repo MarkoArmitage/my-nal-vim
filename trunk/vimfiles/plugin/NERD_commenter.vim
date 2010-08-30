@@ -415,7 +415,9 @@ function s:SetUpForNewFiletype(filetype, forceReset)
     elseif a:filetype ==? "lynx"
         call s:MapDelimiters('# ', '')
     elseif a:filetype ==? "lytex"
-        call s:MapDelimiters('%', '')
+        call s:MapDelimiters('% ', '')
+    elseif a:filetype ==? "tex"
+        call s:MapDelimiters('% ', '')
     elseif a:filetype ==? "mail"
         call s:MapDelimiters('> ','')
     elseif a:filetype ==? "mako"
@@ -655,7 +657,7 @@ function s:SetUpForNewFiletype(filetype, forceReset)
     elseif a:filetype ==? "texinfo"
         call s:MapDelimiters("@c ", "")
     elseif a:filetype ==? "texmf"
-        call s:MapDelimiters('%', '')
+        call s:MapDelimiters('% ', '')
     elseif a:filetype ==? "tf"
         call s:MapDelimiters('; ', '')
     elseif a:filetype ==? "tidy"
@@ -674,9 +676,9 @@ function s:SetUpForNewFiletype(filetype, forceReset)
         call s:MapDelimiters('%','')
 "(2010年 03月 05日 星期五 10:42:59 CST)
 "==============================================================================
-"增加*.txt的
     elseif a:filetype ==? "txt"
         call s:MapDelimitersWithAlternative('(^ ',' ^)','| ',' |')
+"==============================================================================
     elseif a:filetype ==? "uc"
         call s:MapDelimitersWithAlternative('// ','', '/* ',' */')
     elseif a:filetype ==? "uil"
@@ -695,6 +697,11 @@ function s:SetUpForNewFiletype(filetype, forceReset)
         call s:MapDelimiters('# ', '')
     elseif a:filetype ==? "vhdl"
         call s:MapDelimiters('-- ', '')
+"(2010年 08月 29日 星期日 09:43:20 CST)
+"#=======================================================================
+    elseif a:filetype ==? "viki"
+        call s:MapDelimiters('% ','')
+"#=======================================================================
     elseif a:filetype ==? "vimperator"
         call s:MapDelimiters('" ','')
     elseif a:filetype ==? "virata"

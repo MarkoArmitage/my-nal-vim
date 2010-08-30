@@ -69,7 +69,7 @@ autocmd LocationChange .* :js modes.passAllKeys = /wave\.google\.com|mail\.googl
 cnoremap <C-n> :<cr>
 noremap <C-J> :dialog downloads<cr>
 "noremap <C-K> :t http://www.google.cn<cr>
-noremap <C-G> :t http://www.google.com.hk<cr>
+noremap <C-G> :t http://www.google.com.hk<cr><esc>
 noremap <C-H> :t http://www.hao123.com<cr>
 noremap <C-L> :t http://211.64.120.6/eol/homepage/common/opencourse<cr>
 noremap <C-;> :o http://www.sdjtu.edu.cn/sdjtunet/wzdh.htm<cr>
@@ -106,7 +106,7 @@ inoremap <C-y> <C-v><C-y>
 
 " ============================================================================
 map x :bmarks<cr>
-map e :delbmarks<space>  
+map e :delbmarks<space>
 "map xo :bmarks<cr>;o
 "map xt :bmarks<cr>;t
 "map xw :bmarks<cr>;w
@@ -172,16 +172,19 @@ map <Leader>blbl t http://blog.chinaunix.net/u3/112454/index.html<cr>
 
 
 
-noremap J <esc>12j
-noremap K <esc>12k
+
+imap <A-j> <esc>12j
+imap <A-k> <esc>12k
 noremap <A-j> <esc>12j
 noremap <A-k> <esc>12k
 imap j <esc>j
 imap k <esc>k
 noremap j <esc>j
 noremap k <esc>k
-noremap <A-n> <C-n>
-noremap <A-p> <C-P>
+imap <A-n> <esc><C-n>
+imap <A-p> <esc><C-P>
+noremap <A-n> <esc><C-n>
+noremap <A-p> <esc><C-P>
 
 
 
@@ -216,11 +219,11 @@ autocmd LocationChange mail\.google\.com :set editor="gvim -f -c 'set ft=mail'"
 " gu          /* 到URL的上一层目录 */
 " gU          /* 到URL的根目录    */
 " <C-a>/<C-x>   /* 把URL最后一个数字增加/减少1，然后打开 */
-" 
+"
 " 例如：
 " 2gu 是指从http://www.example.com/dir1/dir2/file.htm到 http://www.example.com/dir1/
 " <C-a>是指从 http://www.example.com/2008.htm 到 http://www.example.com/2009.htm
-" 
+"
 " y/p          /* 把当前URL拷贝到粘贴板或把粘贴板上的URL在当然页打开 */
 " P           /* 大写的P是在新标签页打开粘贴板里的URL   */
 

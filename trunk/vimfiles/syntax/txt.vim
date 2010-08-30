@@ -6,7 +6,7 @@
 "Date: 2009-12-27
 "Language: plain/text :)
 "Install_detail:
-        "1. put this file in $HOME/.vim/syntax or $VIMRUNTIME/syntax/ 
+        "1. put this file in $HOME/.vim/syntax or $VIMRUNTIME/syntax/
         "2. Add the following line in your .vimrc:
         "au BufRead,BufNewFile *.txt setlocal ft=txt
 "Version: 1.0.1
@@ -58,7 +58,7 @@ syn match txtList    '^\s*(\=\([0-9]\+\|[a-zA-Z]\))'
 
 "txtList: Lines start with space and then digit and '.'
 "列表文本: 至少一个空格打头, [数字.]打头, 但随后不能跟数字(排除把5.5这样的文
-"本当成列表) 
+"本当成列表)
 syn match txtList "^\s\+\d\+\.\d\@!"
 
 "txtApostrophe: text in the apostrophe
@@ -81,7 +81,7 @@ syn region txtBrackets    matchgroup=txtOperator start="{"        end="}" contai
 
 "link url
 syn match txtUrl '\<[A-Za-z0-9_.-]\+@\([A-Za-z0-9_-]\+\.\)\+[A-Za-z]\{2,4}\>\(?[A-Za-z0-9%&=+.,@*_-]\+\)\='
-syn match txtUrl   '\<\(\(https\=\|ftp\|news\|telnet\|gopher\|wais\)://\([A-Za-z0-9._-]\+\(:[^ @]*\)\=@\)\=\|\(www[23]\=\.\|ftp\.\)\)[A-Za-z0-9%._/~:,=$@-]\+\>/*\(?[A-Za-z0-9/%&=+.,@*_-]\+\)\=\(#[A-Za-z0-9%._-]\+\)\='
+syn match txtUrl   '\<\(\(https\=\|file\|ftp\|news\|telnet\|gopher\|wais\)://\([A-Za-z0-9._-]\+\(:[^ @]*\)\=@\)\=\|\(www[23]\=\.\|ftp\.\)\)[A-Za-z0-9%._/~:,=$@-]\+\>/*\(?[A-Za-z0-9/%&=+.,@*_-]\+\)\=\(#[A-Za-z0-9%._-]\+\)\='
 
 "email text:
 syn match txtEmailMsg '^\s*\(From\|De\|Sent\|To\|Para\|Date\|Data\|Assunto\|Subject\):.*'
@@ -97,24 +97,24 @@ syn match txtEmailQuote '^\(>\($\| \)\)\+'
 " `...`
 syn match  cmdLine "[`][^`]\+\(\n\)\=[^`]*[`]" contains=txtUrl
 "命令行
-syn match   cmdLine '^[	 ]*\[.*\][#\$].*$'
-"syn match   cmdLine2 '^[	 ]*:.*$'
+syn match  cmdLine '^[	 ]*\[.*\][#\$].*$'
+"syn match  cmdLine2 '^[	 ]*:.*$'
 
 "命令输出
-"syn match cmdOut	"^[	 ]*\\\@<!|[^"*|]\+|" contains=cmdOutBar
-"syn match cmdOutBar		contained "|"
-syn region cmdOut    matchgroup=txtOperator start="|&"        end="&|" contains=txtUrl
-syn region cmdOut2    matchgroup=txtOperator start="<code>"        end="</code>" contains=txtUrl
-syn region cmdOut3    matchgroup=txtOperator start="<cmdout>"        end="</cmdout>" contains=txtUrl
+"syn match cmdOut    "^[	 ]*\\\@<!|[^"*|]\+|" contains=cmdOutBar
+"syn match cmdOutBar contained "|"
+syn region cmdOut    matchgroup=txtOperator start="|&"        end="&|"        contains=txtUrl
+syn region cmdOut2   matchgroup=txtOperator start="<code>"    end="</code>"   contains=txtUrl
+syn region cmdOut3   matchgroup=txtOperator start="<cmdout>"  end="</cmdout>" contains=txtUrl
 
 "书名号《》内文字, 不在行首(为了和txtList区别)
 syn match   txtBookParentesis "《.*》" contains=txtUrl
 syn match   txtBookParentesis2 "<<.*>>" contains=txtUrl
 
 "在(^ ^)内的为注释文本
-syn match txtComment   "(\^.*\^)"
-syn match txtComment2  '^#.*$' contains=txtTodo
-syn match txtComment3  '\/\/.*$' contains=txtTodo
+syn match  txtComment  "(\^.*\^)"
+syn match  txtComment2 '^#.*$'   contains=txtTodo
+syn match  txtComment3 '\/\/.*$' contains=txtTodo
 syn region txtComment4 matchgroup=txtOperator start="\/\*" end="\*\/" contains=txtTodo
 "#============================================================================
 
@@ -135,7 +135,7 @@ hi link txtEmailMsg     PmenuSbar
 hi link txtEmailQuote   Structure
 "(2010年 05月 01日 星期六 12:09:56 CST)
 "#=============================================================================
-hi link txtComment      comment
+hi link txtComment     comment
 hi link txtComment2    Comment
 hi link txtComment3    Comment
 hi link txtComment4    Comment
