@@ -34,9 +34,9 @@ if has("win32")
 else
     set fileencoding=utf-8
     if has("gui_running")
-	set lines=48
-	set columns=134
-	winpos  100  20
+	set lines=44
+	set columns=99
+	winpos  100  0
 	if exists("&cursorline")
 	    set cursorline
 	endif
@@ -231,8 +231,8 @@ set fileencodings=utf-8,chinese "@@@@@
 set foldmethod=marker		"按缩进进行折叠
 set formatoptions+=tcqroMm      "使得注释换行时自动加上前导的空格和星号
 set guioptions-=L
-set guioptions-=m               "去除菜单栏
 set guioptions-=r               "去除右边滚动条
+set guioptions-=m               "去除菜单栏
 set guioptions-=T               "去除工具栏
 set history=400                 "设置冒号命令和搜索命令的命令历史列表的长度
 set hlsearch                    "搜索结果高亮度显示
@@ -321,6 +321,23 @@ abbreviate ture true
 "#############################################################################
 " plugins pls
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"=============================================================================
+" vim-latex LaTex
+" http://vim-latex.sourceforge.net/index.php?subject=download&title=Download
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" :help latex-suite.txt
+" IMPORTANT: grep will sometimes skip displaying the file name if you
+" search in a singe file. This will confuse Latex-Suite. Set your grep
+" program to always generate a file-name.
+set grepprg=grep\ -nH\ $*
+
+" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
+" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
+" The following changes the default filetype back to 'tex':
+let g:tex_flavor='latex'
+
+
 "=============================================================================
 " vim-viki
 " http://nic-nac-project.de/~murj/viki/vim/VimViki.html
@@ -999,8 +1016,11 @@ endif
 "#############################################################################
 "maps
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <silent> <leader>cf  :let @+=expand("%:p")<cr>
+map <silent> <leader>ato :set guioptions+=m<cr> :set guioptions-=T<cr>
+map <silent> <leader>dto :set guioptions-=m<cr> :set guioptions-=T<cr>
 map <silent> <leader>acl mzI[~]# <esc>`z
-map <silent> <leader>viw :set lines=50<cr>:set columns=99<cr>:winpos 0 0<cr>
+map <silent> <leader>viw :set lines=44<cr>:set columns=99<cr>:winpos 0 0<cr>
 vmap <silent> <leader>fom d:new $TMPDIR/column_vim2424 <cr>VGP:wq<cr>k
 \ :r! cat $TMPDIR/column_vim2424 \| column -t <cr>
 map <silent> <leader>exd :!nautilus .<cr><cr>
@@ -1315,6 +1335,7 @@ onoremap <C-F4> <C-C><C-W>c
 "highlight WhitespaceEOL ctermbg=red guibg=red
 "match WhitespaceEOL /\s\+$/
 "-----------------------------------------------------------------------------
+" :h \r    (回车符)
 "-----------------------------------------------------------------------------
 "-----------------------------------------------------------------------------
 "-----------------------------------------------------------------------------
