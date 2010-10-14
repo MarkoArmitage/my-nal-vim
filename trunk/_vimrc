@@ -34,15 +34,15 @@ if has("win32")
 else
     set fileencoding=utf-8
     if has("gui_running")
-	set lines=44
-	set columns=99
-	winpos  100  0
+	set lines=42
+	set columns=69
+	winpos  10  0
 	if exists("&cursorline")
 	    set cursorline
 	endif
     else
-	set lines=40
-	set columns=106
+	set lines=35
+	set columns=85
 	    set cursorline
 	winpos  80  10
     endif
@@ -877,13 +877,16 @@ map <silent> <leader>bgs :TxtBrowserSearch<cr>
 let tlist_txt_settings = 'txt;c:content;f:figures;t:tables'
 let TxtBrowser_Dict_Url='http://dict.cn/text'	"英文词典
 let Txtbrowser_Search_Engine='http://www.baidu.com/s?wd=text&oq=text&f=3&rsp=2'
-au BufRead,BufNewFile *.txt   setlocal ft=txt "syntax highlight txt for txt.vim
-au BufRead,BufNewFile *log    setlocal ft=txt "syntax highlight log for txt.vim
-au BufRead,BufNewFile readme setlocal ft=txt "syntax highlight log for txt.vim
-au BufRead,BufNewFile README setlocal ft=txt "syntax highlight log for txt.vim
-au BufRead,BufNewFile ReadMe setlocal ft=txt "syntax highlight log for txt.vim
-"au FileType rd                setlocal ft=txt "syntax highlight readme for txt.vim
-au BufRead,BufNewFile diCtTmp setlocal ft=txt "syntax highlight log for txt.vim
+au BufRead,BufNewFile *.txt     setlocal ft=txt "syntax hlg txt for txt.vim
+au BufRead,BufNewFile *log      setlocal ft=txt "syntax hlg log for txt.vim
+au BufRead,BufNewFile readme    setlocal ft=txt "syntax hlg log for txt.vim
+au BufRead,BufNewFile README    setlocal ft=txt "syntax hlg log for txt.vim
+au BufRead,BufNewFile ReadMe    setlocal ft=txt "syntax hlg log for txt.vim
+"au FileType rd                  setlocal ft=txt "syntax hlg readme for txt.vim
+au BufRead,BufNewFile diCtTmp   setlocal ft=txt
+au BufRead,BufNewFile *.sed.in  setlocal ft=txt
+au BufRead,BufNewFile *.sed.out setlocal ft=txt
+au BufRead,BufNewFile *.tag     setlocal ft=txt
 
 au BufRead,BufNewFile *.conf  setlocal ft=sh "syntax highlight log for sh.vim
 au BufRead,BufNewFile named   setlocal ft=sh "syntax highlight log for sh.vim
@@ -1020,7 +1023,7 @@ map <silent> <leader>cf  :let @+=expand("%:p")<cr>
 map <silent> <leader>ato :set guioptions+=m<cr> :set guioptions-=T<cr>
 map <silent> <leader>dto :set guioptions-=m<cr> :set guioptions-=T<cr>
 map <silent> <leader>acl mzI[~]# <esc>`z
-map <silent> <leader>viw :set lines=44<cr>:set columns=99<cr>:winpos 0 0<cr>
+map <silent> <leader>viw :set lines=42<cr>:set columns=99<cr>:winpos 0 0<cr>
 vmap <silent> <leader>fom d:new $TMPDIR/column_vim2424 <cr>VGP:wq<cr>k
 \ :r! cat $TMPDIR/column_vim2424 \| column -t <cr>
 map <silent> <leader>exd :!nautilus .<cr><cr>
@@ -1348,3 +1351,6 @@ onoremap <C-F4> <C-C><C-W>c
 " wviminfo ./cmd_network_i.vim
 " rviminfo ./cmd_network_i.vim
 " *starting.txt*  For Vim version 7.2.  最近更新: 2008年6月
+
+"/^[0-9][0-9]*\.[0-9]* /  匹配标题号
+"003636

@@ -33,7 +33,7 @@ syn case ignore
 " key words definition.
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Keywords
-syn keyword txtTodo todo fixme note debug comment notice analysis solution question 注意 分析 seealso
+syn keyword txtTodo todo fixme note debug comment notice analysis solution question 注意 分析 seealso Validate
 syn keyword txtError error bug caution dropped
 
 "txtTitle: Lines start with digit and '.'
@@ -97,7 +97,7 @@ syn match txtEmailQuote '^\(>\($\| \)\)\+'
 " `...`
 syn match  cmdLine "[`][^`]\+\(\n\)\=[^`]*[`]" contains=txtUrl
 "命令行
-syn match  cmdLine '^[	 ]*\[.*\][#\$].*$'
+syn match  cmdLine '^[	 ]*\[.*\][#\$] .*$'
 "syn match  cmdLine2 '^[	 ]*:.*$'
 
 "命令输出

@@ -240,3 +240,4 @@ autocmd LocationChange mail\.google\.com :set editor="gvim -f -c 'set ft=mail'"
 " M{a-zA-Z0-9}
 "
 " nuoailz liaocaiyuan
+"
