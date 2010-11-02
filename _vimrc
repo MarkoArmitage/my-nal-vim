@@ -425,6 +425,8 @@ endif
 "map <silent> <leader>css :cs show<cr>
 " 重新初始化所有连接。
 map <silent> <leader>csr :cs reset<cr>
+" 删除当前的cscope连接
+" : cs kill .
 
 "=============================================================================
 "TagList settings
@@ -462,7 +464,7 @@ let Tlist_Max_Submenu_Items=10
 let Tlist_Max_Tag_length=20
 let Tlist_Use_SingleClick=0
 let Tlist_Auto_Open=0
-let Tlist_Close_On_Select=1
+let Tlist_Close_On_Select=0
 let Tlist_File_Fold_Auto_Close=1
 let Tlist_GainFocus_On_ToggleOpen=1
 let Tlist_Process_File_Always=1
@@ -1063,6 +1065,8 @@ map <F3> :tabclose<CR>
 map <A-t> :tabnew<CR>
 map <A-p> :tabprevious<CR>
 map <A-n> :tabnext<CR>
+map <F3> :tabprevious<CR>
+map <F4> :tabnext<CR>
 "-------------------------窗口相关--------------------------------------------
 "改变窗口高度, 宽度
 noremap <silent> <leader>wi   7<C-W>+
