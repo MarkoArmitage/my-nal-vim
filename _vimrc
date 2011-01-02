@@ -34,17 +34,17 @@ if has("win32")
 else
     set fileencoding=utf-8
     if has("gui_running")
-	set lines=42
-	set columns=69
-	winpos  10  0
+	set lines=31
+	set columns=112
+	winpos  0  352
 	if exists("&cursorline")
 	    set cursorline
 	endif
     else
-	set lines=35
-	set columns=85
+	set lines=31
+	set columns=92
 	    set cursorline
-	winpos  80  10
+	winpos  0  352
     endif
 endif
 
@@ -60,7 +60,7 @@ endfunction
 " Platform settings
 if MySys() == 'linux'
     let $TMPDIR = "/tmp"
-    let $BLOGP = "/media/F/notes/blog"
+    let $BLOGP = "/media/N/win/notes/blog"
     let $VIMDIR = "~"
     let $VIMRC = ".vimrc"
     let $VIMPERATORRC = ".vimperatorrc"
@@ -365,7 +365,7 @@ if MySys() == 'linux'
     "au FileType c,cpp set tags+=/home/scr/.rt/lang/0ctope/cpp/cpp_src/tags
     "au FileType c,cpp set tags+=/home/scr/.rt/lang/0ctope/win32/winapi/tags
     "au FileType   cpp set tags+=/home/scr/.rt/lang/0ctope/win32/mfc/tags
-    au FileType  java set tags+ /home/scr/.rt/lang/0ctope/java_api/src/tags
+    au FileType  java set tags+=/media/N/l2this/.rt/lang/0ctope/java_api/src/tags
 elseif MySys() == 'windows'
     au FileType c,cpp set tags+=E:\lang\cpp\cpp\cpp_src\tags "cpp_src.tar.bz2
     au FileType c,cpp set tags+=E:\lang\win32\mfc\tags
@@ -464,7 +464,7 @@ let Tlist_Max_Submenu_Items=10
 let Tlist_Max_Tag_length=20
 let Tlist_Use_SingleClick=0
 let Tlist_Auto_Open=0
-let Tlist_Close_On_Select=0
+let Tlist_Close_On_Select=1
 let Tlist_File_Fold_Auto_Close=1
 let Tlist_GainFocus_On_ToggleOpen=1
 let Tlist_Process_File_Always=1
@@ -907,6 +907,7 @@ au BufRead,BufNewFile hosts*  setlocal ft=sh "syntax highlight log for sh.vim
 "=============================================================================
 " FindMate.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <silent> <leader>,f <Plug>FindMate<space>
 " 快速查找文件
 " You can launch FindMate by typing:
 "       ,, File_name
@@ -979,6 +980,24 @@ autocmd FileType c,cpp,h map <buffer> <leader><space> :w<cr>:make<cr>:cw 10<cr>:
 nmap <leader>cn :cn<cr>
 nmap <leader>cp :cp<cr>
 nmap <leader>cw :cw 10<cr> :cn<cr>
+
+"=============================================================================
+" tabname.vim
+" http://www.vim.org/scripts/script.php?script_id=1678
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <C-H> :TName<space>'
+" :TName 'tab_page_name' - set name of tab-page
+" :TNoName - remove tab page name
+
+"=============================================================================
+" reorder_tabs.vim
+" http://www.vim.org/scripts/script.php?script_id=2520
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use <M-PageUp> and <M-PageDown> to move the current tab to the next position.
+map <A-h> <M-PageUp>
+map <A-l> <M-PageDown>
+
+
 "######################## end of plugins #####################################
 
 
@@ -1021,13 +1040,17 @@ endif
 "#############################################################################
 "maps
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <silent>' `
+map <silent> <leader>,t :tabs<cr>
+map <silent> <leader>cf  :let @+=expand("%:p")<cr>
 map <silent> <leader>cf  :let @+=expand("%:p")<cr>
 map <silent> <leader>ato :set guioptions+=m<cr> :set guioptions-=T<cr>
 map <silent> <leader>dto :set guioptions-=m<cr> :set guioptions-=T<cr>
 map <silent> <leader>acl mzI[~]# <esc>`z
 map <silent> <leader>viw :set lines=42<cr>:set columns=99<cr>:winpos 0 0<cr>
 vmap <silent> <leader>fom d:new $TMPDIR/column_vim2424 <cr>VGP:wq<cr>k
-\ :r! cat $TMPDIR/column_vim2424 \| column -t <cr>
+\ :r! cat $TMPDIR/column_vim2424 \| column -t -s '	' <cr>
+"\ :r! cat $TMPDIR/column_vim2424 \| column -t
 map <silent> <leader>exd :!nautilus .<cr><cr>
 " backup files to 'bk' directory
 map <silent> <leader>abk :call AddBkFileLists()<cr>:!echo <C-R>z >> /home/scr/bin/bk/app_new_filelists.txt <cr>
@@ -1128,8 +1151,8 @@ map <silent> <leader>cow :%s/\i\+/&/gn<cr>
 " 行数
 map <silent> <leader>col :%s/^//n<cr>
 " 统计光标下单词在文中出现的次数
-map <silent> <leader>cos mz:%s/\<<C-R><C-W>\>/&/gn<cr>`z
 map <silent> <leader>cos mz:%s/<C-R><C-W>/&/gn<cr>`z
+map <silent> <leader>cos mz:%s/\<<C-R><C-W>\>/&/gn<cr>`z
 " \ ==> /
 map <silent> <leader>tof V:s/\\/\//g<cr>
 " source $VIMRUNTIME/syntax/2html.vim
@@ -1202,11 +1225,11 @@ endif
 " CTRL-Y is Redo (although not repeat); not in cmdline though
 "noremap <C-Y> <C-R>
 "inoremap <C-Y> <C-O><C-R>
-" Alt-Space is System menu
+" Alt-space is System menu
 if has("gui")
-    noremap <M-Space> :simalt ~<CR>
-    inoremap <M-Space> <C-O>:simalt ~<CR>
-    cnoremap <M-Space> <C-C>:simalt ~<CR>
+    noremap <M-space> :simalt ~<CR>
+    inoremap <M-space> <C-O>:simalt ~<CR>
+    cnoremap <M-space> <C-C>:simalt ~<CR>
 endif
 "对光标下的数字增1
 noremap <M-C-A> <C-A>
