@@ -140,8 +140,8 @@ map <Leader>cbm :sbclose<cr>
 
 map <Leader>vif :! gvim ~/.vimperatorrc<cr><cr>
 map <Leader>vim :! gvim ~/.vimrc<cr><cr>
-map <Leader>vht :! gvim /home/scr/.rt/notes/note/bookmark/html.txt<cr><cr>
-map <Leader>fht :! firefox ~/notes/note/html.txt.html<cr><cr>
+map <Leader>vht :! gvim /media/N/l2this/.rt/notes/note/bookmark/html.txt<cr><cr>
+map <Leader>fht :! firefox /media/N/l2this/.rt/notes/note/html.txt.html<cr><cr>
 
 
 
@@ -239,5 +239,5 @@ autocmd LocationChange mail\.google\.com :set editor="gvim -f -c 'set ft=mail'"
 " gn{a-zA-Z0-9}
 " M{a-zA-Z0-9}
 "
-" nuoailz liaocaiyuan
+" nuoailz liaocaiyuan 5358979
 "
