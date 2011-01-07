@@ -34,15 +34,15 @@ if has("win32")
 else
     set fileencoding=utf-8
     if has("gui_running")
-	set lines=31
-	set columns=112
+	set lines=32
+	set columns=113
 	winpos  0  352
 	if exists("&cursorline")
 	    set cursorline
 	endif
     else
 	set lines=31
-	set columns=92
+	set columns=93
 	    set cursorline
 	winpos  0  352
     endif
@@ -179,22 +179,20 @@ endfunction
 
 function! TestOKfun()
     let tmp=getreg("z")
-    let tmp=expand("%:p") " :help filename-modifiers
+    let tmp=expand("%:p")
     let tmp2="\"" . tmp
     echo tmp2
 endfunction
 
 function! AddBkFileLists()
-    let tmp=expand("%:p")
+    let tmp=expand("%:p")  " :help filename-modifiers
     let tmp="\"" . tmp . "\""
     :call setreg('z', tmp)
 endfunction
 
+" :help function-list
 function! Testfun()
-    " :help function-list
-    let tmp=expand("%:p")
-    let tmp="\"" . tmp . "\""
-    :call setreg('z', tmp)
+    silent! %s/\s\+$//
     "let tmp=getreg("z")
     "echo tmp
 endfunction
@@ -254,7 +252,13 @@ set showcmd                     "在状态栏显示目前所执行的指令 @@@@
 set showmatch
 set smartindent
 set shiftwidth=4                "设定 << 和 >> 命令移动时的宽度
+autocmd FileType xml  set shiftwidth=2
+autocmd FileType html set shiftwidth=2
+autocmd FileType jsp  set shiftwidth=2
 set softtabstop=4               "使得按退格键时可以一次删掉 4 个空格
+autocmd FileType xml  set softtabstop=2
+autocmd FileType html set softtabstop=2
+autocmd FileType jsp  set softtabstop=2
 set tabstop=8                   "tab宽度为四个字符
 "set textwidth=78 fo+=Mm         "对当前文件文字自动换行
 set title                       "在标题中显示文件是否可以或已经被修改
@@ -355,7 +359,7 @@ nmap <C-T> <C-T>:pwd<cr>
 set complete=.,w,b,u,t,i
 "set tags=/home/liaocaiyuan/book/unpv22e/tags
 set tags+=tags "最好写成+=
-set tags+=./tags,./../tags,./../../tags,./../../../tags,./**/tags,tags
+set tags+=./tags,./../tags,./../../tags,./../../../tags,./../../../../tags,./**/tags,tags
 if MySys() == 'linux'
     au FileType c     set tags+=/usr/include/netinet/tags
     au FileType c     set tags+=/usr/include/tags
@@ -798,7 +802,7 @@ let NERDTreeQuitOnOpen=1    " 1: 打开文件后, 关闭NERDTrre窗口
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <silent> <leader>ccc ,cc<cr>k
 autocmd FileType c,cpp imap <silent> <leader>ccc /*<esc>a
-autocmd FileType JAVA  imap <silent> <leader>ccc /* <esc>mza */<esc>`za
+autocmd FileType java  imap <silent> <leader>ccc /* <esc>mza */<esc>`za
 autocmd FileType jsp   imap <silent> <leader>ccc <%-- <esc>mza --%><esc>`za
 autocmd FileType html  imap <silent> <leader>ccc <!-- <esc>mza --><esc>`za
 autocmd FileType xml   imap <silent> <leader>ccc <!-- <esc>mza --><esc>`za
@@ -997,6 +1001,24 @@ map <C-H> :TName<space>'
 map <A-h> <M-PageUp>
 map <A-l> <M-PageDown>
 
+"=============================================================================
+" xml.vim
+" http://www.vim.org/scripts/script.php?script_id=1397
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 按两次'>'将自动关闭标签并使用光标位于中间行
+"let xml_use_html = 1           " xml 当作 html
+"let xml_use_xhtml = 1          " html 当作 xml
+
+" You type: <tag>
+" You get:  <tag default="attributes"></tag>
+function! XmlAttribCallback (xml_tag)
+    if a:xml_tag ==? "my-xml-tag"
+        return "attributes=\"my xml attributes\""
+    else
+        return 0
+    endif
+endfunction
+
 
 "######################## end of plugins #####################################
 
@@ -1038,8 +1060,11 @@ endif
 " let @a='ddpkJj'
 
 "#############################################################################
-"maps
+"maps word-ll
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <C-w>gf :tab split<cr>gf
+vmap <C-w>gf <esc>:tab split<cr>gvgf
+map <silent> <leader>ky F<space>a([<esc>f<space>i])<esc>
 map <silent>' `
 map <silent> <leader>,t :tabs<cr>
 map <silent> <leader>cf  :let @+=expand("%:p")<cr>
@@ -1381,3 +1406,7 @@ onoremap <C-F4> <C-C><C-W>c
 
 "/^[0-9][0-9]*\.[0-9]* /  匹配标题号
 "003636
+"
+"
+set cfu=VjdeCompletionFun
+let g:vjde_lib_path="/media/N/l2this/.rt/book/lang/java/jsp/Pro_JSP_e3/code-e3/Chapter08/projsp20-ch08/lib/hibernate-2.0/j2ee.jar:lib/struts.jar:build/classes"
