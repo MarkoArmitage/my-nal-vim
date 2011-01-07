@@ -1019,6 +1019,11 @@ function! XmlAttribCallback (xml_tag)
     endif
 endfunction
 
+"=============================================================================
+" vimfiles/syntax/tkey.vim
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+au BufRead,BufNewFile *.tkey setlocal ft=tkey
+
 
 "######################## end of plugins #####################################
 
