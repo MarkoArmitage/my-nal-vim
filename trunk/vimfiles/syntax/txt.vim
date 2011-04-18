@@ -46,11 +46,13 @@ syn match txtTitle "^\([一二三四五六七八九十][、.]\)\+\s*[^,。，]\+
 
 "txtTitle: Lines start with digit
 "标题文本: 以数字打头, 中间有空格, 后跟任意文字. 且该行不含有,.。，标点符号
+syn match txtTitle "^Chapter \d\.\s\+.\+\s*[^,。，]$"
 syn match txtTitle "^\d\s\+.\+\s*[^,。，]$"
 
 "txtList: Lines start with space and then '-+*.'
 "列表文本: 任意空格打头, 后跟一个[-+*.]
-syn match txtList    '^\s*[-+*.] [^ ]'me=e-1
+syn match txtList    '^\s*[-+*.] \+'me=e
+syn match txtList    '^\s*\* Chapter \d\.'me=e
 
 "txtList: Lines start with space and then digit
 "列表文本: 任意空格打头, 后跟一个(数字) 或 (字母) 打头的文本行
@@ -98,6 +100,8 @@ syn match txtEmailQuote '^\(>\($\| \)\)\+'
 syn match  cmdLine "[`][^`]\+\(\n\)\=[^`]*[`]" contains=txtUrl
 "命令行
 syn match  cmdLine '^[	 ]*\[.*\][#\$] .*$'
+syn match  cmdLine '^\$ .*$'
+syn match  cmdLine '^[ 	]*sh[#\$] .*$'
 "syn match  cmdLine2 '^[	 ]*:.*$'
 
 "命令输出
@@ -115,7 +119,7 @@ syn match   txtBookParentesis2 "<<.*>>" contains=txtUrl
 syn match  txtComment  "(\^.*\^)"
 syn match  txtComment2 '^#.*$'   contains=txtTodo
 syn match  txtComment3 '\/\/.*$' contains=txtTodo
-syn region txtComment4 matchgroup=txtOperator start="\/\*" end="\*\/" contains=txtTodo
+syn region txtComment4 matchgroup=txtOperator start="[ 	][ 	]*\/\*" end="\*\/" contains=txtTodo
 "#============================================================================
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
