@@ -259,7 +259,7 @@ set softtabstop=4               "使得按退格键时可以一次删掉 4 个�
 autocmd FileType xml  set softtabstop=2
 autocmd FileType html set softtabstop=2
 autocmd FileType jsp  set softtabstop=2
-set tabstop=8                   "tab宽度为四个字符
+set tabstop=4                   "tab宽度为四个字符; 默认为8
 "set textwidth=78 fo+=Mm         "对当前文件文字自动换行
 set title                       "在标题中显示文件是否可以或已经被修改
 set whichwrap=b,s,<,>,[,]       "左右前头跨行移动
@@ -793,7 +793,8 @@ let NERDTreeCaseSensitiveSort=0     " 不分大小写排序
 let NERDTreeWinSize=33
 " let NERDTreeShowLineNumbers=1
 let NERDTreeShowBookmarks=1
-let NERDTreeQuitOnOpen=1    " 1: 打开文件后, 关闭NERDTrre窗口
+let NERDTreeQuitOnOpen=0    " 1: 打开文件后, 关闭NERDTrre窗口
+let NERDTreeChDirMode=2		" 2:  自动更新PWD
 " let NERDTreeHighlightCursorline=1     " 高亮NERDTrre窗口的当前行
 " nmap <silent> <leader>tmk :Bookmark expand("<cword>")<cr>  "
 
@@ -900,6 +901,8 @@ au BufRead,BufNewFile named.conf    setlocal ft=txt "syntax highlight log for sh
 au BufRead,BufNewFile named.*.zones setlocal ft=txt "syntax highlight log for sh.vim
 au BufRead,BufNewFile ifcfg-* setlocal ft=sh "syntax highlight log for sh.vim
 au BufRead,BufNewFile hosts*  setlocal ft=sh "syntax highlight log for sh.vim
+
+au BufRead,BufNewFile mutt*  setlocal ft=MAIL "syntax highlight log for sh.vim
 
 
 "=============================================================================
@@ -1079,7 +1082,7 @@ map <silent> <leader>dto :set guioptions-=m<cr> :set guioptions-=T<cr>
 map <silent> <leader>acl mzI[~]# <esc>`z
 map <silent> <leader>viw :set lines=42<cr>:set columns=99<cr>:winpos 0 0<cr>
 vmap <silent> <leader>fom d:new $TMPDIR/column_vim2424 <cr>VGP:wq<cr>k
-\ :r! cat $TMPDIR/column_vim2424 \| column -t -s '	' <cr>
+\ :r! cat $TMPDIR/column_vim2424 \| column -t -s @ <cr>
 "\ :r! cat $TMPDIR/column_vim2424 \| column -t
 map <silent> <leader>exd :!nautilus .<cr><cr>
 " backup files to 'bk' directory
@@ -1108,8 +1111,9 @@ map <silent> <leader>d2s mz:%s/，/, /ge<cr>:%s/。/. /ge<cr>:%s/；/; /ge<cr>
 \:%s/＞/>/ge<cr>:%s/\│/\|/ge<cr>:%s/–/-/ge<cr>:%s///ge<cr>:%s/←/<--/ge<cr>
 \:%s/．/./ge<cr>:%s/～/\~/ge<cr>:%s/◆//ge<cr>:%s/『/</ge<cr>:%s/』/>/ge<cr>
 \:%s/•/./ge<cr>:%s/﹐/,/ge<cr>:%s/‘/'/ge<cr>:%s/∶/: /ge<cr>:%s/·/\. /ge<cr>
+\:%s/×/x/ge<cr>:%s/″/"/ge<cr>
 \`z
-":%s/·/\./ge<cr>
+":%s/″/"/ge<cr>
 map <silent> <leader>s2t :%s/	/    /g<cr>
 map <silent> <leader>pwd :pwd<cr>
 map <silent> <leader>y mz:r!cat /tmp/pwd2vim.tmp<cr>0v$hd`zi@<esc>Pjdd`zf@x
@@ -1413,5 +1417,3 @@ onoremap <C-F4> <C-C><C-W>c
 "003636
 "
 "
-set cfu=VjdeCompletionFun
-let g:vjde_lib_path="/media/N/l2this/.rt/book/lang/java/jsp/Pro_JSP_e3/code-e3/Chapter08/projsp20-ch08/lib/hibernate-2.0/j2ee.jar:lib/struts.jar:build/classes"
