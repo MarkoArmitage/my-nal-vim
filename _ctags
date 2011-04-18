@@ -2,6 +2,7 @@
 --langmap=txt:.txt
 
 --regex-txt=/^([0-9]+\.?[ \t]+)([^,]+$)/\1\2/c,content/
+--regex-txt=/^Chapter ([0-9]+\.?[ \t]+)([^,]+$)/* Chapter \1\2/c,content/
 --regex-txt=/^(([0-9]+\.){1}([0-9]+\.?)[ \t]+)([^,]+$)/.  \1\4/c,content/
 --regex-txt=/^(([0-9]+\.){2}([0-9]+\.?)[ \t]+)([^,]+$)/.    \1\4/c,content/
 --regex-txt=/^(([0-9]+\.){3}([0-9]+\.?)[ \t]+)([^,]+$)/.      \1\4/c,content/
