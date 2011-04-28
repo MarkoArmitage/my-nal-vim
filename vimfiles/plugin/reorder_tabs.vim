@@ -10,7 +10,7 @@
 " Usage:
 "   Use <M-PageUp> and <M-PageDown> to move the current tab anathor position.
 
-function MoveCurrentTab(value)
+function! MoveCurrentTab(value)
   if a:value == 0
     return
   endif
