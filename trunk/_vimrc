@@ -20,8 +20,8 @@ if has("win32")
     if has("gui_running")
 	"设定 windows 下 gvim 启动时最大化
 	"autocmd GUIEnter * simalt ~
-	set lines=48
-	set columns=84
+	set lines=45
+	set columns=128
 	winpos  10  0
 	if exists("&cursorline")
 	    set cursorline  "Highlight current
@@ -66,10 +66,10 @@ if MySys() == 'linux'
     let $VIMPERATORRC = ".vimperatorrc"
     let $NOTEP = "/home/scr/.rt/notes/note"
 elseif MySys() == 'windows'
-    let path="C:/Vim/Vim"
+    let path="C:/Vim"
     let $TMPDIR = "C:/tmp"
     let $BLOGP = "F:/notes/blog"
-    let $VIMDIR = "C:/Vim/Vim"
+    let $VIMDIR = "C:/Vim"
     let $VIMRC = "_vimrc"
     let $VIMPERATORRC = "_vimperatorrc"
 endif
@@ -516,7 +516,7 @@ if MySys() == 'linux'
 \   "/usr/local/share/vim/vimfiles/c-support/templates/Templates"
 elseif MySys() == 'windows'
     let g:C_GlobalTemplateFile =
-\   "C:\\vim\\Vim\\vimfiles\\c-support\\templates\\Templates"
+\   "C:\\vim\\vimfiles\\c-support\\templates\\Templates"
 endif
 let g:C_Ctrl_j = "on"
 "
