@@ -1,0 +1,5 @@
+
+1. install
+
+在windows平台中最好把vim安装在"C:\Vim" 目录下, 同时须要设置 HOME 环境变量
+HOME=C:\Vim
