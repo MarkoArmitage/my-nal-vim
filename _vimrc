@@ -16,7 +16,6 @@ endif
 
 
 if has("win32")
-    set fileencoding=chinese
     if has("gui_running")
 	"设定 windows 下 gvim 启动时最大化
 	"autocmd GUIEnter * simalt ~
@@ -32,7 +31,6 @@ if has("win32")
 	winpos  80  10
     endif
 else
-    set fileencoding=utf-8
     if has("gui_running")
 	set lines=32
 	set columns=113
@@ -178,10 +176,9 @@ function! Firefox_jsp()
 endfunction
 
 function! TestOKfun()
-    let tmp=getreg("z")
-    let tmp=expand("%:p")
-    let tmp2="\"" . tmp
-    echo tmp2
+    "exec "set encoding?"
+	"echo ':set tags=' . &tags
+    return &encoding
 endfunction
 
 function! AddBkFileLists()
@@ -212,8 +209,18 @@ autocmd BufReadPost *       " @@@@@
 filetype on
 filetype plugin on "自动识别文件类型，自动匹配对应的文件类型Plugin.vim文件
 filetype plugin indent  on "自动识别文件类型，自动匹配对应的文件类型Plugin.vim文件
-set statusline=%f%m%r,%Y,%{&fileformat}\ \ \ ASCII=\%b,HEX=\%B\ \ \ %l,%c%V\
-\ %p%%\ \ \ [%L\ lines]         "设置在状态行显示的信息
+set statusline=%f%m%r,%Y,%{&fileformat}\ \ \|F:%{&fenc}\|E:%{&enc}\|T:%{&tenc}\|
+\\ \ A=\%b,H=\%B\ \ \ %l,%c%V\ \ %p%%\ \ [%L]         "设置在状态行显示的信息
+
+"=== 设置各种编码方式, 使得在Linux和Windows上都能正常写入和显示 ============"
+set fileencodings=utf-8,gb2312,gbk,gb18030 "设置打开文件时自动识别编码的顺序
+                                           "fileencoding会参考它来设置
+set encoding=utf-8               "vim内部机制运行所用的编码
+"set fileencoding?               "写入文件时所用的编码
+"set termencoding?               "显示时用用的编码
+set fileformats=unix,dos,mac     "设置给出换行符 (<EOL>) 的格式列表
+                                 "fileformat会参考它来设置
+"==========================================================================="
 
 set ai
 set ambiwidth=double            "字体为全角
@@ -225,7 +232,6 @@ set backupcopy=yes              "设置备份时的行为为覆盖
 set bsdir=last                  "设定文件浏览器目录为当前目录
 set cindent                     "设置为 C 语言风格的缩进模式
 set cmdheight=1                 "设定命令行的行数为 1
-set fileencodings=utf-8,chinese "@@@@@
 set foldmethod=marker		"按缩进进行折叠
 set formatoptions+=tcqroMm      "使得注释换行时自动加上前导的空格和星号
 set guioptions-=L
@@ -235,7 +241,7 @@ set guioptions-=T               "去除工具栏
 set history=400                 "设置冒号命令和搜索命令的命令历史列表的长度
 set hlsearch                    "搜索结果高亮度显示
 set incsearch                   "输入搜索内容时就显示搜索结果
-set laststatus=1                "2为显示状态栏 (默认值为 1, 无法显示状态栏)
+set laststatus=2                "2为显示状态栏 (默认值为 1, 无法显示状态栏)
 set linespace=2                 "行间距
 set matchtime=7
 set mouse=a
@@ -282,10 +288,8 @@ hi Normal guibg=#cfe8cc
 "set comments=s1:/*,mb:*,ex0:/  "修正自动C式样注释功能 <2005/07/16>
 "set confirm                    "用确认对话框弹出警告信息
 "set display=lastline           "长行不能完全显示时显示当前屏幕能显示的部分
-"set encoding=utf-8             "设置字符编码 @@@@@
 set expandtab                   "使用space代替tab
 au FileType MAKE  set noet      "对于Makefile文件不能用space代替tab
-"set fileformats=unix,dos       "设置保存文件格式
 "set filetype=php               "设置默认文件类型
 "set guifont=SimSun\ 10         "设置用于GUI图形用户界面的字体列表。
 "set hidden                     "允许在有未保存的修改时切换缓冲区
@@ -1070,6 +1074,8 @@ endif
 "#############################################################################
 "maps word-ll
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <silent> <leader>fcp :edit ++enc=cp936<cr>
+map <silent> <leader>fut :edit ++enc=utf-8<cr>
 nmap <C-w>gf :tab split<cr>gf
 vmap <C-w>gf <esc>:tab split<cr>gvgf
 map <silent> <leader>ky F<space>a([<esc>f<space>i])<esc>
