@@ -176,9 +176,13 @@ function! Firefox_jsp()
 endfunction
 
 function! TestOKfun()
-    "exec "set encoding?"
-	"echo ':set tags=' . &tags
-    return &encoding
+"substitute( {expr}, {pat}, {sub}, {flags})
+				"字符串	{expr} 里的所有 {pat} 被 {sub} 替代
+    let tmpStr="/sfj/salla/afjdj/ll.vim"
+    let path = tmpStr
+    let path = substitute(path, ".*\/", "", "")
+    echo tmpStr
+    echo path
 endfunction
 
 function! AddBkFileLists()
