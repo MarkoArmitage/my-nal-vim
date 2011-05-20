@@ -353,7 +353,7 @@ au BufNewFile,BufRead *.cpp
 "==============================================================================
 " C++
 if has("fname_case")
-  au BufNewFile,BufRead *.cxx,*.c++,*.C,*CPP,*.H,*.hh,*.hxx,*.hpp,*.moc,*.tcc,*.inl setf cpp
+  au BufNewFile,BufRead *.cxx,*.m,*.c++,*.C,*CPP,*.H,*.hh,*.hxx,*.hpp,*.moc,*.tcc,*.inl setf cpp
 else
   au BufNewFile,BufRead *.cxx,*.c++,*.hh,*.hxx,*CPP,*.hpp,*.moc,*.tcc,*.inl setf cpp
 endif

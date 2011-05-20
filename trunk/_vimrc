@@ -198,7 +198,7 @@ endfunction
 "#############################################################################
 " settings sets
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd BufWritePre * call RemoveTrailingWhitespace()
+autocmd BufWritePre *.txt call RemoveTrailingWhitespace()
 au FileType c,cpp set nomodeline " @@@@@
 au FileType text, txt, TXT set tw=78 fo+=Mm "选中，然后按gq就可以
 autocmd BufReadPost *       " @@@@@
@@ -797,7 +797,7 @@ let NERDTreeCaseSensitiveSort=0     " 不分大小写排序
 let NERDTreeWinSize=33
 " let NERDTreeShowLineNumbers=1
 let NERDTreeShowBookmarks=1
-let NERDTreeQuitOnOpen=0    " 1: 打开文件后, 关闭NERDTrre窗口
+let NERDTreeQuitOnOpen=1    " 1: 打开文件后, 关闭NERDTrre窗口
 let NERDTreeChDirMode=2		" 2:  自动更新PWD
 " let NERDTreeHighlightCursorline=1     " 高亮NERDTrre窗口的当前行
 " nmap <silent> <leader>tmk :Bookmark expand("<cword>")<cr>  "
@@ -1074,7 +1074,9 @@ endif
 "#############################################################################
 "maps word-ll
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <silent> <leader>fcp :edit ++enc=cp936<cr>
+map <silent> <leader>ajh :set iskeyword+=-<cr>:set iskeyword?<cr>
+map <silent> <leader>djh :set iskeyword-=-<cr>:set iskeyword?<cr>
+map <silent> <leader>fcp :edit ++enc=gb18030<cr>
 map <silent> <leader>fut :edit ++enc=utf-8<cr>
 nmap <C-w>gf :tab split<cr>gf
 vmap <C-w>gf <esc>:tab split<cr>gvgf
