@@ -115,7 +115,9 @@ function! TabGuiCaptionLabel()
     let winnr = tabpagewinnr(tab_number)
 	let buf_name = bufname(bufnrlist[winnr - 1])
     if tab_name == ''
-        let caption .= pathshorten(buf_name)
+        " 只显示文件名, 不显示路径
+        let buf_name = substitute(buf_name, ".*\/", "", "")
+        let caption .= buf_name
     else
         let caption .= tab_name
     endif
