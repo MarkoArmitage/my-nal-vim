@@ -3576,6 +3576,12 @@ function! s:openInNewTab(stayCurrentTab)
             endif
         endif
     endif
+
+    " if NERDTreeQuitOnOpen equal 1, close treenode window
+    exec "normal " currentTab . "gt" 
+    call s:closeTreeIfQuitOnOpen()
+    exec "normal " currentTab+1 . "gt" 
+
     if a:stayCurrentTab
         exec "tabnext " . currentTab
     endif
