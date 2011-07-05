@@ -609,11 +609,11 @@ let OmniCpp_LocalSearchDecl = 1
 " DoxBlock                  Group
 " DoxUndoc(DEBUG) !         Ignore code fragment
 let g:DoxygenToolkit_commentType = "C"
-let g:DoxygenToolkit_briefTag_pre="@Description:  "
-let g:DoxygenToolkit_paramTag_pre="@Param "
-let g:DoxygenToolkit_returnTag="@Returns:   "
-let g:DoxygenToolkit_blockHeader="************************************************************************"
-let g:DoxygenToolkit_blockFooter="************************************************************************"
+let g:DoxygenToolkit_briefTag_pre=" @Description:	"
+let g:DoxygenToolkit_paramTag_pre=" @Param	"
+let g:DoxygenToolkit_returnTag=" @Returns:	"
+let g:DoxygenToolkit_blockHeader=" ***********************************************************************"
+let g:DoxygenToolkit_blockFooter=" ***********************************************************************"
 let g:DoxygenToolkit_authorName="nuoerll (nuoliu), lcy3636@126.com"
 let g:DoxygenToolkit_licenseTag="Reserve"
 "nmap <silent> <leader>dox :Dox<cr><esc>mzkddk3lvf/r*f<space>D0%ddr*wh.f<space>D`za
@@ -1078,6 +1078,7 @@ endif
 "#############################################################################
 "maps word-ll
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <silent> <leader>rtw :call RemoveTrailingWhitespace()<cr>
 map <silent> <leader>ajh :set iskeyword+=-<cr>:set iskeyword?<cr>
 map <silent> <leader>djh :set iskeyword-=-<cr>:set iskeyword?<cr>
 map <silent> <leader>fcp :edit ++enc=gb18030<cr>
@@ -1095,7 +1096,6 @@ map <silent> <leader>acl mzI[~]# <esc>`z
 map <silent> <leader>viw :set lines=42<cr>:set columns=99<cr>:winpos 0 0<cr>
 vmap <silent> <leader>fom d:new $TMPDIR/column_vim2424 <cr>VGP:wq<cr>k
 \ :r! cat $TMPDIR/column_vim2424 \| column -t -s @ <cr>
-"\ :r! cat $TMPDIR/column_vim2424 \| column -t
 map <silent> <leader>exd :!nautilus .<cr><cr>
 " backup files to 'bk' directory
 map <silent> <leader>abk :call AddBkFileLists()<cr>:!echo <C-R>z >> /home/scr/bin/bk/app_new_filelists.txt <cr>
