@@ -182,6 +182,8 @@ endfunction
 function! AddLineNum()
     let num1 = line("v")
     let num2 = num1 - g:nal_cur_line_num + 1
+    let num2 = " " . num2
+    "echo num2
     return num2
 endfunction
 
