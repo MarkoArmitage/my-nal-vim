@@ -175,14 +175,19 @@ function! Firefox_jsp()
     let t3=system('firefox -height 50 -width 40 ' . jsp_fullpath)
 endfunction
 
+function! SetCurLineNum()
+    let g:nal_cur_line_num = line("v")
+endfunction
+
+function! AddLineNum()
+    let num1 = line("v")
+    let num2 = num1 - g:nal_cur_line_num + 1
+    return num2
+endfunction
+
 function! TestOKfun()
-"substitute( {expr}, {pat}, {sub}, {flags})
-				"字符串	{expr} 里的所有 {pat} 被 {sub} 替代
-    let tmpStr="/sfj/salla/afjdj/ll.vim"
-    let path = tmpStr
-    let path = substitute(path, ".*\/", "", "")
-    echo tmpStr
-    echo path
+    let g:tmp1=line(".")
+    "normal gv
 endfunction
 
 function! AddBkFileLists()
@@ -897,6 +902,7 @@ au BufRead,BufNewFile *log      setlocal ft=txt "syntax hlg log for txt.vim
 au BufRead,BufNewFile readme    setlocal ft=txt "syntax hlg log for txt.vim
 au BufRead,BufNewFile README    setlocal ft=txt "syntax hlg log for txt.vim
 au BufRead,BufNewFile ReadMe    setlocal ft=txt "syntax hlg log for txt.vim
+au BufRead,BufNewFile INSTALL   setlocal ft=txt "syntax hlg log for txt.vim
 "au FileType rd                  setlocal ft=txt "syntax hlg readme for txt.vim
 au BufRead,BufNewFile diCtTmp   setlocal ft=txt
 au BufRead,BufNewFile *.sed.in  setlocal ft=txt
@@ -1190,6 +1196,7 @@ vmap <silent> <leader>dep mz:s/<tab><tab>*$//ge<cr>:s/  *$//ge<cr>`z
 map <silent> <leader>dap V:s/ //g<cr>*
 " 加上行号
 map <silent> <leader>anu :%s/^/\=line(".")." "/g<cr>
+vmap <silent> <leader>anu o<esc>:call SetCurLineNum()<cr>gv:s/^/\=AddLineNum()." "/<cr>
 " 字符数
 map <silent> <leader>coc :%s/./&/gn<cr>
 " 单词数
