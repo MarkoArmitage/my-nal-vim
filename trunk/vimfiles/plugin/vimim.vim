@@ -2496,7 +2496,7 @@ function! s:vimim_i_cursor_color(switch)
     if empty(a:switch)
         highlight! Cursor guifg=bg guibg=fg
     else
-        highlight! Cursor guifg=bg guibg=Green
+        highlight! Cursor guifg=bg guibg=Brown
     endif
 endfunction
 
