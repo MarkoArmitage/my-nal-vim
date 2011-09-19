@@ -99,6 +99,7 @@ map <silent> <leader>vtm  :call SwitchToBuf("$TMPDIR/gvim.tmp.txt")<cr>
 " Switch to buffer according to file name
 function! SwitchToBuf(filename)
     "let fullfn = substitute(a:filename, "^\\~/", $HOME . "/", "")   "For linux
+    let curTab = tabpagenr()
     let fullfn = a:filename
     "把filename赋给fullfn, 不作任何替换
     "let fullfn = substitute(fpname, "NotFounded", $HOME . "/", "")
@@ -110,24 +111,25 @@ function! SwitchToBuf(filename)
 
     let bufwinnr = bufwinnr(lastpar)
     if bufwinnr != -1
-	exec bufwinnr . "wincmd w"
-	return
+        exec bufwinnr . "wincmd w"
+        return
     else
-	" find in each tab
-	tabfirst
-	let tab = 1
-	while tab <= tabpagenr("$")
-	    let bufwinnr = bufwinnr(lastpar)
-	    if bufwinnr != -1
-		exec "normal " . tab . "gt"
-		exec bufwinnr . "wincmd w"
-		return
-	    endif
-	    tabnext
-	    let tab = tab + 1
-	endwhile
-	" not exist, new tab
-	exec "tabnew " . fullfn
+        " find in each tab
+        tabfirst
+        let tab = 1
+        while tab <= tabpagenr("$")
+            let bufwinnr = bufwinnr(lastpar)
+            if bufwinnr != -1
+                exec "normal " . tab . "gt"
+                exec bufwinnr . "wincmd w"
+                return
+            endif
+            tabnext
+            let tab = tab + 1
+        endwhile
+        " if not exist, go to original tab and open the new tab
+        exec "normal " . curTab . "gt" 
+        exec "tabnew " . fullfn
     endif
 endfunction
 
@@ -146,25 +148,6 @@ function! RemoveTrailingWhitespace()
         silent! %s/\(\s*\n\)\+\%$//
         call cursor(b:curline, b:curcol)
     endif
-endfunction
-
-function! Mydict(wflag)
-    if a:wflag == 1
-	" . ==> 字符串连接(:help expression-syntax)
-        let expl=system('sdcv.sh ' . expand("<cword>"))
-    elseif a:wflag == 2
-	let fwords=getreg("z")
-	let expl=system('sdcv.sh ' . "\"" . fwords . " \"")
-    endif
-    windo if
-    \ expand("%:p")=="/tmp/diCtTmp" |
-    \ close|endif
-    botright vertical 20split /tmp/diCtTmp
-    "botright aboveleft 20split /tmp/diCtTmp
-    setlocal buftype= bufhidden=hide noswapfile
-    "setlocal buftype=nofile bufhidden=hide noswapfile
-    1s/^/\=expl/
-    1
 endfunction
 
 function! Firefox_jsp()
@@ -209,6 +192,9 @@ endfunction
 "#############################################################################
 " settings sets
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+au FileType c,cpp   set dictionary+=/usr/include/GL/gl[^e]*.h
+au FileType c,cpp   set dictionary+=/usr/include/GL/gl.h
+
 autocmd BufWritePre *.txt call RemoveTrailingWhitespace()
 au FileType c,cpp set nomodeline " @@@@@
 au FileType text, txt, TXT set tw=78 fo+=Mm "选中，然后按gq就可以
@@ -376,10 +362,12 @@ set complete=.,w,b,u,t,i
 set tags+=tags "最好写成+=
 set tags+=./tags,./../tags,./../../tags,./../../../tags,./../../../../tags,./**/tags,tags
 if MySys() == 'linux'
-    au FileType c     set tags+=/usr/include/netinet/tags
-    au FileType c     set tags+=/usr/include/tags
-    au FileType c     set tags+=/usr/include/sys/tags
-    au FileType c     set tags+=/usr/include/bits/tags
+    au FileType c,cpp set tags+=/usr/include/netinet/tags
+    au FileType c,cpp set tags+=/usr/include/tags
+    au FileType c,cpp set tags+=/usr/include/sys/tags
+    au FileType c,cpp set tags+=/usr/include/bits/tags
+    au FileType c,cpp set tags+=/usr/include/GL/tags
+    au FileType c,cpp set tags+=/usr/local/include/GL/tags
     "au FileType c,cpp set tags+=/home/scr/.rt/lang/0ctope/libc/libc/tags
     "au FileType c,cpp set tags+=/home/scr/.rt/lang/0ctope/cpp/cpp_src/tags
     "au FileType c,cpp set tags+=/home/scr/.rt/lang/0ctope/win32/winapi/tags
@@ -450,29 +438,7 @@ map <silent> <leader>csr :cs reset<cr>
 "=============================================================================
 "TagList settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! TlistToggle_close_diCtTmp(filename, flag)
-    let curwinnr = winnr()
-    let bufwinnr = bufwinnr(a:filename)
-    if bufwinnr != -1
-	"把光标焦点移到号为bufwinnr的窗口
-	exec bufwinnr . "wincmd w"
-	close
-    endif
-    if a:flag == 0
-	TlistToggle
-    elseif a:flag == 1
-	call Mydict(1) " nomally: <cword>
-	exec curwinnr . "wincmd w"
-    elseif a:flag == 2
-	call Mydict(2) " virtual: select words
-	exec curwinnr . "wincmd w"
-    endif
-endfunction "tll
-map <silent> <leader>tl :call TlistToggle_close_diCtTmp("diCtTmp", 0)<cr>
-map <silent> <leader>tf :call TlistToggle_close_diCtTmp("__Tag_List__", 1)<cr>
-vmap <silent> <leader>tf "zy:call TlistToggle_close_diCtTmp("__Tag_List__", 2)<cr>
-"map <silent> <leader>tl :TlistToggle<CR>
-
+"map <silent> <leader>tl :call ... " SET in rlabel.vim
 let Tlist_Show_One_File=4
 let Tlist_OnlyWindow=0
 let Tlist_Use_Right_Window=1
@@ -510,6 +476,18 @@ map <silent> <leader>hb :HSBufExplorer<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " mbt mbe mbc mbu
 "map <silent> <leader>mbc ,mbe:q!<cr>
+let g:miniBufExplSplitBelow = 1         " open in right
+let g:miniBufExplSplitToEdge = 1        "
+let g:miniBufExplModSelTarget = 1       "
+"let g:miniBufExplVSplit = 20           " SET int rlabel.vim
+let g:miniBufExplorerMoreThanOne = 999  " wouldn't auto-open until 999 buffers
+let g:miniBufExplMapWindowNavVim = 1    " auto close on leave
+let g:miniBufExplMapCTabSwitchBufs = 1  " mapping of <C-TAB> and <C-S-TAB> to
+                                        " a function that will bring up the
+                                        " next " or previous buffer in the
+                                        " current window.
+hi link MBEVisibleChanged Title
+
 
 "=============================================================================
 "WinManager 功能:控制各插件的窗口布局
@@ -798,6 +776,7 @@ let g:proj_run3='silent !gvim %f'
 "=============================================================================
 "NERD_tree.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"let g:NERDTreeMaxWinNumPerTab = 10      " 一个tab中最多打开10个窗口
 " let loaded_nerd_tree=1    " 禁用所有与NERD_tree有关的命令
 nmap <silent> <leader>tto :NERDTreeToggle<cr>
 let NERDTreeIgnore=['\.vm$', '\~$']    " 不显示指定的类型的文件
@@ -1044,6 +1023,15 @@ endfunction
 au BufRead,BufNewFile *.tkey setlocal ft=tkey
 
 
+"=============================================================================
+" /usr/local/share/vim/vimfiles/plugin/rlabel.vim
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" all SET in rlabel.vim
+" map <silent> <leader>tl :call <SID>Rlabel_Toggle("MyTlistToggle", 0)<cr>
+" map <silent> <leader>tm :call <SID>Rlabel_Toggle("MyMiniBufExplorer", 0)<cr>
+" map <silent> <leader>tf :call <SID>Rlabel_Toggle("Mydict", 1)<cr>
+
+
 "######################## end of plugins #####################################
 
 
@@ -1087,6 +1075,7 @@ endif
 "maps word-ll
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <silent> <leader>rtw :call RemoveTrailingWhitespace()<cr>
+imap <silent> <leader>mar [()]<esc>hi
 map <silent> <leader>ajh :set iskeyword+=-<cr>:set iskeyword?<cr>
 map <silent> <leader>djh :set iskeyword-=-<cr>:set iskeyword?<cr>
 map <silent> <leader>fcp :edit ++enc=gb18030<cr>
