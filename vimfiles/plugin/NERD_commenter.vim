@@ -183,7 +183,7 @@ function s:SetUpForNewFiletype(filetype, forceReset)
     elseif a:filetype ==? "catalog"
         call s:MapDelimiters('-- ','-- ')
     elseif a:filetype ==? "c"
-        call s:MapDelimitersWithAlternative('/* ',' */', '// ', '')
+        call s:MapDelimitersWithAlternative('// ','', '/* ',' */')
     elseif a:filetype ==? "cfg"
         call s:MapDelimiters('# ', '')
     elseif a:filetype ==? "cg"
