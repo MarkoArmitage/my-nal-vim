@@ -54,6 +54,10 @@ call s:initVariable("g:NERDTreeChDirMode", 0)
 if !exists("g:NERDTreeIgnore")
     let g:NERDTreeIgnore = ['\~$']
 endif
+" add by NAL
+if !exists("g:NERDTreeMaxWinNumPerTab")
+    let g:NERDTreeMaxWinNumPerTab = 9
+endif
 call s:initVariable("g:NERDTreeBookmarksFile", expand('$HOME') . '/.NERDTreeBookmarks')
 call s:initVariable("g:NERDTreeHighlightCursorline", 1)
 call s:initVariable("g:NERDTreeHijackNetrw", 1)
@@ -3554,6 +3558,8 @@ endfunction
 " Args:
 " stayCurrentTab: if 1 then vim will stay in the current tab, if 0 then vim
 " will go to the tab where the new file is opened
+"
+" modify by NAL.
 function! s:openInNewTab(stayCurrentTab)
     let currentTab = tabpagenr()
 
@@ -3563,7 +3569,8 @@ function! s:openInNewTab(stayCurrentTab)
             tabnew
             call s:initNerdTree(treenode.path.strForOS(0))
         else
-            exec "tabedit " . treenode.path.strForEditCmd()
+            exec "call SwitchToBuf('" . treenode.path.strForEditCmd() . "')"
+            let newTab = tabpagenr()
         endif
     else
         let bookmark = s:getSelectedBookmark()
@@ -3572,18 +3579,37 @@ function! s:openInNewTab(stayCurrentTab)
                 tabnew
                 call s:initNerdTree(bookmark.name)
             else
-                exec "tabedit " . bookmark.path.strForEditCmd()
+                exec "call SwitchToBuf('" . bookmark.path.strForEditCmd() . "')"
+                let newTab = tabpagenr()
             endif
         endif
     endif
 
-    " if NERDTreeQuitOnOpen equal 1, close treenode window
-    exec "normal " currentTab . "gt" 
-    call s:closeTreeIfQuitOnOpen()
-    exec "normal " currentTab+1 . "gt" 
+    " loop all tab, in order to close named `NERD_tree_*' window
+    if a:stayCurrentTab == 0
+        tabfirst
+        let tab = 1
+        while tab <= tabpagenr("$")
+            let twn = 1
+            while twn <= g:NERDTreeMaxWinNumPerTab
+                let nerdname = "NERD_tree_" . twn
+                let bufwinnr = bufwinnr(nerdname)
+                if bufwinnr != -1
+                    exec "normal " . tab . "gt"
+                    exec bufwinnr . "wincmd w"
+                    call s:closeTreeIfQuitOnOpen()
+                endif
+                let twn = twn + 1
+            endwhile
+            tabnext
+            let tab = tab + 1
+        endwhile
+    endif
 
-    if a:stayCurrentTab
-        exec "tabnext " . currentTab
+    " open the new file in the new tab
+    exec "normal " . newTab . "gt" 
+    if a:stayCurrentTab == 1
+        exec "normal " . currentTab . "gt" 
     endif
 endfunction
 
