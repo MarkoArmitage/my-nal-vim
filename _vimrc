@@ -179,6 +179,19 @@ function! MyGrepWithNotPrecise()
     exec "vim /" . word . "/j *.c .*h"
 endfunction
 
+function! OpenFileOnFindFormat()
+    let path = system('cat /tmp/pwd2vim.tmp')
+    let path = substitute(path, "\n", "", "g") . "/"
+    let file = system('cat /tmp/screen-exchange')
+    let idx = stridx(file, ":")
+    let len = strlen(file)
+    let filename = strpart(file, 0, idx)
+    let linenum = strpart(file, idx + 1, len)
+    let linenum = substitute(linenum, ":", "", "g")
+    exec "call SwitchToBuf(\"" . path . filename . "\")"
+    exec "normal " . linenum . "G"
+endfunction
+
 function! TestOKfun()
     let g:tmp1=line(".")
     "normal gv
@@ -1083,6 +1096,7 @@ endif
 "#############################################################################
 "maps word-ll
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <silent> <leader>off :call OpenFileOnFindFormat()<cr>
 au FileType qf nnoremap <buffer> <silent>q :close<CR>
 map <silent> <leader>rep :call MyGrepWithPrecise()<cr>:cope<cr>
 map <silent> <leader>ren :call MyGrepWithNotPrecise()<cr>:cope<cr>
