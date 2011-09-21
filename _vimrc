@@ -95,7 +95,6 @@ map <silent> <leader>vin  :call SwitchToBuf("$NOTEP/network")<cr>
 map <silent> <leader>vtm  :call SwitchToBuf("$TMPDIR/gvim.tmp.txt")<cr>
 
 
-
 " Switch to buffer according to file name
 function! SwitchToBuf(filename)
     "let fullfn = substitute(a:filename, "^\\~/", $HOME . "/", "")   "For linux
@@ -168,6 +167,16 @@ function! AddLineNum()
     let num2 = " " . num2
     "echo num2
     return num2
+endfunction
+
+function! MyGrepWithPrecise()
+    let word = expand("<cword>")
+    exec "vim /\\<" . word . "\\>/j *.c .*h"
+endfunction
+
+function! MyGrepWithNotPrecise()
+    let word = expand("<cword>")
+    exec "vim /" . word . "/j *.c .*h"
 endfunction
 
 function! TestOKfun()
@@ -1074,6 +1083,9 @@ endif
 "#############################################################################
 "maps word-ll
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+au FileType qf nnoremap <buffer> <silent>q :close<CR>
+map <silent> <leader>rep :call MyGrepWithPrecise()<cr>:cope<cr>
+map <silent> <leader>ren :call MyGrepWithNotPrecise()<cr>:cope<cr>
 map <silent> <leader>rtw :call RemoveTrailingWhitespace()<cr>
 imap <silent> <leader>mar [()]<esc>hi
 map <silent> <leader>ajh :set iskeyword+=-<cr>:set iskeyword?<cr>
