@@ -24,15 +24,23 @@ if !exists('g:Rlabel_WinWidth')
     let g:miniBufExplVSplit = g:Rlabel_WinWidth
 endif
 
+
+function! s:Rlabel_mbe_Open()
+    exec "call NAL_GetSelectedBuffer()"
+    " close '-MiniBufExplorer-' window
+    close
+    exec "call SwitchToBuf('" . g:miniBufExplCurBufName . "')"
+endfunction
+
 function! s:Rlabel_Window_Zoom()
     if s:rlabel_win_maximized
         " Restore the window back to the previous size
-            exe 'vert resize ' . g:Rlabel_WinWidth
+        exe 'vert resize ' . g:Rlabel_WinWidth
         let s:rlabel_win_maximized = 0
     else
         " Set the window size to the maximum possible without closing other
         " windows
-            vert resize
+        vert resize
         let s:rlabel_win_maximized = 1
     endif
 endfunction
@@ -116,4 +124,5 @@ vmap <silent> <leader>tf "zy:call <SID>Rlabel_Toggle("Mydict", 2)<cr>
 
 au FileType rlabel nnoremap <buffer> <silent> q :close<CR>
 au FileType rlabel nnoremap <buffer> <silent> x :call <SID>Rlabel_Window_Zoom()<CR>
+au FileType rlabel nnoremap <buffer> <silent> t :call <SID>Rlabel_mbe_Open()<CR>
 

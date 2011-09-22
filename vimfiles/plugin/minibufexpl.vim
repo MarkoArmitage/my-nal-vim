@@ -1323,6 +1323,11 @@ function! <SID>GetSelectedBuffer()
 
 endfunction
 
+function! NAL_GetSelectedBuffer()
+    let l:bufnr  = <SID>GetSelectedBuffer()
+    let g:miniBufExplCurBufName = bufname(l:bufnr)
+endfunction
+
 " }}}
 " MBESelectBuffer - From the MBE window, open buffer under the cursor {{{
 " 

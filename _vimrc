@@ -498,6 +498,8 @@ map <silent> <leader>hb :HSBufExplorer<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " mbt mbe mbc mbu
 "map <silent> <leader>mbc ,mbe:q!<cr>
+let g:miniBufExplCurBufName = ""        " registe for NAL_GetSelectedBuffer()
+                                        " use in rlabel.vim & minibufexpl.vim
 let g:miniBufExplSplitBelow = 1         " open in right
 let g:miniBufExplSplitToEdge = 1        "
 let g:miniBufExplModSelTarget = 1       "
@@ -509,7 +511,6 @@ let g:miniBufExplMapCTabSwitchBufs = 1  " mapping of <C-TAB> and <C-S-TAB> to
                                         " next " or previous buffer in the
                                         " current window.
 hi link MBEVisibleChanged Title
-
 
 "=============================================================================
 "WinManager 功能:控制各插件的窗口布局
