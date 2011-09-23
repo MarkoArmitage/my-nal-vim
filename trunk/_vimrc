@@ -419,6 +419,14 @@ iabbrev ch child
 "set follow-fork-mode  parent/child   "设置需跟踪的进程
 
 "=============================================================================
+"gtags-cscope settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:GtagsCscope_Auto_Map = 0        " To use cscope's settings, NOT itself!
+let g:GtagsCscope_Ignore_Case = 0     " To ignore letter case when searching.
+let g:GtagsCscope_Absolute_Path = 1   " To use absolute path name.
+let g:GtagsCscope_Auto_Load = 1       " To auto loading.
+
+"=============================================================================
 "cscope settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "set cscopequickfix=s-,c-,d-,i-,t-,e-
