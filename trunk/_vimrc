@@ -300,7 +300,7 @@ colorscheme default
 "hi Normal guibg=#cfe8cc ctermfg=gray ctermbg=black
 "set background=dark
 set background=light
-hi Normal guibg=#cfe8cc
+hi Normal guibg=#c7e3cc
 
 "lcd e:/vimroot                 "设置GVIM默认目录
 "set comments=://   "C/C++注释
