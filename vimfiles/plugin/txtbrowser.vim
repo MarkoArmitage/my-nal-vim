@@ -48,6 +48,7 @@ function! s:TxtbrowserParseUrl(line)
 	let url = matchstr(a:line, "http:\/\/[^ ()]*")
 	:if url==""
 	let url = matchstr(a:line, "https:\/\/[^ ()]*")
+    :endif
 	:if url==""
 	let url = matchstr(a:line, "ftp:\/\/[^ ]*")
 	:endif
