@@ -472,7 +472,7 @@ map <silent> <leader>csr :cs reset<cr>
 let Tlist_Show_One_File=4
 let Tlist_OnlyWindow=0
 let Tlist_Use_Right_Window=1
-let Tlist_Sort_Type='name'
+let Tlist_Sort_Type='order'
 let Tlist_Exit_OnlyWindow=1
 let Tlist_Show_Menu=0 "最好设为0
 let Tlist_Max_Submenu_Items=10
