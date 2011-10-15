@@ -104,6 +104,8 @@ syn match  cmdLine '^\$ .*$'
 syn match  cmdLine '^[ 	]*sh[#\$] .*$'
 "syn match  cmdLine2 '^[	 ]*:.*$'
 
+syn match  tables '^[ \t]*表[ \t]*[0-9a-zA-Z]*[-.: ][ \t]*.*$'
+
 "命令输出
 "syn match cmdOut    "^[	 ]*\\\@<!|[^"*|]\+|" contains=cmdOutBar
 "syn match cmdOutBar contained "|"
@@ -137,6 +139,7 @@ hi link txtError  ErrorMsg
 hi link txtTodo  Todo
 hi link txtEmailMsg     PmenuSbar
 hi link txtEmailQuote   Structure
+hi link tables   MoreMsg"String
 "(2010年 05月 01日 星期六 12:09:56 CST)
 "#=============================================================================
 hi link txtComment     comment

@@ -12,4 +12,4 @@
 --regex-txt=/^[ \t]*(图[ \t]*[0-9a-zA-Z]+[.: ][ \t]*.+$)/\1/f,figures/i
 
 --regex-txt=/^[ \t]+(table[ \t]+[0-9a-zA-Z]+([.: ]([ \t]*.+)?)?$)/\1/t,tables/i
---regex-txt=/^[ \t]*(表[ \t]*[0-9a-zA-Z]+[.: ][ \t]*.+$)/\1/t,tables/i
+--regex-txt=/^[ \t]*(表[ \t]*[0-9a-zA-Z]+[-.: ][ \t]*.+$)/\1/t,tables/i
