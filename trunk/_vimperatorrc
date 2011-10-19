@@ -54,7 +54,7 @@ set hlsearch
 set popups=2
 set showstatuslinks=2
 set showtabline=1
-set titlestring=LiaoCaiYuan-nuoaila
+set titlestring="Mozilla Firefox"
 "set visualbell
 set wildoptions=auto
 style -name notab * .tabs-newtab-button {display:none !important;}
@@ -140,8 +140,8 @@ map <Leader>cbm :sbclose<cr>
 
 map <Leader>vif :! gvim ~/.vimperatorrc<cr><cr>
 map <Leader>vim :! gvim ~/.vimrc<cr><cr>
-map <Leader>vht :! gvim /media/N/l2this/.rt/notes/note/bookmark/html.txt<cr><cr>
-map <Leader>fht :! firefox /media/N/l2this/.rt/notes/note/html.txt.html<cr><cr>
+map <Leader>vht :! gvim /home/scr/.rt/linux/computor/bookmark/html.txt<cr><cr>
+map <Leader>fht :! firefox /home/scr/.rt/linux/computor/bookmark/html.txt<cr><cr>
 
 
 
