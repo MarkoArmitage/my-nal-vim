@@ -308,7 +308,7 @@ hi Normal guibg=#c7e3cc
 "set confirm                    "用确认对话框弹出警告信息
 "set display=lastline           "长行不能完全显示时显示当前屏幕能显示的部分
 set expandtab                   "使用space代替tab
-au FileType MAKE  set noet      "对于Makefile文件不能用space代替tab
+au FileType MAKE,MUTTRC set noet "对于Makefile文件不能用space代替tab
 "set filetype=php               "设置默认文件类型
 "set guifont=SimSun\ 10         "设置用于GUI图形用户界面的字体列表。
 "set hidden                     "允许在有未保存的修改时切换缓冲区
@@ -1160,7 +1160,8 @@ map <silent> <leader>d2s mz:%s/，/, /ge<cr>:%s/。/. /ge<cr>:%s/；/; /ge<cr>
 ":%s/″/"/ge<cr>
 map <silent> <leader>s2t :%s/	/    /g<cr>
 map <silent> <leader>pwd :pwd<cr>
-map <silent> <leader>y mz:r!cat /tmp/pwd2vim.tmp<cr>0v$hd`zi@<esc>Pjdd`zf@x
+map <silent> <leader>ys mz:r!cat /tmp/screen-exchange<cr>
+map <silent> <leader>yy mz:r!cat /tmp/pwd2vim.tmp<cr>0v$hd`zi@<esc>Pjdd`zf@x
 map <silent> <leader>vy mz:r!cat /tmp/pwd2vim.tmp<cr>0v$hd`zi@<esc>Pjdd`zf@x
 map <F3> :tabclose<CR>
 map <A-t> :tabnew<CR>
@@ -1253,7 +1254,9 @@ map <silent> <leader>ldb o<Esc>I#ifdef  _NAL_DEBUG_<Esc>o#else<Esc>o#endif<esc>k
 vnoremap p <Esc>:let current_reg = @"<CR>gvs<C-R>=current_reg<CR><Esc>
 "中文也可以达78个字符时自动换行
 map <silent> <leader>sfo :set fo+=Mm<cr>
-map <silent> <leader>q :set noai<cr>:set tw=78<cr>:set fo+=Mm<cr>Vgq:set ai<cr>
+map <silent> <leader>qn :set noai<cr>:set nocin<cr>:set nosi<cr>:set tw=78<cr>
+\:set fo+=Mm<cr>Vgq:set ai<cr>:set cin<cr>:set si<cr>
+map <silent> <leader>qu :set tw=78<cr>:set fo+=Mm<cr>Vgq
 inoremap <C-U> <C-G>u<C-U>
 "########################end of map##########################################
 
