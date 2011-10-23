@@ -73,6 +73,8 @@ noremap <C-G> :t http://www.google.com.hk<cr><esc>
 noremap <C-H> :t http://www.hao123.com<cr>
 noremap <C-L> :t http://211.64.120.6/eol/homepage/common/opencourse<cr>
 noremap <C-;> :o http://www.sdjtu.edu.cn/sdjtunet/wzdh.htm<cr>
+" 调出firefox的插件管理；
+noremap <A-a> :addon<cr>
 
 noremap <C-q> <C-v>
 noremap <C-Q> <C-z>
