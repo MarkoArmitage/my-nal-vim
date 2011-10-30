@@ -97,6 +97,7 @@ map <silent> <leader>vtm  :call SwitchToBuf("$TMPDIR/gvim.tmp.txt")<cr>
 
 " Switch to buffer according to file name
 function! SwitchToBuf(filename)
+    let pwdold = getcwd()
     "let fullfn = substitute(a:filename, "^\\~/", $HOME . "/", "")   "For linux
     let curTab = tabpagenr()
     let fullfn = a:filename
@@ -126,8 +127,10 @@ function! SwitchToBuf(filename)
             tabnext
             let tab = tab + 1
         endwhile
-        " if not exist, go to original tab and open the new tab
+        " if not exist, go to original tab and recovert the work directory to
+        " $pwdold than open the file in new tab.
         exec "normal " . curTab . "gt" 
+        exec "cd " . pwdold
         exec "tabnew " . fullfn
     endif
 endfunction
