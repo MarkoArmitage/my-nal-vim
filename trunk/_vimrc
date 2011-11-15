@@ -1015,6 +1015,8 @@ map <silent> <leader>s [c<cr>
 autocmd FileType c,cpp,h map <buffer> <leader><space> :w<cr>:make<cr>:cw 10<cr>:cn<cr>
 nmap <leader>cn :cn<cr>
 nmap <leader>cp :cp<cr>
+nmap <leader>jn :cn<cr>
+nmap <leader>jp :cp<cr>
 nmap <leader>cw :cw 10<cr> :cn<cr>
 
 "=============================================================================
