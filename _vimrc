@@ -393,7 +393,7 @@ if MySys() == 'linux'
     au FileType c,cpp set tags+=/usr/include/bits/tags
     au FileType c,cpp set tags+=/usr/include/GL/tags
     au FileType c,cpp set tags+=/usr/local/include/GL/tags
-    "au FileType c,cpp set tags+=/home/scr/.rt/lang/0ctope/libc/libc/tags
+    au FileType c,cpp set tags+=/home/scr/.rt/lang/0ctope/libc/libc/tags
     "au FileType c,cpp set tags+=/home/scr/.rt/lang/0ctope/cpp/cpp_src/tags
     "au FileType c,cpp set tags+=/home/scr/.rt/lang/0ctope/win32/winapi/tags
     "au FileType   cpp set tags+=/home/scr/.rt/lang/0ctope/win32/mfc/tags
