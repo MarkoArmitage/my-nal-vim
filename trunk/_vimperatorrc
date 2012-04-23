@@ -70,7 +70,7 @@ cnoremap <C-n> :<cr>
 noremap <C-J> :dialog downloads<cr>
 "noremap <C-K> :t http://www.google.cn<cr>
 noremap <C-G> :t http://www.google.com.hk<cr><esc>
-noremap <C-H> :t http://www.hao123.com/indexold.html<cr>
+noremap <C-H> :t http://www.hao123.com<cr>
 noremap <C-L> :t http://211.64.120.6/eol/homepage/common/opencourse<cr>
 noremap <C-;> :o http://www.sdjtu.edu.cn/sdjtunet/wzdh.htm<cr>
 " 调出firefox的插件管理；
@@ -162,7 +162,7 @@ map <Leader>tbmp t http://mp3.baidu.com<cr>
 map <Leader>tbbk t http://baike.baidu.com<cr>
 map <Leader>tbpt t http://image.baidu.com<cr>
 map <Leader>tbns t http://news.baidu.com<cr>
-map <Leader>tbh1 t http://www.hao123.com/indexold.html<cr>
+map <Leader>tbh1 t http://www.hao123.com<cr>
 map <Leader>tfdr t http://start.fedoraproject.org<cr>
 map <Leader>tffj t https://addons.mozilla.org/zh-CN/firefox<cr> "Firefox附件
 
