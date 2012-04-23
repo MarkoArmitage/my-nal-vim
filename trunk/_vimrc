@@ -63,6 +63,8 @@ if MySys() == 'linux'
     let $VIMRC = ".vimrc"
     let $VIMPERATORRC = ".vimperatorrc"
     let $NOTEP = "/home/scr/.rt/notes/note"
+    let $HBIN = "/home/scr/bin"
+    let $NBBLOG = "/home/scr/.rt/vercol/git/lang/blog"
 elseif MySys() == 'windows'
     let path="C:/Vim"
     let $TMPDIR = "C:/tmp"
@@ -93,6 +95,8 @@ map <silent> <leader>vfi  :call SwitchToBuf("$NOTEP/linux/note/note/02files_intr
 map <silent> <leader>vti  :call SwitchToBuf("$NOTEP/network/cmd_network.txt")<cr>
 map <silent> <leader>vin  :call SwitchToBuf("$NOTEP/network")<cr>
 map <silent> <leader>vtm  :call SwitchToBuf("$TMPDIR/gvim.tmp.txt")<cr>
+map <silent> <leader>vnbt :call SwitchToBuf("$HBIN/nb/nb-create_tag.sh")<cr>
+map <silent> <leader>vnbl :call SwitchToBuf("$NBBLOG/nb-viki.list")<cr>
 
 
 " Switch to buffer according to file name
@@ -231,8 +235,9 @@ autocmd BufReadPost *       " @@@@@
 filetype on
 filetype plugin on "自动识别文件类型，自动匹配对应的文件类型Plugin.vim文件
 filetype plugin indent  on "自动识别文件类型，自动匹配对应的文件类型Plugin.vim文件
+"设置在状态行显示的信息
 set statusline=%f%m%r,%Y,%{&fileformat}\ \ \|F:%{&fenc}\|E:%{&enc}\|T:%{&tenc}\|
-\\ \ A=\%b,H=\%B\ \ \ %l,%c%V\ \ %p%%\ \ [%L]         "设置在状态行显示的信息
+\%<\ \ A=\%b,H=\%B\ \ \ %l,%c%V\ \ %p%%\ [%L]\ \ [%{strftime(\"%m-%d\ %T\")}]
 
 "=== 设置各种编码方式, 使得在Linux和Windows上都能正常写入和显示 ============"
 set fileencodings=utf-8,gb2312,gbk,gb18030 "设置打开文件时自动识别编码的顺序
