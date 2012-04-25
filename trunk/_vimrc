@@ -633,9 +633,9 @@ let OmniCpp_LocalSearchDecl = 1
 " DoxBlock                  Group
 " DoxUndoc(DEBUG) !         Ignore code fragment
 let g:DoxygenToolkit_commentType = "C"
-let g:DoxygenToolkit_briefTag_pre=" @Description:	"
-let g:DoxygenToolkit_paramTag_pre=" @Param	"
-let g:DoxygenToolkit_returnTag=" @Returns:	"
+let g:DoxygenToolkit_briefTag_pre=" @Description:"
+let g:DoxygenToolkit_paramTag_pre=" @Param  "
+let g:DoxygenToolkit_returnTag=" @Returns:"
 let g:DoxygenToolkit_blockHeader=" ***********************************************************************"
 let g:DoxygenToolkit_blockFooter=" ***********************************************************************"
 let g:DoxygenToolkit_authorName="nuoerll (nuoliu), lcy3636@126.com"
