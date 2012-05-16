@@ -821,7 +821,9 @@ nmap <silent> <leader>tto :NERDTreeToggle<cr>
 let NERDTreeIgnore=['\.vm$', '\~$']    " 不显示指定的类型的文件
 let NERDTreeShowHidden=0    " 不显示隐藏文件(好像只在linux环境中有效)
 let NERDTreeSortOrder=['\/$', 'makefile$', 'Makefile$', 'bochsrc$', '\.img$',
-            \ '\.cpp$', '\.c$', '\.h$', '\.asm$', '\.inc$', '\.o$', '\.java$', '.jsp$',
+            \ '\.cpp$', '\.c$', '\.h$', '\.asm$', '\.inc$', 
+            \ '\.glsl$', '\.vert$', '\.frag$', '\.fp$', '\.vp$',
+            \ '\.o$', '\.java$', '.jsp$',
             \ '.xml$', '.html$', '.class$', '.tex$', '.viki$', '*']
 let NERDTreeCaseSensitiveSort=0     " 不分大小写排序
 let NERDTreeWinSize=33
@@ -1072,6 +1074,26 @@ au BufRead,BufNewFile *.tkey setlocal ft=tkey
 " map <silent> <leader>tl :call <SID>Rlabel_Toggle("MyTlistToggle", 0)<cr>
 " map <silent> <leader>tm :call <SID>Rlabel_Toggle("MyMiniBufExplorer", 0)<cr>
 " map <silent> <leader>tf :call <SID>Rlabel_Toggle("Mydict", 1)<cr>
+
+
+"=============================================================================
+" /usr/local/share/vim/vimfiles/syntax/glsl*.vim
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+command! SetGLSLFileType call SetGLSLFileType()
+function! SetGLSLFileType()
+    "for item in getline(1,10)
+    "    if item =~ "#version 400"
+    "        execute ':set filetype=glsl400'
+    "        break
+    "    endif
+    "    if item =~ "#version 330"
+    "        execute ':set filetype=glsl330'
+    "        break
+    "    endif
+    "endfor
+    execute ':set filetype=glsl400'
+endfunction
+au BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl SetGLSLFileType
 
 
 "######################## end of plugins #####################################
