@@ -820,7 +820,7 @@ let g:proj_run3='silent !gvim %f'
 nmap <silent> <leader>tto :NERDTreeToggle<cr>
 let NERDTreeIgnore=['\.vm$', '\~$']    " 不显示指定的类型的文件
 let NERDTreeShowHidden=0    " 不显示隐藏文件(好像只在linux环境中有效)
-let NERDTreeSortOrder=['\/$', 'makefile$', 'Makefile$', 'bochsrc$', '\.img$',
+let NERDTreeSortOrder=['\/$', 'makefile', 'Makefile', 'bochsrc', '\.img$',
             \ '\.cpp$', '\.c$', '\.h$', '\.asm$', '\.inc$', 
             \ '\.glsl$', '\.vert$', '\.frag$', '\.fp$', '\.vp$',
             \ '\.o$', '\.java$', '.jsp$',
