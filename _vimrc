@@ -1269,7 +1269,7 @@ map <silent> <leader>cos mz:%s/\<<C-R><C-W>\>/&/gn<cr>`z
 " \ ==> /
 map <silent> <leader>tof V:s/\\/\//g<cr>
 " source $VIMRUNTIME/syntax/2html.vim
-map <silent> <leader>v2h :source $VIMRUNTIME/syntax/2html.vim<cr>
+map <silent> <leader>v2h :set nonu<cr>:source $VIMRUNTIME/syntax/2html.vim<cr><C-W>j:set nu<cr>
 " write date under cursor
 map <silent> <leader>dte :r ! date<cr>I(<Esc>A)<Esc>o<Esc>i#<esc>71a=<Esc>0
 "给某个单词加上()
