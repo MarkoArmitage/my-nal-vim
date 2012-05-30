@@ -1138,6 +1138,7 @@ endif
 "#############################################################################
 "maps word-ll
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+imap <A-8> <esc>la
 map <silent> <leader>off :call OpenFileOnFindFormat()<cr>
 au FileType qf nnoremap <buffer> <silent>q :close<CR>
 map <silent> <leader>rep :call MyGrepWithPrecise()<cr>:cope<cr>
