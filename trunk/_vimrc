@@ -75,7 +75,7 @@ elseif MySys() == 'windows'
 endif
 "Fast edit vimrc
 autocmd! bufwritepost $VIMRC source $VIMDIR/$VIMRC
-map <silent> <leader>vis  :source $VIMDIR/$VIMRC<cr>
+map <silent> <leader>vis  :source $VIMDIR/$VIMRC<cr>:IndentGuidesEnable<cr>
 map <silent> <leader>wvim :call SwitchToBuf("/media/C/Vim/Vim/_vimrc")<cr>
 map <silent> <leader>vim  :call SwitchToBuf("$VIMDIR/$VIMRC")<cr>
 map <silent> <leader>vif  :call SwitchToBuf("$VIMDIR/$VIMPERATORRC")<cr>
@@ -98,6 +98,17 @@ map <silent> <leader>vtm  :call SwitchToBuf("$TMPDIR/gvim.tmp.txt")<cr>
 map <silent> <leader>vnbt :call SwitchToBuf("$HBIN/nb/nb-create_tag.sh")<cr>
 map <silent> <leader>vnbl :call SwitchToBuf("$NBBLOG/nb-viki.list")<cr>
 
+
+function! SetColorColumn()
+    let col_num = virtcol(".")
+    let cc_list = split(&cc, ',')
+    if count(cc_list, string(col_num)) <= 0
+        " cc(colorcolumn)选项需要vim7.3以上版本才支持.
+        execute "set cc+=".col_num
+    else
+        execute "set cc-=".col_num
+    endif
+endfunction
 
 " Switch to buffer according to file name
 function! SwitchToBuf(filename)
@@ -1096,6 +1107,16 @@ endfunction
 au BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl SetGLSLFileType
 
 
+"=============================================================================
+" Indent Guides
+" http://www.vim.org/scripts/script.php?script_id=3361
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <silent> <leader>tig :IndentGuidesToggle<cr>
+map <silent> <leader>tch :call SetColorColumn()<CR>
+let g:indent_guides_guide_size = 1
+let g:indent_guides_enable_on_vim_startup = 1
+
+
 "######################## end of plugins #####################################
 
 
@@ -1499,3 +1520,14 @@ onoremap <C-F4> <C-C><C-W>c
 "003636
 "
 "
+
+map ,ch :call SetColorColumn()<CR>
+function! SetColorColumn()
+    let col_num = virtcol(".")
+    let cc_list = split(&cc, ',')
+    if count(cc_list, string(col_num)) <= 0
+        execute "set cc+=".col_num
+    else
+        execute "set cc-=".col_num
+    endif
+endfunction
