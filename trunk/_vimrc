@@ -32,9 +32,9 @@ if has("win32")
     endif
 else
     if has("gui_running")
-	set lines=32
-	set columns=113
-	winpos  0  352
+	set lines=45
+	set columns=143
+	winpos  180  0
 	if exists("&cursorline")
 	    set cursorline
 	endif
@@ -49,14 +49,16 @@ endif
 " Platform
 function! MySys()
     if has("win32")
-	return "windows"
+        return "windows"
+    elseif has("mac")
+        return "mac"
     else
-	return "linux"
+        return "linux"
 endfunction
 
 
 " Platform settings
-if MySys() == 'linux'
+if MySys() == 'linux' || MySys() == 'mac'
     let $TMPDIR = "/tmp"
     let $BLOGP = "/media/N/win/notes/blog"
     let $VIMDIR = "~"
@@ -246,7 +248,7 @@ au FileType c,cpp   set dictionary+=/usr/include/GL/gl.h
 
 autocmd BufWritePre *.txt call RemoveTrailingWhitespace()
 au FileType c,cpp set nomodeline " @@@@@
-au FileType text, txt, TXT set tw=78 fo+=Mm "选中，然后按gq就可以
+"au FileType text, txt, TXT set tw=78 fo+=Mm "选中，然后按gq就可以
 autocmd BufReadPost *       " @@@@@
 \ if line("°\"") > 0 && line("°\"") <= line("$") |
 \ exe "normal g`\"" |
@@ -305,6 +307,8 @@ set showcmd                     "在状态栏显示目前所执行的指令 @@@@
 set showmatch
 set smartindent
 set shiftwidth=4                "设定 << 和 >> 命令移动时的宽度
+set macmeta                     "在Mac下, option键解释为meta键
+
 autocmd FileType xml  set shiftwidth=2
 autocmd FileType html set shiftwidth=2
 autocmd FileType jsp  set shiftwidth=2
@@ -338,7 +342,12 @@ hi Normal guibg=#c7e3cc
 set expandtab                   "使用space代替tab
 au FileType MAKE,MUTTRC set noet "对于Makefile文件不能用space代替tab
 "set filetype=php               "设置默认文件类型
-"set guifont=SimSun\ 10         "设置用于GUI图形用户界面的字体列表。
+if MySys() == 'mac'
+    set guifont=Menlo:h12           "设置用于GUI图形用户界面的字体列表。
+else
+    "set guifont=Menlo:h12          "设置用于GUI图形用户界面的字体列表。
+endif
+
 "set hidden                     "允许在有未保存的修改时切换缓冲区
 "set ignorecase smartcase       "搜索忽略大小写, 但在有一个以上大写字母时仍敏感
 "set list                       "显示换行符$
@@ -411,7 +420,7 @@ set complete=.,w,b,u,t,i
 "set tags=/home/liaocaiyuan/book/unpv22e/tags
 set tags+=tags "最好写成+=
 set tags+=./tags,./../tags,./../../tags,./../../../tags,./../../../../tags,./**/tags,tags
-if MySys() == 'linux'
+if MySys() == 'linux' || MySys() == 'mac'
     au FileType c,cpp set tags+=/usr/include/netinet/tags
     au FileType c,cpp set tags+=/usr/include/tags
     au FileType c,cpp set tags+=/usr/include/sys/tags
@@ -563,7 +572,7 @@ nmap <silent> <leader>wm :WMToggle<cr>
 "=============================================================================
 " c.vim settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if MySys() == 'linux'
+if MySys() == 'linux' || MySys() == 'mac'
     let g:C_GlobalTemplateFile =
 \   "/usr/local/share/vim/vimfiles/c-support/templates/Templates"
 elseif MySys() == 'windows'
@@ -934,9 +943,9 @@ map <silent> <leader>bft :set ft=txt<cr>
 "<Leader>g / TxtBrowserUrl		"打开URL
 "<Leader>f / TxtBrowserWord		"查单词
 "<Leader>s / TxtBrowserSearch	"search word under cursor
-map <silent> <leader>bgu :TxtBrowserUrl<cr>
-map <silent> <leader>bgw :TxtBrowserWord<cr>
-map <silent> <leader>bgs :TxtBrowserSearch<cr>
+map <silent> <leader>bgu :TxtBrowserUrl<cr><cr>
+map <silent> <leader>bgw :TxtBrowserWord<cr><cr>
+map <silent> <leader>bgs :TxtBrowserSearch<cr><cr>
 let tlist_txt_settings = 'txt;c:content;f:figures;t:tables'
 let TxtBrowser_Dict_Url='http://dict.cn/text'	"英文词典
 let Txtbrowser_Search_Engine='http://www.baidu.com/s?wd=text&oq=text&f=3&rsp=2'
@@ -1113,7 +1122,7 @@ function! SetGLSLFileType()
     "endfor
     execute ':set filetype=glsl400'
 endfunction
-au BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl SetGLSLFileType
+au BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl,*.vs,*.fs SetGLSLFileType
 
 
 "=============================================================================
@@ -1229,7 +1238,6 @@ map <silent> <leader>pwd :pwd<cr>
 map <silent> <leader>ys mz:r!cat /tmp/screen-exchange<cr>
 map <silent> <leader>yy mz:r!cat /tmp/pwd2vim.tmp<cr>0v$hd`zi@<esc>Pjdd`zf@x
 map <silent> <leader>vy mz:r!cat /tmp/pwd2vim.tmp<cr>0v$hd`zi@<esc>Pjdd`zf@x
-map <F3> :tabclose<CR>
 map <A-t> :tabnew<CR>
 map <A-p> :tabprevious<CR>
 map <A-n> :tabnext<CR>
