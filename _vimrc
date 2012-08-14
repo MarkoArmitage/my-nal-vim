@@ -308,6 +308,7 @@ set showmatch
 set smartindent
 set shiftwidth=4                "设定 << 和 >> 命令移动时的宽度
 set macmeta                     "在Mac下, option键解释为meta键
+set vb t_vb=                    "关闭tab键声音提醒
 
 autocmd FileType xml  set shiftwidth=2
 autocmd FileType html set shiftwidth=2
@@ -1330,7 +1331,7 @@ vnoremap p <Esc>:let current_reg = @"<CR>gvs<C-R>=current_reg<CR><Esc>
 map <silent> <leader>sfo :set fo+=Mm<cr>
 map <silent> <leader>qn :set noai<cr>:set nocin<cr>:set nosi<cr>:set tw=78<cr>
 \:set fo+=Mm<cr>Vgq:set ai<cr>:set cin<cr>:set si<cr>
-map <silent> <leader>qu :set tw=78<cr>:set fo+=Mm<cr>Vgq
+map <silent> <leader>qu :set tw=100<cr>:set fo+=Mm<cr>Vgq
 inoremap <C-U> <C-G>u<C-U>
 "########################end of map##########################################
 
