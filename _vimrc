@@ -309,6 +309,7 @@ set smartindent
 set shiftwidth=4                "设定 << 和 >> 命令移动时的宽度
 set macmeta                     "在Mac下, option键解释为meta键
 set vb t_vb=                    "关闭tab键声音提醒
+set matchpairs=(:),{:},[:],<:>,=:;
 
 autocmd FileType xml  set shiftwidth=2
 autocmd FileType html set shiftwidth=2
