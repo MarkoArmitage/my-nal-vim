@@ -140,10 +140,10 @@ map <Leader>cbm :sbclose<cr>
 "
 
 
-map <Leader>vif :! gvim ~/.vimperatorrc<cr><cr>
-map <Leader>vim :! gvim ~/.vimrc<cr><cr>
-map <Leader>vht :! gvim /home/scr/.rt/linux/computor/bookmark/html.txt<cr><cr>
-map <Leader>fht :! firefox /home/scr/.rt/linux/computor/bookmark/html.txt<cr><cr>
+map <Leader>vif :! gvim ~/.vimperatorrc<cr><cr><esc>
+map <Leader>vim :! gvim ~/.vimrc<cr><cr><esc>
+map <Leader>vht :! gvim /home/scr/.rt/linux/computor/bookmark/html.txt<cr><cr><esc>
+map <Leader>fht :! firefox /home/scr/.rt/linux/computor/bookmark/html.txt<cr><cr><esc>
 
 
 
@@ -174,6 +174,7 @@ map <Leader>blbl t http://blog.chinaunix.net/u3/112454/index.html<cr>
 
 
 
+set macmeta
 
 imap <A-j> <esc>12j
 imap <A-k> <esc>12k
@@ -187,6 +188,13 @@ imap <A-n> <esc><C-n>
 imap <A-p> <esc><C-P>
 noremap <A-n> <esc><C-n>
 noremap <A-p> <esc><C-P>
+
+map ,n :tabnext<cr><cr><esc>
+map ,p :tabprevious<cr><cr><esc>
+map L  :tabnext<cr><cr><esc>
+map H  :tabprevious<cr><cr><esc>
+imap L  :<esc><esc>tabnext<cr><cr><esc>
+imap H  :<esc><esc>tabprevious<cr><cr><esc>
 
 
 
