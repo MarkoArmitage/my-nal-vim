@@ -262,7 +262,7 @@ set statusline=%f%m%r,%Y,%{&fileformat}\ \ \|F:%{&fenc}\|E:%{&enc}\|T:%{&tenc}\|
 \%<\ \ A=\%b,H=\%B\ \ \ %l,%c%V\ \ %p%%\ [%L]\ \ [%{strftime(\"%m-%d\ %T\")}]
 
 "=== 设置各种编码方式, 使得在Linux和Windows上都能正常写入和显示 ============"
-set fileencodings=utf-8,gb2312,gbk,gb18030 "设置打开文件时自动识别编码的顺序
+set fileencodings=utf-8,gb2312,gbk,gb18030,ucs-bom "设置打开文件时自动识别编码的顺序
                                            "fileencoding会参考它来设置
 set encoding=utf-8               "vim内部机制运行所用的编码
 "set fileencoding?               "写入文件时所用的编码
