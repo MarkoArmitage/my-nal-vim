@@ -1140,6 +1140,25 @@ let g:indent_guides_guide_size = 1
 let g:indent_guides_enable_on_vim_startup = 0
 
 
+"=============================================================================
+" Preview.vim
+" http://www.vim.org/scripts/script.php?script_id=3344
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <A-i> :Preview<cr>
+
+
+"=============================================================================
+" Markdwon
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let tlist_markdown_settings = 'markdown;c:content;f:figures;t:tables;h:headlines'
+au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} set ft=markdown
+au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} set iskeyword+=[
+au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} set iskeyword-=_
+au FileType markdown,MARKDOWN  set iskeyword+=[
+au FileType markdown,MARKDOWN  set iskeyword-=_
+au BufWritePre *{md,mdown,mkd,mkdn,markdown,mdwn} call RemoveTrailingWhitespace()
+
+
 "######################## end of plugins #####################################
 
 
