@@ -61,15 +61,15 @@ syn region mkdLinkTitle matchgroup=mkdDelimiter start=+'+ end=+'+ contained
 syn region mkdLinkTitle matchgroup=mkdDelimiter start=+(+ end=+)+ contained
 
 "define Markdown groups
-syn match mkdLineContinue ".$" contained
+syn match mkdLineContinue ".$"
 syn match mkdLineBreak / \+$/
-syn region mkdBlockquote start=/^\s*>/ end=/$/ contains=mkdLineBreak,mkdLineContinue,@Spell
-syn region mkdCode start=/\(\([^\\]\|^\)\\\)\@<!`/ end=/\(\([^\\]\|^\)\\\)\@<!`/
-syn region mkdCode start=/\s*``[^`]*/ end=/[^`]*``\s*/
-syn region mkdCode start=/^```\s*\w*\s*$/ end=/^```\s*$/
-syn region mkdCode start="<pre[^>]*>" end="</pre>"
-syn region mkdCode start="<code[^>]*>" end="</code>"
-syn match mkdCode /^\s*\n\(\(\s\{4,}[^ ]\|\t\+[^\t]\).*\n\)\+/
+syn region mkdBlockquote start=/^\s*>/ end=/$/ contains=mkdLineBreak,mkdLineContinue,@Spell,txtApostrophe,txtQuotes,txtUrl,txtEmailMsg,txtComment,txtBrackets
+syn region mkdCode start=/\(\([^\\]\|^\)\\\)\@<!`/ end=/\(\([^\\]\|^\)\\\)\@<!`/  contains=txtApostrophe,txtQuotes,txtUrl,txtEmailMsg,txtComment,txtBrackets
+syn region mkdCode start=/\s*``[^`]*/ end=/[^`]*``\s*/  contains=txtApostrophe,txtQuotes,txtUrl,txtEmailMsg,txtComment,txtBrackets
+syn region mkdCode start=/^```\s*\w*\s*$/ end=/^```\s*$/  contains=txtApostrophe,txtQuotes,txtUrl,txtEmailMsg,txtComment,txtBrackets
+syn region mkdCode start="<pre[^>]*>" end="</pre>"  contains=txtApostrophe,txtQuotes,txtUrl,txtEmailMsg,txtComment,txtBrackets
+syn region mkdCode start="<code[^>]*>" end="</code>"  contains=txtApostrophe,txtQuotes,txtUrl,txtEmailMsg,txtComment,txtBrackets
+syn match mkdCode /^\(\(\s\{4,}[^ ]\|\t\+[^\t]\).*\n\)\+/ contains=txtApostrophe,txtQuotes,txtUrl,txtEmailMsg,txtComment,txtBrackets
 syn match mkdListItem "^\s*[-*+]\s\+"
 syn match mkdListItem "^\s*\d\+\.\s\+"
 syn match mkdRule /^\s*\*\s\{0,1}\*\s\{0,1}\*$/
@@ -88,11 +88,38 @@ syn region htmlH6 start="^\s*######" end="\($\|#\+\)" contains=@Spell
 syn match htmlH1 /^.\+\n=\+$/ contains=@Spell
 syn match htmlH2 /^.\+\n-\+$/ contains=@Spell
 
+"txtApostrophe: text in the apostrophe
+"单引号内文字
+syn match   txtApostrophe  '\'[^\']\+\''hs=s+1,he=e-1
+
+"txtQuotes: text in the quotoes
+"双引号内文字, 包括全角半角, 作用范围最多两行
+syn match   txtQuotes     '["“][^"”]\+\(\n\)\=[^"”]*["”]'hs=s+1,he=e-1
+
+"txtParentesis: text in the parentesis
+"括号内文字, 不在行首(为了和txtList区别), 作用范围最多两行
+syn match   txtParentesis "[(（][^)）]\+\(\n\)\=[^)）]*[)）]" contains=txtUrl
+
+"txtBrackets: text in the brackets
+"其它括号内文字, 作用范围最多两行, 大括号无行数限制
+"syn match txtBrackets     '<[^<]\+\(\n\)\=[^<]*>'hs=s+1,he=e-1 contains=txtUrl
+syn match txtBrackets     '\[[^\[]\+\(\n\)\=[^\[]*\]'hs=s+1,he=e-1 contains=txtUrl
+
+"link url
+syn match txtUrl '\<[A-Za-z0-9_.-]\+@\([A-Za-z0-9_-]\+\.\)\+[A-Za-z]\{2,4}\>\(?[A-Za-z0-9%&=+.,@*_-]\+\)\='
+syn match txtUrl   '\<\(\(https\=\|file\|ftp\|news\|telnet\|gopher\|wais\)://\([A-Za-z0-9._-]\+\(:[^ @]*\)\=@\)\=\|\(www[23]\=\.\|ftp\.\)\)[A-Za-z0-9%._/~:,=$@-]\+\>/*\(?[A-Za-z0-9/%&=+.,@*_-]\+\)\=\(#[A-Za-z0-9%._-]\+\)\='
+
+"email text:
+syn match txtEmailMsg '^\s*\(From\|De\|Sent\|To\|Para\|Date\|Data\|Assunto\|Subject\):.*'
+
+syn match  txtComment '\/\/.*$' contains=txtTodo
+
+
 "highlighting for Markdown groups
 HtmlHiLink mkdString String
-HtmlHiLink mkdCode String
+HtmlHiLink mkdCode LineNr
 HtmlHiLink mkdBlockquote Comment
-HtmlHiLink mkdLineContinue Comment
+"HtmlHiLink mkdLineContinue Comment
 HtmlHiLink mkdListItem Identifier
 HtmlHiLink mkdRule Identifier
 HtmlHiLink mkdLineBreak Todo
@@ -106,6 +133,17 @@ HtmlHiLink mkdLinkDefTarget mkdURL
 HtmlHiLink mkdLinkTitle htmlString
 
 HtmlHiLink mkdDelimiter Delimiter
+
+
+"hi link mkdCode         PmenuSbar
+hi link txtApostrophe   WarningMsg"Special
+hi link txtQuotes       MoreMsg"String
+hi link txtParentesis   String"Special "Comment
+hi link txtBrackets     Function"Special
+hi link txtUrl          Underlined"ModeMsg"Tabline"PmenuSbar
+hi link txtEmailMsg     PmenuSbar
+hi link txtComment      Comment
+
 
 let b:current_syntax = "markdown"
 
