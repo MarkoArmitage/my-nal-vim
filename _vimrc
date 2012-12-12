@@ -352,7 +352,7 @@ else
 endif
 
 "set hidden                     "允许在有未保存的修改时切换缓冲区
-"set ignorecase smartcase       "搜索忽略大小写, 但在有一个以上大写字母时仍敏感
+set ignorecase smartcase        "搜索忽略大小写, 但在有一个以上大写字母时仍敏感
 "set list                       "显示换行符$
 "set noignorecase               "不区分大小写
 "set nowrap                     "允许向左右滚屏
@@ -1233,7 +1233,7 @@ map <silent> <leader>d2s mz:%s/，/, /ge<cr>:%s/。/. /ge<cr>:%s/；/; /ge<cr>
 \:%s/＞/>/ge<cr>:%s/\│/\|/ge<cr>:%s/–/-/ge<cr>:%s///ge<cr>:%s/←/<--/ge<cr>
 \:%s/．/./ge<cr>:%s/～/\~/ge<cr>:%s/◆//ge<cr>:%s/『/</ge<cr>:%s/』/>/ge<cr>
 \:%s/•/./ge<cr>:%s/﹐/,/ge<cr>:%s/‘/'/ge<cr>:%s/∶/: /ge<cr>:%s/·/\. /ge<cr>
-\:%s/×/x/ge<cr>:%s/″/"/ge<cr>
+\:%s/×/x/ge<cr>:%s/″/"/ge<cr>:%s/］/]/ge<cr>:%s/［/[/ge<cr>
 \`z
 ":%s/″/"/ge<cr>
 map <silent> <leader>s2t :%s/	/    /g<cr>
