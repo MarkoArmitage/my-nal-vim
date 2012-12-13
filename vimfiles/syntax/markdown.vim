@@ -63,7 +63,7 @@ syn region mkdLinkTitle matchgroup=mkdDelimiter start=+(+ end=+)+ contained
 "define Markdown groups
 syn match mkdLineContinue ".$"
 syn match mkdLineBreak / \+$/
-syn region mkdBlockquote start=/^\s*>/ end=/$/ contains=mkdLineBreak,mkdLineContinue,@Spell,txtApostrophe,txtQuotes,txtUrl,txtEmailMsg,txtComment,txtBrackets
+syn region mkdBlockquote start=/^\s*>/ end=/$/ contains=mkdLineBreak,@Spell,txtApostrophe,txtQuotes,txtUrl,txtEmailMsg,txtComment,txtBrackets
 syn region mkdCode start=/\(\([^\\]\|^\)\\\)\@<!`/ end=/\(\([^\\]\|^\)\\\)\@<!`/  contains=txtApostrophe,txtQuotes,txtUrl,txtEmailMsg,txtComment,txtBrackets
 syn region mkdCode start=/\s*``[^`]*/ end=/[^`]*``\s*/  contains=txtApostrophe,txtQuotes,txtUrl,txtEmailMsg,txtComment,txtBrackets
 syn region mkdCode start=/^```\s*\w*\s*$/ end=/^```\s*$/  contains=txtApostrophe,txtQuotes,txtUrl,txtEmailMsg,txtComment,txtBrackets
