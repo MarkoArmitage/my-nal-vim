@@ -172,8 +172,10 @@ function! RemoveTrailingWhitespace()
     if &ft != "diff"
         let b:curcol = col(".")
         let b:curline = line(".")
+        silent! %s/\(\[.*\]\[.*\]\)\s\+$/\1@@@@@@@@/
         silent! %s/\s\+$//
         silent! %s/\(\s*\n\)\+\%$//
+        silent! %s/\(\[.*\]\[.*\]\)@@@@@@@@$/\1  /
         call cursor(b:curline, b:curcol)
     endif
 endfunction
@@ -243,10 +245,16 @@ endfunction
 "#############################################################################
 " settings sets
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"#========= MAKE ==========
+au BufRead,BufNewFile {makefile,Makefile}.*  set noet
+au BufRead,BufNewFile {makefile,Makefile}.*  setlocal ft=MAKE
+au FileType MAKE,MUTTRC set noet "对于Makefile文件不能用space代替tab
+"#=========================
+
 au FileType c,cpp   set dictionary+=/usr/include/GL/gl[^e]*.h
 au FileType c,cpp   set dictionary+=/usr/include/GL/gl.h
 
-autocmd BufWritePre *.txt call RemoveTrailingWhitespace()
+au BufWritePre *.txt call RemoveTrailingWhitespace()
 au FileType c,cpp set nomodeline " @@@@@
 "au FileType text, txt, TXT set tw=78 fo+=Mm "选中，然后按gq就可以
 autocmd BufReadPost *       " @@@@@
@@ -306,25 +314,21 @@ set scrolloff=2                 "设定光标离窗口上下边界2行时窗口�
 set showcmd                     "在状态栏显示目前所执行的指令 @@@@@
 set showmatch
 set smartindent
-set shiftwidth=4                "设定 << 和 >> 命令移动时的宽度
 set macmeta                     "在Mac下, option键解释为meta键
 set vb t_vb=                    "关闭tab键声音提醒
 set matchpairs=(:),{:},[:],<:>,=:;
 set backupskip=/tmp/*,/private/tmp/*
 
-autocmd FileType xml  set shiftwidth=2
-autocmd FileType html set shiftwidth=2
-autocmd FileType jsp  set shiftwidth=2
-set softtabstop=4               "使得按退格键时可以一次删掉 4 个空格
-autocmd FileType xml  set softtabstop=2
-autocmd FileType html set softtabstop=2
-autocmd FileType jsp  set softtabstop=2
-set tabstop=4                   "tab宽度为四个字符; 默认为8
 "set textwidth=78 fo+=Mm         "对当前文件文字自动换行
 set title                       "在标题中显示文件是否可以或已经被修改
 set whichwrap=b,s,<,>,[,]       "左右前头跨行移动
 syntax enable
 syntax on                       "设置语法高亮
+
+"set expandtab                   "使用space代替tab
+set shiftwidth=4                "设定 << 和 >> 命令移动时的宽度
+set softtabstop=4               "使得按退格键时可以一次删掉 4 个空格
+set tabstop=4                   "tab宽度为四个字符; 默认为8
 
 "colorscheme  candycode
 "colorscheme  darkblue
@@ -342,8 +346,6 @@ hi Normal guibg=#c7e3cc
 "set comments=s1:/*,mb:*,ex0:/  "修正自动C式样注释功能 <2005/07/16>
 "set confirm                    "用确认对话框弹出警告信息
 "set display=lastline           "长行不能完全显示时显示当前屏幕能显示的部分
-set expandtab                   "使用space代替tab
-au FileType MAKE,MUTTRC set noet "对于Makefile文件不能用space代替tab
 "set filetype=php               "设置默认文件类型
 if MySys() == 'mac'
     set guifont=Menlo:h12           "设置用于GUI图形用户界面的字体列表。
