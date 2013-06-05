@@ -63,10 +63,10 @@ function! s:Mydict(wflag)
     endif
 
     windo if
-    \ expand("%:p")=="/tmp/diCtTmp" |
+    \ expand("%:p")=="~/.stardict/user-data/diCtTmp" |
     \ close|endif
-    exec "botright vertical " . g:Rlabel_WinWidth . "split /tmp/diCtTmp"
-    "botright aboveleft 20split /tmp/diCtTmp
+    exec "botright vertical " . g:Rlabel_WinWidth . "split ~/.stardict/user-data/diCtTmp"
+    "botright aboveleft 20split ~/.stardict/user-data/diCtTmp
     setlocal buftype= bufhidden=hide noswapfile
     "setlocal buftype=nofile bufhidden=hide noswapfile
     1s/^/\=expl/
